@@ -701,8 +701,42 @@ nav.scrolled {
 /* Emergency Section */
 .emergency {
   padding: 80px 20px;
-  background-color: var(--accent-color);
+  background: linear-gradient(135deg, #d93b2b 0%, #b92d1f 48%, #8f1f15 100%);
   color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency::before,
+.emergency::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.emergency::before {
+  width: 320px;
+  height: 320px;
+  top: -120px;
+  right: -90px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.02) 70%
+  );
+}
+
+.emergency::after {
+  width: 380px;
+  height: 380px;
+  bottom: -170px;
+  left: -100px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.02) 72%
+  );
 }
 
 .emergency-content {
@@ -710,37 +744,53 @@ nav.scrolled {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 50px;
   align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.emergency-info {
+  background: rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(4px);
 }
 
 .emergency-info h2 {
-  font-size: 36px;
-  margin-bottom: 20px;
+  font-size: 38px;
+  margin-bottom: 14px;
+  line-height: 1.2;
 }
 
 .emergency-info p {
-  font-size: 18px;
-  margin-bottom: 30px;
+  font-size: 17px;
+  margin-bottom: 24px;
   line-height: 1.8;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .emergency-list {
   list-style: none;
-  margin-bottom: 30px;
+  margin-bottom: 26px;
+  display: grid;
+  gap: 10px;
 }
 
 .emergency-list li {
-  padding: 10px 0;
+  padding: 10px 14px;
   font-size: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
 }
 
 .emergency-list i {
-  color: var(--secondary-color);
+  color: #9cf5ba;
   margin-right: 10px;
 }
 
 .emergency-contact {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 20px;
 }
 
@@ -748,24 +798,61 @@ nav.scrolled {
   display: flex;
   align-items: center;
   gap: 20px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.emergency-number:hover {
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.22);
 }
 
 .emergency-number i {
-  font-size: 36px;
+  font-size: 30px;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .emergency-number h3 {
   font-size: 24px;
   margin-top: 5px;
+  letter-spacing: 0.4px;
+}
+
+.emergency-number p {
+  margin: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.92;
+}
+
+.emergency-image {
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.25);
 }
 
 .emergency-image img {
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+  display: block;
 }
 
 /* About Section */
@@ -1307,6 +1394,31 @@ nav.scrolled {
 
   .hero-content p {
     font-size: 16px;
+  }
+
+  .emergency {
+    padding: 64px 20px;
+  }
+
+  .emergency-content {
+    gap: 28px;
+  }
+
+  .emergency-info {
+    padding: 22px;
+  }
+
+  .emergency-info h2 {
+    font-size: 30px;
+  }
+
+  .emergency-number {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .emergency-number h3 {
+    font-size: 20px;
   }
 
   .section-header h2 {
