@@ -3,88 +3,729 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luka Premiere Health Care</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-      }
-
-      /* Navigation Bar Styles */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 80px;
-        background-color: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 50px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-      }
-
-      /* Logo Styles */
-      .logo {
-        font-size: 24px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        color: black;
-      }
-
-      /* Navigation Links Container */
-      .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 40px;
-      }
-
-      /* Navigation Link Styles */
-      .nav-links a {
-        text-decoration: none;
-        color: black;
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        font-family: Arial, sans-serif;
-        transition: color 0.3s ease;
-      }
-
-      /* Hover Effect */
-      .nav-links a:hover {
-        color: blue;
-      }
-
-      /* Add padding to body to account for fixed navbar */
-      body {
-        padding-top: 80px;
-      }
-    </style>
+    <title>Luka Premiere Health Care - Quality Healthcare Services</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+      <i class="fas fa-phone-alt"></i>
+      <span>24/7 Emergency: <strong>+254 700 000 000</strong></span>
+    </div>
+
     <!-- Navigation Bar -->
-    <nav>
+    <nav id="navbar">
       <div class="logo">LUKA</div>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#home">HOME</a></li>
-        <li><a href="#about">ABOUT</a></li>
         <li><a href="#services">SERVICES</a></li>
+        <li><a href="#doctors">DOCTORS</a></li>
+        <li><a href="#about">ABOUT</a></li>
         <li><a href="#contact">CONTACT</a></li>
+        <li><a href="#patient-portal" class="btn-portal">PATIENT PORTAL</a></li>
       </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </nav>
 
-    <!-- Main Content Area -->
-    <main>
-      <!-- Your page content will go here -->
-    </main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Your Health, Our Priority</h1>
+        <p>
+          Providing exceptional healthcare services with compassion and
+          expertise
+        </p>
+        <div class="hero-buttons">
+          <a href="#appointment" class="btn btn-primary">Book Appointment</a>
+          <a href="#services" class="btn btn-secondary">Our Services</a>
+        </div>
+      </div>
+      <div class="hero-features">
+        <div class="feature-card">
+          <i class="fas fa-user-md"></i>
+          <h3>Expert Doctors</h3>
+          <p>Highly qualified specialists</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-hospital"></i>
+          <h3>Modern Facilities</h3>
+          <p>State-of-the-art equipment</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-clock"></i>
+          <h3>24/7 Emergency</h3>
+          <p>Always here for you</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access">
+      <div class="container">
+        <div class="quick-card">
+          <i class="fas fa-calendar-check"></i>
+          <h3>Book Appointment</h3>
+          <p>Schedule your visit online</p>
+          <a href="#appointment" class="link-arrow"
+            >Book Now <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="quick-card">
+          <i class="fas fa-file-medical"></i>
+          <h3>Medical Records</h3>
+          <p>Access your health records</p>
+          <a href="#patient-portal" class="link-arrow"
+            >View Records <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="quick-card">
+          <i class="fas fa-credit-card"></i>
+          <h3>Pay Bills</h3>
+          <p>Secure online payment</p>
+          <a href="#billing" class="link-arrow"
+            >Pay Now <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="quick-card">
+          <i class="fas fa-ambulance"></i>
+          <h3>Emergency</h3>
+          <p>Immediate medical attention</p>
+          <a href="#emergency" class="link-arrow"
+            >Learn More <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Medical Services</h2>
+          <p>Comprehensive healthcare solutions for you and your family</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <i class="fas fa-heartbeat"></i>
+            <h3>Cardiology</h3>
+            <p>Expert heart care and cardiovascular treatments</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-baby"></i>
+            <h3>Pediatrics</h3>
+            <p>Specialized care for infants, children, and adolescents</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-brain"></i>
+            <h3>Neurology</h3>
+            <p>Advanced neurological diagnosis and treatment</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-bone"></i>
+            <h3>Orthopedics</h3>
+            <p>Bone, joint, and muscle care</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-x-ray"></i>
+            <h3>Radiology</h3>
+            <p>Advanced imaging and diagnostic services</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-procedures"></i>
+            <h3>Surgery</h3>
+            <p>Comprehensive surgical procedures</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-vial"></i>
+            <h3>Laboratory</h3>
+            <p>Accurate diagnostic testing</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-pills"></i>
+            <h3>Pharmacy</h3>
+            <p>24/7 pharmaceutical services</p>
+            <a href="#" class="service-link">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section id="doctors" class="doctors">
+      <div class="container">
+        <div class="section-header">
+          <h2>Meet Our Expert Doctors</h2>
+          <p>
+            Experienced healthcare professionals dedicated to your wellbeing
+          </p>
+        </div>
+        <div class="doctors-grid">
+          <div class="doctor-card">
+            <div class="doctor-image">
+              <img
+                src="https://via.placeholder.com/300x350/4A90E2/ffffff?text=Dr.+Sarah+Johnson"
+                alt="Dr. Sarah Johnson"
+              />
+            </div>
+            <div class="doctor-info">
+              <h3>Dr. Sarah Johnson</h3>
+              <p class="specialty">Cardiologist</p>
+              <p class="credentials">MD, FACC - 15 years experience</p>
+              <div class="doctor-languages">
+                <span>English</span>
+                <span>Swahili</span>
+              </div>
+              <a href="#appointment" class="btn btn-small">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <div class="doctor-image">
+              <img
+                src="https://via.placeholder.com/300x350/50C878/ffffff?text=Dr.+Michael+Omondi"
+                alt="Dr. Michael Omondi"
+              />
+            </div>
+            <div class="doctor-info">
+              <h3>Dr. Michael Omondi</h3>
+              <p class="specialty">Pediatrician</p>
+              <p class="credentials">MD, FAAP - 12 years experience</p>
+              <div class="doctor-languages">
+                <span>English</span>
+                <span>Swahili</span>
+              </div>
+              <a href="#appointment" class="btn btn-small">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <div class="doctor-image">
+              <img
+                src="https://via.placeholder.com/300x350/E94B3C/ffffff?text=Dr.+Grace+Wanjiku"
+                alt="Dr. Grace Wanjiku"
+              />
+            </div>
+            <div class="doctor-info">
+              <h3>Dr. Grace Wanjiku</h3>
+              <p class="specialty">Neurologist</p>
+              <p class="credentials">MD, PhD - 18 years experience</p>
+              <div class="doctor-languages">
+                <span>English</span>
+                <span>Swahili</span>
+                <span>Kikuyu</span>
+              </div>
+              <a href="#appointment" class="btn btn-small">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <div class="doctor-image">
+              <img
+                src="https://via.placeholder.com/300x350/9B59B6/ffffff?text=Dr.+James+Kamau"
+                alt="Dr. James Kamau"
+              />
+            </div>
+            <div class="doctor-info">
+              <h3>Dr. James Kamau</h3>
+              <p class="specialty">Orthopedic Surgeon</p>
+              <p class="credentials">MD, FAAOS - 20 years experience</p>
+              <div class="doctor-languages">
+                <span>English</span>
+                <span>Swahili</span>
+              </div>
+              <a href="#appointment" class="btn btn-small">Book Appointment</a>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <a href="#all-doctors" class="btn btn-outline">View All Doctors</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Appointment Booking Section -->
+    <section id="appointment" class="appointment">
+      <div class="container">
+        <div class="section-header">
+          <h2>Book an Appointment</h2>
+          <p>Schedule your visit with our healthcare professionals</p>
+        </div>
+        <div class="appointment-form-container">
+          <form class="appointment-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" required />
+              </div>
+              <div class="form-group">
+                <label for="date">Preferred Date *</label>
+                <input type="date" id="date" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="department">Department *</label>
+                <select id="department" required>
+                  <option value="">Select Department</option>
+                  <option value="cardiology">Cardiology</option>
+                  <option value="pediatrics">Pediatrics</option>
+                  <option value="neurology">Neurology</option>
+                  <option value="orthopedics">Orthopedics</option>
+                  <option value="general">General Medicine</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="doctor">Preferred Doctor</label>
+                <select id="doctor">
+                  <option value="">Any Available</option>
+                  <option value="dr-johnson">Dr. Sarah Johnson</option>
+                  <option value="dr-omondi">Dr. Michael Omondi</option>
+                  <option value="dr-wanjiku">Dr. Grace Wanjiku</option>
+                  <option value="dr-kamau">Dr. James Kamau</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Message / Reason for Visit</label>
+              <textarea id="message" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large">
+              Book Appointment
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="emergency" class="emergency">
+      <div class="container">
+        <div class="emergency-content">
+          <div class="emergency-info">
+            <h2>24/7 Emergency Services</h2>
+            <p>
+              Our emergency department is always ready to provide immediate
+              medical attention when you need it most.
+            </p>
+            <ul class="emergency-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Immediate medical attention
+              </li>
+              <li><i class="fas fa-check-circle"></i> Advanced life support</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Trauma care specialists
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Ambulance services available
+              </li>
+            </ul>
+            <div class="emergency-contact">
+              <div class="emergency-number">
+                <i class="fas fa-phone-volume"></i>
+                <div>
+                  <p>Emergency Hotline</p>
+                  <h3>+254 700 000 000</h3>
+                </div>
+              </div>
+              <div class="emergency-number">
+                <i class="fas fa-ambulance"></i>
+                <div>
+                  <p>Ambulance Service</p>
+                  <h3>+254 700 000 111</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="emergency-image">
+            <img
+              src="https://via.placeholder.com/600x400/E74C3C/ffffff?text=Emergency+Department"
+              alt="Emergency Department"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>About Luka Premiere Health Care</h2>
+            <p class="lead">Committed to excellence in healthcare since 2005</p>
+            <p>
+              Luka Premiere Health Care is a leading healthcare provider
+              dedicated to delivering exceptional medical services with
+              compassion and expertise. Our state-of-the-art facilities and
+              experienced medical professionals ensure that you receive the
+              highest quality care.
+            </p>
+            <p>
+              We believe in a patient-centered approach, combining advanced
+              medical technology with personalized attention to meet your unique
+              healthcare needs.
+            </p>
+            <div class="about-stats">
+              <div class="stat">
+                <h3>50+</h3>
+                <p>Expert Doctors</p>
+              </div>
+              <div class="stat">
+                <h3>15,000+</h3>
+                <p>Happy Patients</p>
+              </div>
+              <div class="stat">
+                <h3>20+</h3>
+                <p>Departments</p>
+              </div>
+              <div class="stat">
+                <h3>18</h3>
+                <p>Years Experience</p>
+              </div>
+            </div>
+            <div class="accreditations">
+              <h4>Accreditations & Certifications</h4>
+              <div class="badges">
+                <span class="badge">ISO 9001:2015</span>
+                <span class="badge">JCI Accredited</span>
+                <span class="badge">Ministry of Health Approved</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img
+              src="https://via.placeholder.com/600x500/3498DB/ffffff?text=Our+Hospital"
+              alt="Luka Hospital"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2>What Our Patients Say</h2>
+          <p>Real experiences from real people</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "Excellent care and professional staff. Dr. Johnson was very
+              thorough and took time to explain everything. Highly recommend!"
+            </p>
+            <div class="testimonial-author">
+              <strong>Mary Njeri</strong>
+              <span>Cardiology Patient</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "The pediatric department is amazing! Dr. Omondi is wonderful with
+              children. My son felt comfortable throughout the visit."
+            </p>
+            <div class="testimonial-author">
+              <strong>John Mwangi</strong>
+              <span>Pediatrics Patient</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "Modern facilities and caring staff. The emergency department
+              handled my case efficiently. Thank you for saving my life!"
+            </p>
+            <div class="testimonial-author">
+              <strong>Peter Otieno</strong>
+              <span>Emergency Patient</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Health Blog Section -->
+    <section class="blog">
+      <div class="container">
+        <div class="section-header">
+          <h2>Health Tips & News</h2>
+          <p>Stay informed about health and wellness</p>
+        </div>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div class="blog-image">
+              <img
+                src="https://via.placeholder.com/400x250/27AE60/ffffff?text=Heart+Health"
+                alt="Heart Health"
+              />
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Cardiology</span>
+              <h3>10 Tips for a Healthy Heart</h3>
+              <p>
+                Learn essential lifestyle changes to maintain cardiovascular
+                health and prevent heart disease.
+              </p>
+              <a href="#" class="blog-link"
+                >Read More <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-image">
+              <img
+                src="https://via.placeholder.com/400x250/E67E22/ffffff?text=Child+Nutrition"
+                alt="Child Nutrition"
+              />
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Pediatrics</span>
+              <h3>Nutrition Guide for Growing Children</h3>
+              <p>
+                Essential nutrients and meal planning tips for your child's
+                healthy development.
+              </p>
+              <a href="#" class="blog-link"
+                >Read More <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-image">
+              <img
+                src="https://via.placeholder.com/400x250/8E44AD/ffffff?text=Mental+Health"
+                alt="Mental Health"
+              />
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Wellness</span>
+              <h3>Managing Stress and Mental Wellbeing</h3>
+              <p>
+                Practical strategies for maintaining mental health in today's
+                fast-paced world.
+              </p>
+              <a href="#" class="blog-link"
+                >Read More <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+        </div>
+        <div class="text-center">
+          <a href="#all-articles" class="btn btn-outline">View All Articles</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>Get In Touch</h2>
+          <p>We're here to help and answer any questions you might have</p>
+        </div>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <h4>Visit Us</h4>
+                <p>123 Healthcare Avenue<br />Nairobi, Kenya</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <h4>Call Us</h4>
+                <p>Main: +254 700 000 000<br />Emergency: +254 700 000 111</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h4>Email Us</h4>
+                <p>info@lukahealth.co.ke<br />appointments@lukahealth.co.ke</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <div>
+                <h4>Working Hours</h4>
+                <p>
+                  Mon - Fri: 8:00 AM - 8:00 PM<br />Sat - Sun: 9:00 AM - 5:00
+                  PM<br />Emergency: 24/7
+                </p>
+              </div>
+            </div>
+            <div class="social-links">
+              <h4>Follow Us</h4>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form-container">
+            <form class="contact-form">
+              <div class="form-group">
+                <label for="contactName">Name *</label>
+                <input type="text" id="contactName" required />
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Email *</label>
+                <input type="email" id="contactEmail" required />
+              </div>
+              <div class="form-group">
+                <label for="contactPhone">Phone</label>
+                <input type="tel" id="contactPhone" />
+              </div>
+              <div class="form-group">
+                <label for="contactSubject">Subject *</label>
+                <input type="text" id="contactSubject" required />
+              </div>
+              <div class="form-group">
+                <label for="contactMessage">Message *</label>
+                <textarea id="contactMessage" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-large">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8193168449!2d36.8219!3d-1.2921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTcnMzEuNiJTIDM2wrA0OScxOC44IkU!5e0!3m2!1sen!2ske!4v1234567890"
+            width="100%"
+            height="400"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>LUKA</h3>
+            <p>
+              Providing exceptional healthcare services with compassion and
+              expertise since 2005.
+            </p>
+            <div class="footer-social">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#doctors">Doctors</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Patient Resources</h4>
+            <ul>
+              <li><a href="#patient-portal">Patient Portal</a></li>
+              <li><a href="#billing">Pay Bills</a></li>
+              <li><a href="#insurance">Insurance</a></li>
+              <li><a href="#records">Medical Records</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Departments</h4>
+            <ul>
+              <li><a href="#">Cardiology</a></li>
+              <li><a href="#">Pediatrics</a></li>
+              <li><a href="#">Neurology</a></li>
+              <li><a href="#">Orthopedics</a></li>
+              <li><a href="#">Emergency</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul class="footer-contact">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> 123 Healthcare Avenue,
+                Nairobi
+              </li>
+              <li><i class="fas fa-phone"></i> +254 700 000 000</li>
+              <li><i class="fas fa-envelope"></i> info@lukahealth.co.ke</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Luka Premiere Health Care. All rights reserved.</p>
+          <div class="footer-links">
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#hipaa">HIPAA Compliance</a>
+            <a href="#careers">Careers</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
   </body>
 </html>
