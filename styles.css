@@ -2094,6 +2094,31 @@ body.dark-mode .hero-video-overlay {
     grid-template-columns: 1fr;
   }
 
+  .contact-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid rgba(74, 144, 226, 0.18);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .social-links {
+    grid-column: 1 / -1;
+  }
+
+  .social-icons a {
+    text-decoration: none;
+  }
+
   .services-grid,
   .doctors-grid,
   .blog-grid {
