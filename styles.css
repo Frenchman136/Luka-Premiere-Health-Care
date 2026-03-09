@@ -2102,4 +2102,23 @@ body.dark-mode .hero-video-overlay {
   .about-text {
     padding: 20px;
   }
+
+  .footer-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .footer-section:first-child,
+  .footer-section:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
 }
