@@ -2108,8 +2108,7 @@ body.dark-mode .hero-video-overlay {
     gap: 18px;
   }
 
-  .footer-section:first-child,
-  .footer-section:last-child {
+  .footer-section:first-child {
     grid-column: 1 / -1;
   }
 
