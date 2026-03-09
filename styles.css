@@ -2097,18 +2097,34 @@ body.dark-mode .hero-video-overlay {
   .contact-info {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 8px 12px;
   }
 
   .contact-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    gap: 8px;
-    padding: 12px;
-    border: 1px solid rgba(74, 144, 226, 0.18);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.75);
+    gap: 10px;
+    padding: 8px 2px;
+    border: 0;
+    border-bottom: 1px solid rgba(74, 144, 226, 0.2);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .contact-item i {
+    font-size: 20px;
+    margin-top: 3px;
+  }
+
+  .contact-item h4 {
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  .contact-item p {
+    font-size: 13px;
+    line-height: 1.4;
   }
 
   .social-links {
