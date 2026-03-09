@@ -1345,6 +1345,7 @@ nav.scrolled {
   justify-content: center;
   border-radius: 50%;
   transition: var(--transition);
+  text-decoration: none;
 }
 
 .footer-social a:hover {
@@ -2101,6 +2102,10 @@ body.dark-mode .hero-video-overlay {
 
   .about-text {
     padding: 20px;
+  }
+
+  .footer-social {
+    justify-content: center;
   }
 
   .footer-content {
