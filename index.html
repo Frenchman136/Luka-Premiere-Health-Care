@@ -11,64 +11,74 @@
     />
   </head>
   <body>
-    <!-- Emergency Banner -->
-    <div class="emergency-banner">
-      <i class="fas fa-phone-alt"></i>
-      <span>24/7 Emergency: <strong>+254 718 564 857</strong></span>
-    </div>
-
     <!-- Navigation Bar -->
     <nav id="navbar">
-      <div class="logo">LUKA</div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#services">SERVICES</a></li>
-        <li><a href="#doctors">DOCTORS</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-        <li><a href="#patient-portal" class="btn-portal">PATIENT PORTAL</a></li>
-      </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="logo">
+        <h1>LUKA</h1>
       </div>
+      <div class="nav-actions">
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle dark mode"
+          aria-pressed="false"
+        >
+          <i class="fas fa-moon" aria-hidden="true"></i>
+          <span>Dark</span>
+        </button>
+        <button class="search-btn" aria-label="Search">
+          <svg
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span class="hamburger-label">Menu</span>
+          <span class="hamburger-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Patient Care</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#appointment">Schedule an Appointment</a></li>
+        <li><a href="#doctors">Find a Doctor</a></li>
+        <li><a href="#billing">Pay Your Bill</a></li>
+        <li><a href="#careers">Employment</a></li>
+        <li><a href="#contact">Location</a></li>
+      </ul>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="hero-bg.MP4" type="video/mp4" />
+      </video>
+      <div class="hero-video-overlay"></div>
       <div class="hero-content">
-        <h1>Your Health, Our Priority</h1>
-        <p>
-          Providing exceptional healthcare services with compassion and
-          expertise
-        </p>
-        <div class="hero-buttons">
-          <a href="#appointment" class="btn btn-primary">Book Appointment</a>
-          <a href="#services" class="btn btn-secondary">Our Services</a>
-        </div>
-      </div>
-      <div class="hero-features">
-        <div class="feature-card">
-          <i class="fas fa-user-md"></i>
-          <h3>Expert Doctors</h3>
-          <p>Highly qualified specialists</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-hospital"></i>
-          <h3>Modern Facilities</h3>
-          <p>State-of-the-art equipment</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-clock"></i>
-          <h3>24/7 Emergency</h3>
-          <p>Always here for you</p>
+        <div class="hero-bottom-right">
+          <h2>An <span>Oasis</span> of life</h2>
+          <p>An oasis of life. We treat, God heals.</p>
         </div>
       </div>
     </section>
 
     <!-- Quick Access Section -->
-    <section class="quick-access">
+    <section id="billing" class="quick-access">
       <div class="container">
         <div class="quick-card">
           <i class="fas fa-calendar-check"></i>
@@ -229,25 +239,6 @@
                 <span>English</span>
                 <span>Swahili</span>
                 <span>Kikuyu</span>
-              </div>
-              <a href="#appointment" class="btn btn-small">Book Appointment</a>
-            </div>
-          </div>
-          <div class="doctor-card">
-            <div class="doctor-image">
-              <img
-                src="https://thispersondoesnotexist.com/?doctor=orthopedics-104"
-                alt="Dr. James Kamau"
-                referrerpolicy="no-referrer"
-              />
-            </div>
-            <div class="doctor-info">
-              <h3>Dr. James Kamau</h3>
-              <p class="specialty">Orthopedic Surgeon</p>
-              <p class="credentials">MD, FAAOS - 20 years experience</p>
-              <div class="doctor-languages">
-                <span>English</span>
-                <span>Swahili</span>
               </div>
               <a href="#appointment" class="btn btn-small">Book Appointment</a>
             </div>
@@ -492,7 +483,7 @@
     </section>
 
     <!-- Health Blog Section -->
-    <section class="blog">
+    <section id="research" class="blog">
       <div class="container">
         <div class="section-header">
           <h2>Health Tips & News</h2>
@@ -655,7 +646,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer id="careers" class="footer">
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">

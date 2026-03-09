@@ -1,6 +1,61 @@
 // Mobile Navigation Toggle
 const hamburger = document.getElementById("hamburger");
 const navLinks = document.getElementById("navLinks");
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
+const themeLabel = themeToggle ? themeToggle.querySelector("span") : null;
+const themeStorageKey = "luka-theme";
+
+const setTheme = (theme) => {
+  const darkMode = theme === "dark";
+  document.body.classList.toggle("dark-mode", darkMode);
+
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", darkMode ? "true" : "false");
+  }
+
+  if (themeIcon) {
+    themeIcon.className = darkMode ? "fas fa-sun" : "fas fa-moon";
+  }
+
+  if (themeLabel) {
+    themeLabel.textContent = darkMode ? "Light" : "Dark";
+  }
+};
+
+const getInitialTheme = () => {
+  let storedTheme = null;
+
+  try {
+    storedTheme = localStorage.getItem(themeStorageKey);
+  } catch (error) {
+    storedTheme = null;
+  }
+
+  if (storedTheme === "dark" || storedTheme === "light") {
+    return storedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+setTheme(getInitialTheme());
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const isDark = document.body.classList.contains("dark-mode");
+    const nextTheme = isDark ? "light" : "dark";
+    setTheme(nextTheme);
+
+    try {
+      localStorage.setItem(themeStorageKey, nextTheme);
+    } catch (error) {
+      // Ignore storage errors and keep theme in-memory for this session.
+    }
+  });
+}
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
@@ -115,7 +170,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
-      const offsetTop = target.offsetTop - 120; // Account for fixed navbar
+      const offsetTop = target.offsetTop - 72; // Account for sticky navbar height
 
       window.scrollTo({
         top: offsetTop,
