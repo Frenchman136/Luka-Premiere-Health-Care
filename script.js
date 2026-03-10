@@ -291,6 +291,32 @@ if (blogSection && blogViewAllBtn) {
   });
 }
 
+// Doctors random order + View All toggle
+const doctorsSection = document.querySelector(".doctors");
+const doctorsGrid = document.querySelector(".doctors-grid");
+const doctorsViewAllBtn = document.querySelector(".doctors-view-all");
+
+if (doctorsGrid) {
+  const doctorCards = Array.from(doctorsGrid.children);
+  for (let i = doctorCards.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [doctorCards[i], doctorCards[j]] = [doctorCards[j], doctorCards[i]];
+  }
+  doctorCards.forEach((card) => doctorsGrid.appendChild(card));
+}
+
+if (doctorsSection && doctorsViewAllBtn) {
+  doctorsViewAllBtn.addEventListener("click", () => {
+    const isCollapsed = doctorsSection.classList.toggle("is-collapsed");
+    const expanded = !isCollapsed;
+    doctorsViewAllBtn.setAttribute(
+      "aria-expanded",
+      expanded ? "true" : "false",
+    );
+    doctorsViewAllBtn.textContent = expanded ? "Show Less" : "View All Doctors";
+  });
+}
+
 // Set minimum date for appointment booking (today)
 const dateInput = document.getElementById("date");
 if (dateInput) {

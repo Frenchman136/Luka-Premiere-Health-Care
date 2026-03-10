@@ -605,6 +605,14 @@ nav.scrolled {
   margin-bottom: 40px;
 }
 
+.doctors.is-collapsed .doctor-card {
+  display: none;
+}
+
+.doctors.is-collapsed .doctor-card:nth-child(-n + 2) {
+  display: block;
+}
+
 .doctor-card {
   background-color: var(--white);
   border-radius: 10px;
