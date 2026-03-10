@@ -1121,15 +1121,24 @@ nav.scrolled {
 
 .blog-image {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 10;
+  height: auto;
   overflow: hidden;
+  background-color: #f2f2f2;
 }
 
 .blog-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: var(--transition);
+}
+
+.blog-card--heart .blog-image img {
+  object-fit: contain;
+  object-position: center center;
+  transform: none;
 }
 
 .blog-card:hover .blog-image img {
