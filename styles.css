@@ -204,7 +204,7 @@ nav.scrolled {
       rgba(8, 24, 43, 0.62) 45%,
       rgba(8, 24, 43, 0.2) 100%
     ),
-    url("images/hero.jpg");
+    url("images/hero.webp");
   background-size: cover;
   background-position: center;
   color: var(--white);
@@ -1064,12 +1064,13 @@ nav.scrolled {
 .testimonials-grid {
   display: flex;
   gap: 30px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   padding-bottom: 10px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
 }
 
 .testimonials-grid::-webkit-scrollbar {
@@ -1083,7 +1084,6 @@ nav.scrolled {
   box-shadow: var(--shadow);
   transition: var(--transition);
   flex: 0 0 calc((100% - 60px) / 3);
-  scroll-snap-align: start;
 }
 
 .testimonial-card:hover {
