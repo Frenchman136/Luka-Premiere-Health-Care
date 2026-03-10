@@ -1935,8 +1935,10 @@ body.dark-mode .hero-video-overlay {
   }
 
   .hero {
-    padding: 64px 16px;
-    height: calc(100dvh - 56px);
+    padding: 72px 16px 48px;
+    height: auto;
+    min-height: calc(70dvh - 56px);
+    background-position: center 30%;
   }
 
   .hero-content {
