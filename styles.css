@@ -1057,10 +1057,23 @@ nav.scrolled {
   background-color: var(--light-color);
 }
 
+.testimonials-slider {
+  overflow: hidden;
+}
+
 .testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
   gap: 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.testimonials-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .testimonial-card {
@@ -1069,6 +1082,8 @@ nav.scrolled {
   border-radius: 10px;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  flex: 0 0 calc((100% - 60px) / 3);
+  scroll-snap-align: start;
 }
 
 .testimonial-card:hover {
@@ -1094,7 +1109,8 @@ nav.scrolled {
 
 .testimonial-author {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .testimonial-author strong {
@@ -1105,6 +1121,33 @@ nav.scrolled {
 .testimonial-author span {
   color: var(--primary-color);
   font-size: 14px;
+}
+
+.testimonial-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid rgba(74, 144, 226, 0.2);
+  flex-shrink: 0;
+}
+
+.testimonial-author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .testimonial-card {
+    flex-basis: calc((100% - 30px) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonial-card {
+    flex-basis: 100%;
+  }
 }
 
 /* Blog Section */
@@ -1118,6 +1161,26 @@ nav.scrolled {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
+}
+
+.blog.is-collapsed .blog-card {
+  display: none;
+}
+
+.blog.is-collapsed .blog-card:nth-child(-n + 2) {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .blog.is-collapsed .blog-card:nth-child(-n + 3) {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog.is-collapsed .blog-card:nth-child(-n + 4) {
+    display: block;
+  }
 }
 
 .blog-card {

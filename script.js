@@ -209,6 +209,88 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Testimonials auto-slide
+const testimonialsTrack = document.querySelector(".testimonials-grid");
+if (testimonialsTrack) {
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (!prefersReducedMotion) {
+    const cards = testimonialsTrack.querySelectorAll(".testimonial-card");
+    let slideStep = 0;
+    let sliderTimer = null;
+
+    const getGap = () => {
+      const styles = getComputedStyle(testimonialsTrack);
+      const gapValue = styles.columnGap || styles.gap || "0";
+      const parsed = Number.parseFloat(gapValue);
+      return Number.isNaN(parsed) ? 0 : parsed;
+    };
+
+    const updateStep = () => {
+      if (!cards.length) {
+        slideStep = 0;
+        return;
+      }
+
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      slideStep = cardWidth + getGap();
+    };
+
+    const startAutoSlide = () => {
+      if (sliderTimer || slideStep === 0) return;
+
+      sliderTimer = setInterval(() => {
+        const maxScrollLeft =
+          testimonialsTrack.scrollWidth - testimonialsTrack.clientWidth;
+
+        if (testimonialsTrack.scrollLeft + slideStep >= maxScrollLeft - 2) {
+          testimonialsTrack.scrollTo({ left: 0, behavior: "smooth" });
+          return;
+        }
+
+        testimonialsTrack.scrollBy({ left: slideStep, behavior: "smooth" });
+      }, 4000);
+    };
+
+    const stopAutoSlide = () => {
+      if (!sliderTimer) return;
+      clearInterval(sliderTimer);
+      sliderTimer = null;
+    };
+
+    updateStep();
+    startAutoSlide();
+
+    window.addEventListener("resize", () => {
+      updateStep();
+      stopAutoSlide();
+      startAutoSlide();
+    });
+
+    testimonialsTrack.addEventListener("mouseenter", stopAutoSlide);
+    testimonialsTrack.addEventListener("mouseleave", startAutoSlide);
+    testimonialsTrack.addEventListener("touchstart", stopAutoSlide, {
+      passive: true,
+    });
+    testimonialsTrack.addEventListener("touchend", startAutoSlide);
+  }
+}
+
+// Blog "View All Articles" toggle
+const blogSection = document.querySelector(".blog");
+const blogViewAllBtn = document.querySelector(".blog-view-all");
+
+if (blogSection && blogViewAllBtn) {
+  blogViewAllBtn.addEventListener("click", () => {
+    const isCollapsed = blogSection.classList.toggle("is-collapsed");
+    const expanded = !isCollapsed;
+    blogViewAllBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+    blogViewAllBtn.textContent = expanded ? "Show Less" : "View All Articles";
+  });
+}
+
 // Set minimum date for appointment booking (today)
 const dateInput = document.getElementById("date");
 if (dateInput) {

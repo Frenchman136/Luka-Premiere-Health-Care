@@ -420,7 +420,8 @@
           <h2>What Our Patients Say</h2>
           <p>Real experiences from real people</p>
         </div>
-        <div class="testimonials-grid">
+        <div class="testimonials-slider">
+          <div class="testimonials-grid">
           <div class="testimonial-card">
             <div class="stars">
               <i class="fas fa-star"></i>
@@ -430,12 +431,19 @@
               <i class="fas fa-star"></i>
             </div>
             <p>
-              "Excellent care and professional staff. Dr. Johnson was very
+              "Excellent care and professional staff. Dr. Zaccheus was very
               thorough and took time to explain everything. Highly recommend!"
             </p>
             <div class="testimonial-author">
-              <strong>Mary Njeri</strong>
-              <span>Cardiology Patient</span>
+              <img
+                class="testimonial-avatar"
+                src="images/clients/client.JPG"
+                alt="Julia Mbavazi"
+              />
+              <div class="testimonial-author-info">
+                <strong>Julia Mbavazi</strong>
+                <span>Cardiology Patient</span>
+              </div>
             </div>
           </div>
           <div class="testimonial-card">
@@ -447,12 +455,19 @@
               <i class="fas fa-star"></i>
             </div>
             <p>
-              "The pediatric department is amazing! Dr. Omondi is wonderful with
+              "The pediatric department is amazing! Dr. Bilha is wonderful with
               children. My son felt comfortable throughout the visit."
             </p>
             <div class="testimonial-author">
-              <strong>John Mwangi</strong>
-              <span>Pediatrics Patient</span>
+              <img
+                class="testimonial-avatar"
+                src="images/clients/client1.JPG"
+                alt="Fesel Chirumban"
+              />
+              <div class="testimonial-author-info">
+                <strong>Fesel Chirumban</strong>
+                <span>Pediatrics Patient</span>
+              </div>
             </div>
           </div>
           <div class="testimonial-card">
@@ -468,16 +483,72 @@
               handled my case efficiently. Thank you for saving my life!"
             </p>
             <div class="testimonial-author">
-              <strong>Peter Otieno</strong>
-              <span>Emergency Patient</span>
+              <img
+                class="testimonial-avatar"
+                src="images/clients/client2.JPG"
+                alt="John Webo"
+              />
+              <div class="testimonial-author-info">
+                <strong>John Webo</strong>
+                <span>Emergency Patient</span>
+              </div>
             </div>
           </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "The maternity team was supportive and kind. Everything was
+              handled with care and professionalism."
+            </p>
+            <div class="testimonial-author">
+              <img
+                class="testimonial-avatar"
+                src="images/clients/client3.JPG"
+                alt="Amina Khalid"
+              />
+              <div class="testimonial-author-info">
+                <strong>Amina Khalid</strong>
+                <span>Maternity Patient</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "Fast service at the outpatient clinic and the staff explained
+              the treatment plan clearly. Great experience."
+            </p>
+            <div class="testimonial-author">
+              <img
+                class="testimonial-avatar"
+                src="images/clients/client.JPG"
+                alt="Brian Kimani"
+              />
+              <div class="testimonial-author-info">
+                <strong>Brian Kimani</strong>
+                <span>Outpatient Patient</span>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </section>
 
     <!-- Health Blog Section -->
-    <section id="research" class="blog">
+    <section id="research" class="blog is-collapsed">
       <div class="container">
         <div class="section-header">
           <h2>Health Tips & News</h2>
@@ -562,7 +633,13 @@
           </article>
         </div>
         <div class="text-center">
-          <a href="#all-articles" class="btn btn-outline">View All Articles</a>
+          <button
+            type="button"
+            class="btn btn-outline blog-view-all"
+            aria-expanded="false"
+          >
+            View All Articles
+          </button>
         </div>
       </div>
     </section>
