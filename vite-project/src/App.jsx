@@ -9,7 +9,7 @@ import { Appointments } from "./components/Appointments";
 import { Emergency } from "./components/Emergency";
 import { About } from "./components/About";
 import { Testimonials } from "./components/Testimonials";
-import { HealthBlog } from "./components/HealthBlog";
+import { HealthBlog, HealthBlogPage } from "./components/HealthBlog";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 
@@ -30,6 +30,9 @@ function App() {
   }
   if (hash.startsWith("#/doctors")) {
     return <DoctorsPage />;
+  }
+  if (hash.startsWith("#/blog")) {
+    return <HealthBlogPage />;
   }
 
   return (

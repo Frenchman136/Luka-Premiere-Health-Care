@@ -45,9 +45,21 @@
 
 .about-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1.05fr 1fr;
   gap: 50px;
-  align-items: center;
+  align-items: stretch;
+}
+
+.about-heading {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.about-heading h2 {
+  font-size: 40px;
+  color: var(--dark-color);
+  margin-bottom: 18px;
+  line-height: 1.2;
 }
 
 .about-text {
@@ -56,13 +68,6 @@
   border-radius: 18px;
   padding: 32px;
   box-shadow: 0 14px 34px rgba(44, 62, 80, 0.08);
-}
-
-.about-text h2 {
-  font-size: 36px;
-  color: var(--dark-color);
-  margin-bottom: 12px;
-  line-height: 1.2;
 }
 
 .lead {
@@ -80,37 +85,43 @@
 }
 
 .about-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 14px;
-  margin: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
 }
 
 .stat {
-  text-align: center;
-  padding: 18px 14px;
-  background: linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
-  border: 1px solid rgba(74, 144, 226, 0.16);
-  border-radius: 12px;
-  box-shadow: 0 10px 22px rgba(44, 62, 80, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(74, 144, 226, 0.08);
+  border: 1px solid rgba(74, 144, 226, 0.14);
+  border-radius: 999px;
+  box-shadow: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .stat:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 26px rgba(44, 62, 80, 0.14);
+  transform: none;
+  background: rgba(74, 144, 226, 0.14);
+  border-color: rgba(74, 144, 226, 0.28);
+  box-shadow: none;
 }
 
 .stat h3 {
-  font-size: 32px;
+  font-size: 22px;
   color: var(--primary-color);
-  margin-bottom: 3px;
+  margin: 0;
+  line-height: 1;
 }
 
 .stat p {
-  font-size: 13px;
+  font-size: 12px;
   color: #4d5f70;
   font-weight: 600;
+  margin: 0;
 }
 
 .accreditations {
@@ -142,6 +153,9 @@
 }
 
 .about-image {
+  display: flex;
+  height: 100%;
+  min-height: 420px;
   padding: 12px;
   border-radius: 18px;
   border: 1px solid rgba(74, 144, 226, 0.16);
@@ -156,8 +170,7 @@
 
 .about-image img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   object-position: center center;
   border-radius: 12px;
@@ -174,19 +187,17 @@
     grid-template-columns: 1fr;
   }
 
-  .about-text h2 {
-    font-size: 28px;
+  .about-heading h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
   }
 
   .about-image {
     order: -1;
-  }
-
-  .about-stats {
-    grid-template-columns: repeat(2, 1fr);
+    min-height: 280px;
   }
 
   .stat h3 {
-    font-size: 26px;
+    font-size: 20px;
   }
 }

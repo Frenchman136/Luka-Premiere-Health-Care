@@ -5,8 +5,10 @@ export function Emergency() {
     <section id="emergency" className="emergency">
       <div className="container">
         <div className="emergency-content">
-          <div className="emergency-info">
+          <div className="emergency-heading">
             <h2>24/7 Emergency Services</h2>
+          </div>
+          <div className="emergency-info">
             <p>
               Our emergency department is always ready to provide immediate
               medical attention when you need it most.

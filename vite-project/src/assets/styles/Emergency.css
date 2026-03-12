@@ -1,6 +1,6 @@
 /* Emergency Section */
 .emergency {
-  padding: 80px 20px;
+  padding: 64px 20px;
   background: linear-gradient(135deg, #d93b2b 0%, #b92d1f 48%, #8f1f15 100%);
   color: var(--white);
   position: relative;
@@ -41,11 +41,22 @@
 
 .emergency-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1.05fr;
   gap: 50px;
-  align-items: center;
+  align-items: stretch;
   position: relative;
   z-index: 1;
+}
+
+.emergency-heading {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.emergency-heading h2 {
+  font-size: 42px;
+  margin-bottom: 18px;
+  line-height: 1.2;
 }
 
 .emergency-info {
@@ -54,12 +65,6 @@
   border-radius: 16px;
   padding: 30px;
   backdrop-filter: blur(4px);
-}
-
-.emergency-info h2 {
-  font-size: 38px;
-  margin-bottom: 14px;
-  line-height: 1.2;
 }
 
 .emergency-info p {
@@ -141,6 +146,9 @@
 }
 
 .emergency-image {
+  display: flex;
+  height: 100%;
+  min-height: 420px;
   padding: 10px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -151,8 +159,8 @@
 
 .emergency-image img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
+  height: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center center;
   border-radius: 12px;
@@ -161,7 +169,7 @@
 
 @media (max-width: 640px) {
   .emergency {
-    padding: 40px 16px;
+    padding: 36px 16px;
   }
 
   .emergency-content {
@@ -169,8 +177,9 @@
     grid-template-columns: 1fr;
   }
 
-  .emergency-info h2 {
-    font-size: 28px;
+  .emergency-heading h2 {
+    font-size: 32px;
+    margin-bottom: 12px;
   }
 
   .emergency-info p {
@@ -179,5 +188,6 @@
 
   .emergency-image {
     order: -1;
+    min-height: 280px;
   }
 }

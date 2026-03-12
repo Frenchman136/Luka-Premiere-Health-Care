@@ -5,8 +5,20 @@ export function About() {
     <section id="about" className="about">
       <div className="container">
         <div className="about-content">
-          <div className="about-text">
+          <div className="about-heading">
             <h2>About Luka Premiere Health Care</h2>
+          </div>
+          <div className="about-image">
+            <img
+              src="/images/Luka%20hospital.webp"
+              alt="Luka Hospital"
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="about-text">
             <p className="lead">Committed to excellence in healthcare since 2005</p>
             <p>
               Luka Premiere Health Care is a leading healthcare provider
@@ -46,16 +58,6 @@ export function About() {
                 <span className="badge">MOH Approved</span>
               </div>
             </div>
-          </div>
-          <div className="about-image">
-            <img
-              src="/images/Luka%20hospital.webp"
-              alt="Luka Hospital"
-              width="1200"
-              height="800"
-              loading="lazy"
-              decoding="async"
-            />
           </div>
         </div>
       </div>

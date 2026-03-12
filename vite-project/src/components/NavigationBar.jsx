@@ -1,6 +1,15 @@
+import { useEffect, useState } from "react";
 import "../assets/styles/NavigationBar.css";
 
 export function NavigationBar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => setMenuOpen(false);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   return (
     <nav id="navbar">
       <div className="logo">
@@ -33,11 +42,12 @@ export function NavigationBar() {
           </svg>
         </button>
         <button
-          className="hamburger"
+          className={`hamburger ${menuOpen ? "is-open" : ""}`}
           id="hamburger"
           aria-label="Menu"
-          aria-expanded="false"
+          aria-expanded={menuOpen}
           aria-controls="navLinks"
+          onClick={() => setMenuOpen((prev) => !prev)}
         >
           <span className="hamburger-label">Menu</span>
           <span className="hamburger-lines" aria-hidden="true">
@@ -47,32 +57,55 @@ export function NavigationBar() {
           </span>
         </button>
       </div>
-      <ul className="nav-links" id="navLinks" aria-hidden="true">
+      <ul
+        className={`nav-links ${menuOpen ? "active" : ""}`}
+        id="navLinks"
+        aria-hidden={!menuOpen}
+      >
         <li>
-          <a href="#about">About</a>
+          <a href="#about" onClick={() => setMenuOpen(false)}>
+            About
+          </a>
         </li>
         <li>
-          <a href="#services">Patient Care</a>
+          <a href="#services" onClick={() => setMenuOpen(false)}>
+            Patient Care
+          </a>
         </li>
         <li>
-          <a href="#research">Research</a>
+          <a href="#research" onClick={() => setMenuOpen(false)}>
+            Research
+          </a>
         </li>
         <li>
-          <a href="#/appointment" target="_blank" rel="noreferrer">
+          <a
+            href="#/appointment"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setMenuOpen(false)}
+          >
             Schedule an Appointment
           </a>
         </li>
         <li>
-          <a href="#doctors">Find a Doctor</a>
+          <a href="#doctors" onClick={() => setMenuOpen(false)}>
+            Find a Doctor
+          </a>
         </li>
         <li>
-          <a href="#billing">Pay Your Bill</a>
+          <a href="#billing" onClick={() => setMenuOpen(false)}>
+            Pay Your Bill
+          </a>
         </li>
         <li>
-          <a href="#careers">Employment</a>
+          <a href="#careers" onClick={() => setMenuOpen(false)}>
+            Employment
+          </a>
         </li>
         <li>
-          <a href="#contact">Location</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>
+            Location
+          </a>
         </li>
       </ul>
     </nav>
