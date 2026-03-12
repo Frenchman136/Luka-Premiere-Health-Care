@@ -25,7 +25,7 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="images/clients/client.webp"
+                  src="/images/clients/client.webp"
                   alt="Aggrey Dj"
                   width="56"
                   height="56"
@@ -53,7 +53,7 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="images/clients/client1.webp"
+                  src="/images/clients/client1.webp"
                   alt="Fesel Chirumban"
                   width="56"
                   height="56"
@@ -81,7 +81,7 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="images/clients/client2.webp"
+                  src="/images/clients/client2.webp"
                   alt="John Webo"
                   width="56"
                   height="56"
@@ -109,7 +109,7 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="images/clients/client3.webp"
+                  src="/images/clients/client3.webp"
                   alt="Kilimba Nekesa"
                   width="56"
                   height="56"
@@ -137,7 +137,7 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="images/clients/client.webp"
+                  src="/images/clients/client.webp"
                   alt="Brian Kimani"
                   width="56"
                   height="56"
@@ -156,3 +156,4 @@ export function Testimonials() {
     </section>
   );
 }
+

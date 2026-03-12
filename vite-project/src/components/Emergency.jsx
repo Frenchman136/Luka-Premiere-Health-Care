@@ -44,7 +44,7 @@ export function Emergency() {
           </div>
           <div className="emergency-image">
             <img
-              src="images/emergency/emergency.webp"
+              src="/images/emergency/emergency.webp"
               alt="Emergency Department"
               width="1200"
               height="800"
@@ -57,3 +57,4 @@ export function Emergency() {
     </section>
   );
 }
+

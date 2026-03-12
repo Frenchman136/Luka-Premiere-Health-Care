@@ -9,7 +9,7 @@
       rgba(8, 24, 43, 0.62) 45%,
       rgba(8, 24, 43, 0.2) 100%
     ),
-    url("images/hero.webp");
+    url("/images/hero.webp");
   background-size: cover;
   background-position: center;
   color: var(--white);

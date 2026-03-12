@@ -49,7 +49,7 @@ export function About() {
           </div>
           <div className="about-image">
             <img
-              src="images/Luka%20hospital.webp"
+              src="/images/Luka%20hospital.webp"
               alt="Luka Hospital"
               width="1200"
               height="800"
@@ -62,3 +62,4 @@ export function About() {
     </section>
   );
 }
+

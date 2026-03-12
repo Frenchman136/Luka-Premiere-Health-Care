@@ -14,7 +14,7 @@ export function Doctors() {
           <div className="doctor-card">
             <div className="doctor-image">
               <img
-                src="images/doctors/doctor5.webp"
+                src="/images/doctors/doctor5.webp"
                 alt="Dr. Aggrey Kadima"
                 width="400"
                 height="500"
@@ -34,7 +34,7 @@ export function Doctors() {
           <div className="doctor-card">
             <div className="doctor-image">
               <img
-                src="images/doctors/doctor4.webp"
+                src="/images/doctors/doctor4.webp"
                 alt="Dr. Bilha Anjili"
                 width="400"
                 height="500"
@@ -54,7 +54,7 @@ export function Doctors() {
           <div className="doctor-card">
             <div className="doctor-image">
               <img
-                src="images/doctors/doctor1.webp"
+                src="/images/doctors/doctor1.webp"
                 alt="Dr. Zaccheus Junior"
                 width="400"
                 height="500"
@@ -74,7 +74,7 @@ export function Doctors() {
           <div className="doctor-card">
             <div className="doctor-image">
               <img
-                src="images/doctors/doctor6.webp"
+                src="/images/doctors/doctor6.webp"
                 alt="Dr. James Kamau"
                 width="400"
                 height="500"
@@ -94,7 +94,7 @@ export function Doctors() {
           <div className="doctor-card">
             <div className="doctor-image">
               <img
-                src="images/doctors/doctor.webp"
+                src="/images/doctors/doctor.webp"
                 alt="Dr. Leah Wanjiku"
                 width="400"
                 height="500"
@@ -114,7 +114,7 @@ export function Doctors() {
           <div className="doctor-card">
             <div className="doctor-image">
               <img
-                src="images/doctors/doctor2.webp"
+                src="/images/doctors/doctor2.webp"
                 alt="Dr. Samuel Otieno"
                 width="400"
                 height="500"
@@ -134,7 +134,7 @@ export function Doctors() {
           <div className="doctor-card">
             <div className="doctor-image">
               <img
-                src="images/doctors/doctor3.webp"
+                src="/images/doctors/doctor3.webp"
                 alt="Dr. Faith Achieng"
                 width="400"
                 height="500"
@@ -165,3 +165,4 @@ export function Doctors() {
     </section>
   );
 }
+
