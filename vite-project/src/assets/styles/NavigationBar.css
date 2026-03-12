@@ -27,6 +27,20 @@ nav.scrolled {
   box-shadow: 0 12px 28px rgba(44, 62, 80, 0.14);
 }
 
+[data-theme="dark"] nav {
+  background: linear-gradient(
+    135deg,
+    rgba(12, 22, 38, 0.95) 0%,
+    rgba(16, 30, 48, 0.92) 100%
+  );
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] nav.scrolled {
+  background: rgba(12, 22, 38, 0.98);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+}
+
 .logo .logo-text {
   font-size: 20px;
   font-weight: 800;
@@ -127,6 +141,17 @@ nav.scrolled {
   background: rgba(74, 144, 226, 0.12);
 }
 
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .search-btn {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(121, 174, 241, 0.35);
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .hamburger-lines span {
+  background-color: #79aef1;
+}
+
 .nav-links {
   position: absolute;
   top: calc(100% + 8px);
@@ -151,6 +176,12 @@ nav.scrolled {
   pointer-events: auto;
 }
 
+[data-theme="dark"] .nav-links {
+  background: rgba(12, 22, 38, 0.98);
+  border-color: rgba(121, 174, 241, 0.28);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+
 .nav-links li + li {
   border-top: 1px solid rgba(74, 144, 226, 0.1);
 }
@@ -162,6 +193,10 @@ nav.scrolled {
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
+}
+
+[data-theme="dark"] .nav-links a {
+  color: #e2e8f0;
 }
 
 .nav-links a:hover {

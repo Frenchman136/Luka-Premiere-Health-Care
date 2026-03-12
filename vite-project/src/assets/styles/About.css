@@ -81,7 +81,7 @@
   font-size: 16px;
   line-height: 1.8;
   margin-bottom: 16px;
-  color: #4b5a67;
+  color: var(--muted-text);
 }
 
 .about-stats {
@@ -119,7 +119,7 @@
 
 .stat p {
   font-size: 12px;
-  color: #4d5f70;
+  color: var(--muted-text);
   font-weight: 600;
   margin: 0;
 }
@@ -200,4 +200,42 @@
   .stat h3 {
     font-size: 20px;
   }
+}
+
+[data-theme="dark"] .about {
+  background: linear-gradient(180deg, #0b1220 0%, #0f172a 55%, #0b1220 100%);
+}
+
+[data-theme="dark"] .about::before {
+  background: radial-gradient(
+    circle,
+    rgba(121, 174, 241, 0.2) 0%,
+    rgba(121, 174, 241, 0.04) 70%
+  );
+}
+
+[data-theme="dark"] .about::after {
+  background: radial-gradient(
+    circle,
+    rgba(87, 211, 148, 0.16) 0%,
+    rgba(87, 211, 148, 0.04) 70%
+  );
+}
+
+[data-theme="dark"] .about-text {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(121, 174, 241, 0.18);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .stat {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(121, 174, 241, 0.2);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .about-image {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(17, 24, 39, 0.9));
+  border-color: rgba(121, 174, 241, 0.18);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }

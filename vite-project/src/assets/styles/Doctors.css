@@ -79,7 +79,7 @@
 .empty-state {
   margin-top: 24px;
   text-align: center;
-  color: #52606d;
+  color: var(--muted-text);
   font-weight: 600;
 }
 
@@ -169,6 +169,35 @@
 .doctor-info .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+}
+
+[data-theme="dark"] .doctors {
+  background: linear-gradient(180deg, #0b1220 0%, #0f172a 55%, #0b1220 100%);
+}
+
+[data-theme="dark"] .doctors::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(121, 174, 241, 0.25),
+    transparent
+  );
+}
+
+[data-theme="dark"] .doctors-search {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(121, 174, 241, 0.3);
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .doctor-card {
+  background-color: #0b1220;
+  border-color: rgba(121, 174, 241, 0.2);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .doctor-image {
+  background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
 }
 
 /* Tablet: 2 columns, compact */

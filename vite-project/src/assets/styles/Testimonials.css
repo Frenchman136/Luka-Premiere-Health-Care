@@ -51,7 +51,7 @@
   font-style: italic;
   line-height: 1.8;
   margin-bottom: 20px;
-  color: #666;
+  color: var(--muted-text);
 }
 
 .testimonial-author {
@@ -84,6 +84,16 @@
 .testimonial-author-info {
   display: flex;
   flex-direction: column;
+}
+
+[data-theme="dark"] .testimonials {
+  background-color: #0f172a;
+}
+
+[data-theme="dark"] .testimonial-card {
+  background-color: #0b1220;
+  border: 1px solid rgba(121, 174, 241, 0.12);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 1024px) {

@@ -4,6 +4,14 @@ import { trackEvent } from "../utils/analytics";
 
 export function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return "light";
+    return (
+      document.documentElement.dataset.theme ||
+      window.localStorage.getItem("theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+    );
+  });
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -34,6 +42,15 @@ export function NavigationBar() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      window.localStorage.setItem("theme", theme);
+    } catch {
+      // ignore storage issues
+    }
+  }, [theme]);
+
   const handleToggleMenu = () => {
     setMenuOpen((prev) => {
       const next = !prev;
@@ -47,6 +64,11 @@ export function NavigationBar() {
     setMenuOpen(false);
   };
 
+  const handleThemeToggle = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    trackEvent("theme_toggle", { theme: theme === "dark" ? "light" : "dark" });
+  };
+
   return (
     <nav id="navbar" ref={navRef}>
       <div className="logo">
@@ -57,10 +79,14 @@ export function NavigationBar() {
           className="theme-toggle"
           id="themeToggle"
           aria-label="Toggle dark mode"
-          aria-pressed="false"
+          aria-pressed={theme === "dark"}
+          onClick={handleThemeToggle}
         >
-          <i className="fas fa-moon" aria-hidden="true"></i>
-          <span>Dark</span>
+          <i
+            className={theme === "dark" ? "fas fa-sun" : "fas fa-moon"}
+            aria-hidden="true"
+          ></i>
+          <span>{theme === "dark" ? "Light" : "Dark"}</span>
         </button>
         <button className="search-btn" aria-label="Search">
           <svg

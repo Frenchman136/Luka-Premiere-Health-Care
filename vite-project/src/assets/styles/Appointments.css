@@ -516,3 +516,44 @@ textarea {
     width: 100%;
   }
 }
+
+[data-theme="dark"] .form-panel {
+  background: #0b1220;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .form-title {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] label {
+  color: rgba(226, 232, 240, 0.75);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #111827;
+  border-color: #1f2937;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .radio-option label {
+  background: #111827;
+  border-color: #1f2937;
+  color: #cbd5f5;
+}
+
+[data-theme="dark"] .form-panel .summary-panel {
+  background: #111827;
+  border-color: #1f2937;
+}
+
+[data-theme="dark"] .form-panel .summary-row {
+  color: #cbd5f5;
+}

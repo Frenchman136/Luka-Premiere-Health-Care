@@ -70,7 +70,7 @@
 }
 
 .blog-content p {
-  color: #666;
+  color: var(--muted-text);
   line-height: 1.6;
   margin-bottom: 15px;
 }
@@ -126,8 +126,31 @@
 .empty-state {
   margin-top: 24px;
   text-align: center;
-  color: #52606d;
+  color: var(--muted-text);
   font-weight: 600;
+}
+
+[data-theme="dark"] .blog {
+  background-color: #0b1220;
+}
+
+[data-theme="dark"] .blog-card {
+  background-color: #0b1220;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .blog-image {
+  background-color: #1f2937;
+}
+
+[data-theme="dark"] .blog-search {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(121, 174, 241, 0.3);
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .empty-state {
+  color: #b6c2d1;
 }
 
 @media (max-width: 640px) {

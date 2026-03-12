@@ -17,6 +17,11 @@ function App() {
   const [hash, setHash] = useState(() => window.location.hash || "#/");
 
   useEffect(() => {
+    const stored =
+      window.localStorage.getItem("theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.dataset.theme = stored;
+
     const handleHashChange = () => {
       setHash(window.location.hash || "#/");
     };

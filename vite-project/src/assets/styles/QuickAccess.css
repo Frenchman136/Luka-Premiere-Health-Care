@@ -37,7 +37,7 @@
 }
 
 .quick-card p {
-  color: #666;
+  color: var(--muted-text);
   margin-bottom: 15px;
 }
 
@@ -60,6 +60,16 @@
 
 .link-arrow:hover i {
   transform: translateX(5px);
+}
+
+[data-theme="dark"] .quick-access {
+  background-color: #0f172a;
+}
+
+[data-theme="dark"] .quick-card {
+  background-color: #0b1220;
+  border: 1px solid rgba(121, 174, 241, 0.12);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 640px) {

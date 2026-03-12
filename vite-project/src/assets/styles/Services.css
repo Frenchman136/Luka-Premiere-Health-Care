@@ -58,6 +58,16 @@
   color: var(--white);
 }
 
+[data-theme="dark"] .services {
+  background-color: #0b1220;
+}
+
+[data-theme="dark"] .service-card {
+  background-color: #0f172a;
+  border: 1px solid rgba(121, 174, 241, 0.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+}
+
 @media (max-width: 640px) {
   .services {
     padding: 40px 16px;
