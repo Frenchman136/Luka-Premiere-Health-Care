@@ -146,11 +146,38 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }
 
 .emergency-image img {
   width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center center;
   border-radius: 12px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
-  display: block;
+}
+
+@media (max-width: 640px) {
+  .emergency {
+    padding: 40px 16px;
+  }
+
+  .emergency-content {
+    gap: 30px;
+    grid-template-columns: 1fr;
+  }
+
+  .emergency-info h2 {
+    font-size: 28px;
+  }
+
+  .emergency-info p {
+    font-size: 15px;
+  }
+
+  .emergency-image {
+    order: -1;
+  }
 }

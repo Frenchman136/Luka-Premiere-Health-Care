@@ -61,9 +61,8 @@
 }
 
 .blog-card--heart .blog-image img {
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
-  transform: none;
 }
 
 .blog-card:hover .blog-image img {
@@ -115,4 +114,20 @@
 
 .blog-link:hover i {
   transform: translateX(5px);
+}
+
+@media (max-width: 640px) {
+  .blog {
+    padding: 40px 16px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .blog-content h3 {
+    font-size: 18px;
+  }
 }

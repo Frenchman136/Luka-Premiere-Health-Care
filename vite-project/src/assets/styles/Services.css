@@ -57,3 +57,18 @@
 .service-card:hover .service-link {
   color: var(--white);
 }
+
+@media (max-width: 640px) {
+  .services {
+    padding: 40px 16px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .service-card h3 {
+    font-size: 20px;
+  }
+}

@@ -72,6 +72,7 @@
 
 .testimonial-avatar {
   width: 56px;
+  min-width: 56px;
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
@@ -92,7 +93,16 @@
 }
 
 @media (max-width: 640px) {
+  .testimonials {
+    padding: 40px 16px;
+  }
+
   .testimonial-card {
     flex-basis: 100%;
+    padding: 24px;
+  }
+
+  .testimonial-card p {
+    font-size: 15px;
   }
 }

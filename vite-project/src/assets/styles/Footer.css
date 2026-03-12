@@ -112,3 +112,24 @@
 .footer-links a:hover {
   color: var(--primary-color);
 }
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 40px 16px 20px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .footer-section h3 {
+    font-size: 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}

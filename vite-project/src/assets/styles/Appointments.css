@@ -67,3 +67,17 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+@media (max-width: 640px) {
+  .appointment {
+    padding: 40px 16px;
+  }
+
+  .appointment-form-container {
+    padding: 24px 16px;
+  }
+
+  .appointment-form .form-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -126,7 +126,7 @@
 .badges {
   display: flex;
   gap: 10px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -151,11 +151,42 @@
     rgba(235, 245, 255, 0.8) 100%
   );
   box-shadow: 0 14px 30px rgba(44, 62, 80, 0.12);
+  overflow: hidden;
 }
 
 .about-image img {
   width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center center;
   border-radius: 12px;
   box-shadow: 0 12px 26px rgba(44, 62, 80, 0.16);
-  display: block;
+}
+
+@media (max-width: 640px) {
+  .about {
+    padding: 40px 16px;
+  }
+
+  .about-content {
+    gap: 30px;
+    grid-template-columns: 1fr;
+  }
+
+  .about-text h2 {
+    font-size: 28px;
+  }
+
+  .about-image {
+    order: -1;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat h3 {
+    font-size: 26px;
+  }
 }

@@ -132,6 +132,17 @@
   }
 }
 
+@media (max-width: 640px) {
+  .hero {
+    min-height: calc(100svh - 62px);
+    padding: 0 16px;
+  }
+
+  .hero-content {
+    padding: 0 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero,
   .hero::before,

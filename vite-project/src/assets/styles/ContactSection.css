@@ -85,3 +85,31 @@
   overflow: hidden;
   box-shadow: var(--shadow);
 }
+
+.map-container iframe {
+  width: 100%;
+  min-height: 300px;
+}
+
+@media (max-width: 640px) {
+  .contact {
+    padding: 40px 16px;
+  }
+
+  .contact-content {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .contact-form-container {
+    padding: 24px 16px;
+  }
+
+  .map-container {
+    margin-top: 30px;
+  }
+
+  .map-container iframe {
+    min-height: 250px;
+  }
+}

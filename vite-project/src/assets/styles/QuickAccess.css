@@ -61,3 +61,18 @@
 .link-arrow:hover i {
   transform: translateX(5px);
 }
+
+@media (max-width: 640px) {
+  .quick-access {
+    padding: 40px 16px;
+  }
+
+  .quick-access .container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .quick-card h3 {
+    font-size: 18px;
+  }
+}

@@ -155,3 +155,20 @@ nav.scrolled {
   background: rgba(74, 144, 226, 0.08);
   border-radius: 8px;
 }
+
+@media (max-width: 640px) {
+  nav {
+    padding: 0 16px;
+  }
+
+  .logo .logo-text {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    right: 16px;
+    left: 16px;
+    min-width: auto;
+  }
+}
