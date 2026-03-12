@@ -1,5 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import "../assets/styles/Doctors.css";
+import { trackEvent } from "../utils/analytics";
 
 const DOCTORS = [
   {
@@ -95,8 +96,18 @@ export function Doctors({ showAll = false }) {
     () => getRandomSubset(DOCTORS, previewCount),
     []
   );
+  const [query, setQuery] = useState("");
 
-  const doctorsToShow = showAll ? DOCTORS : previewDoctors;
+  const filteredDoctors = useMemo(() => {
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return DOCTORS;
+    return DOCTORS.filter((doctor) => {
+      const haystack = `${doctor.name} ${doctor.specialty} ${doctor.credentials}`.toLowerCase();
+      return haystack.includes(trimmed);
+    });
+  }, [query]);
+
+  const doctorsToShow = showAll ? filteredDoctors : previewDoctors;
 
   return (
     <section id="doctors" className="doctors">
@@ -109,7 +120,25 @@ export function Doctors({ showAll = false }) {
               : "Experienced healthcare professionals dedicated to your wellbeing"}
           </p>
         </div>
+        {showAll && (
+          <div className="doctors-tools">
+            <input
+              type="search"
+              className="doctors-search"
+              placeholder="Search by name or specialty..."
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                trackEvent("doctors_search", { query: event.target.value });
+              }}
+              aria-label="Search doctors"
+            />
+          </div>
+        )}
         <DoctorsGrid items={doctorsToShow} />
+        {showAll && doctorsToShow.length === 0 && (
+          <p className="empty-state">No doctors found. Try a different search.</p>
+        )}
         {!showAll && (
           <div className="doctors-actions">
             <a
@@ -117,6 +146,7 @@ export function Doctors({ showAll = false }) {
               target="_blank"
               rel="noreferrer"
               className="btn btn-primary"
+              onClick={() => trackEvent("doctors_view_all", { source: "home" })}
             >
               View All Doctors
             </a>

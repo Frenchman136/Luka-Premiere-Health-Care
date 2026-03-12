@@ -1,5 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import "../assets/styles/HealthBlog.css";
+import { trackEvent } from "../utils/analytics";
 
 const BLOG_POSTS = [
   {
@@ -83,7 +84,18 @@ export function HealthBlog({ showAll = false }) {
     () => getRandomSubset(BLOG_POSTS, previewCount),
     []
   );
-  const postsToShow = showAll ? BLOG_POSTS : previewPosts;
+  const [query, setQuery] = useState("");
+
+  const filteredPosts = useMemo(() => {
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return BLOG_POSTS;
+    return BLOG_POSTS.filter((post) => {
+      const haystack = `${post.title} ${post.category} ${post.summary}`.toLowerCase();
+      return haystack.includes(trimmed);
+    });
+  }, [query]);
+
+  const postsToShow = showAll ? filteredPosts : previewPosts;
 
   return (
     <section id="research" className="blog">
@@ -96,7 +108,25 @@ export function HealthBlog({ showAll = false }) {
               : "Stay informed about health and wellness"}
           </p>
         </div>
+        {showAll && (
+          <div className="blog-tools">
+            <input
+              type="search"
+              className="blog-search"
+              placeholder="Search articles..."
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                trackEvent("blog_search", { query: event.target.value });
+              }}
+              aria-label="Search articles"
+            />
+          </div>
+        )}
         <BlogGrid items={postsToShow} />
+        {showAll && postsToShow.length === 0 && (
+          <p className="empty-state">No articles found. Try another search.</p>
+        )}
         {!showAll && (
           <div className="blog-actions">
             <a
@@ -104,6 +134,7 @@ export function HealthBlog({ showAll = false }) {
               target="_blank"
               rel="noreferrer"
               className="btn btn-outline blog-view-all"
+              onClick={() => trackEvent("blog_view_all", { source: "home" })}
             >
               View All Articles
             </a>

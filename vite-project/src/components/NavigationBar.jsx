@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../assets/styles/NavigationBar.css";
+import { trackEvent } from "../utils/analytics";
 
 export function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef(null);
 
   useEffect(() => {
     const handleHashChange = () => setMenuOpen(false);
@@ -10,8 +12,43 @@ export function NavigationBar() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    const handleClickOutside = (event) => {
+      if (!menuOpen) return;
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
+
+  const handleToggleMenu = () => {
+    setMenuOpen((prev) => {
+      const next = !prev;
+      trackEvent("nav_menu_toggle", { open: next });
+      return next;
+    });
+  };
+
+  const handleNavClick = (label) => {
+    trackEvent("nav_link_click", { label });
+    setMenuOpen(false);
+  };
+
   return (
-    <nav id="navbar">
+    <nav id="navbar" ref={navRef}>
       <div className="logo">
         <span className="logo-text">LUKA</span>
       </div>
@@ -47,7 +84,7 @@ export function NavigationBar() {
           aria-label="Menu"
           aria-expanded={menuOpen}
           aria-controls="navLinks"
-          onClick={() => setMenuOpen((prev) => !prev)}
+          onClick={handleToggleMenu}
         >
           <span className="hamburger-label">Menu</span>
           <span className="hamburger-lines" aria-hidden="true">
@@ -63,17 +100,17 @@ export function NavigationBar() {
         aria-hidden={!menuOpen}
       >
         <li>
-          <a href="#about" onClick={() => setMenuOpen(false)}>
+          <a href="#about" onClick={() => handleNavClick("About")}>
             About
           </a>
         </li>
         <li>
-          <a href="#services" onClick={() => setMenuOpen(false)}>
+          <a href="#services" onClick={() => handleNavClick("Patient Care")}>
             Patient Care
           </a>
         </li>
         <li>
-          <a href="#research" onClick={() => setMenuOpen(false)}>
+          <a href="#research" onClick={() => handleNavClick("Research")}>
             Research
           </a>
         </li>
@@ -82,28 +119,28 @@ export function NavigationBar() {
             href="#/appointment"
             target="_blank"
             rel="noreferrer"
-            onClick={() => setMenuOpen(false)}
+            onClick={() => handleNavClick("Appointment")}
           >
             Schedule an Appointment
           </a>
         </li>
         <li>
-          <a href="#doctors" onClick={() => setMenuOpen(false)}>
+          <a href="#doctors" onClick={() => handleNavClick("Doctors")}>
             Find a Doctor
           </a>
         </li>
         <li>
-          <a href="#billing" onClick={() => setMenuOpen(false)}>
+          <a href="#billing" onClick={() => handleNavClick("Billing")}>
             Pay Your Bill
           </a>
         </li>
         <li>
-          <a href="#careers" onClick={() => setMenuOpen(false)}>
+          <a href="#careers" onClick={() => handleNavClick("Careers")}>
             Employment
           </a>
         </li>
         <li>
-          <a href="#contact" onClick={() => setMenuOpen(false)}>
+          <a href="#contact" onClick={() => handleNavClick("Location")}>
             Location
           </a>
         </li>

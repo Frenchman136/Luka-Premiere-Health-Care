@@ -48,10 +48,39 @@
   margin-bottom: 0;
 }
 
+.doctors-tools {
+  margin: 20px 0 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.doctors-search {
+  width: min(520px, 100%);
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 144, 226, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  box-shadow: 0 10px 20px rgba(44, 62, 80, 0.08);
+}
+
+.doctors-search:focus {
+  outline: none;
+  border-color: rgba(74, 144, 226, 0.5);
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.12);
+}
+
 .doctors-actions {
   margin-top: 32px;
   display: flex;
   justify-content: center;
+}
+
+.empty-state {
+  margin-top: 24px;
+  text-align: center;
+  color: #52606d;
+  font-weight: 600;
 }
 
 .doctor-card {
