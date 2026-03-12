@@ -109,6 +109,14 @@ export function Appointments() {
     }
   }, [formData, activeStep]);
 
+  useEffect(() => {
+    if (!status.message) return;
+    const timer = setTimeout(() => {
+      setStatus({ type: "", message: "" });
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [status.message]);
+
   const updateField = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
@@ -135,6 +143,7 @@ export function Appointments() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
 
     if (activeStep < steps.length - 1) {
       goToStep(activeStep + 1);

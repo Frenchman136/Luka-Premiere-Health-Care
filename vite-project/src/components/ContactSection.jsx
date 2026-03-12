@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../assets/styles/ContactSection.css";
 import { trackEvent } from "../utils/analytics";
 
@@ -18,6 +18,14 @@ export function ContactSection() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!status.message) return;
+    const timer = setTimeout(() => {
+      setStatus({ type: "", message: "" });
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [status.message]);
 
   const updateField = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -40,6 +48,7 @@ export function ContactSection() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
     const nextErrors = validateForm();
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors);

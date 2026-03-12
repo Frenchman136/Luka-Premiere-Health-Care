@@ -199,9 +199,19 @@ nav.scrolled {
   color: #e2e8f0;
 }
 
+[data-theme="dark"] .nav-links a.is-active {
+  background: rgba(121, 174, 241, 0.2);
+}
+
 .nav-links a:hover {
   color: var(--primary-color);
   background: rgba(74, 144, 226, 0.08);
+  border-radius: 8px;
+}
+
+.nav-links a.is-active {
+  color: var(--primary-color);
+  background: rgba(74, 144, 226, 0.14);
   border-radius: 8px;
 }
 

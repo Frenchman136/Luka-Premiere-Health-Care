@@ -167,6 +167,10 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
 }
 
+[data-theme="dark"] .emergency {
+  background: linear-gradient(135deg, #8a1f18 0%, #6f1812 48%, #4b0f0b 100%);
+}
+
 @media (max-width: 640px) {
   .emergency {
     padding: 36px 16px;
