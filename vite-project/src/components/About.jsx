@@ -1,0 +1,64 @@
+import '../assets/styles/About.css'
+
+export function About() {
+  return (
+    <section id="about" className="about">
+      <div className="container">
+        <div className="about-content">
+          <div className="about-text">
+            <h2>About Luka Premiere Health Care</h2>
+            <p className="lead">Committed to excellence in healthcare since 2005</p>
+            <p>
+              Luka Premiere Health Care is a leading healthcare provider
+              dedicated to delivering exceptional medical services with
+              compassion and expertise. Our state-of-the-art facilities and
+              experienced medical professionals ensure that you receive the
+              highest quality care.
+            </p>
+            <p>
+              We believe in a patient-centered approach, combining advanced
+              medical technology with personalized attention to meet your unique
+              healthcare needs.
+            </p>
+            <div className="about-stats">
+              <div className="stat">
+                <h3>50+</h3>
+                <p>Expert Doctors</p>
+              </div>
+              <div className="stat">
+                <h3>15,000+</h3>
+                <p>Happy Patients</p>
+              </div>
+              <div className="stat">
+                <h3>20+</h3>
+                <p>Departments</p>
+              </div>
+              <div className="stat">
+                <h3>18</h3>
+                <p>Years Experience</p>
+              </div>
+            </div>
+            <div className="accreditations">
+              <h4>Accreditations & Certifications</h4>
+              <div className="badges">
+                <span className="badge">ISO 9001:2015</span>
+                <span className="badge">JCI Accredited</span>
+                <span className="badge">MOH Approved</span>
+              </div>
+            </div>
+          </div>
+          <div className="about-image">
+            <img
+              src="images/Luka%20hospital.webp"
+              alt="Luka Hospital"
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
