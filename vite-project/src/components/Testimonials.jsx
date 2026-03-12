@@ -25,7 +25,9 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="/images/clients/client.webp"
+                  src="/images/clients/client-80.webp"
+                  srcSet="/images/clients/client-80.webp 80w, /images/clients/client-160.webp 160w"
+                  sizes="56px"
                   alt="Aggrey Dj"
                   width="56"
                   height="56"
@@ -53,7 +55,9 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="/images/clients/client1.webp"
+                  src="/images/clients/client1-80.webp"
+                  srcSet="/images/clients/client1-80.webp 80w, /images/clients/client1-160.webp 160w"
+                  sizes="56px"
                   alt="Fesel Chirumban"
                   width="56"
                   height="56"
@@ -81,7 +85,9 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="/images/clients/client2.webp"
+                  src="/images/clients/client2-80.webp"
+                  srcSet="/images/clients/client2-80.webp 80w, /images/clients/client2-160.webp 160w"
+                  sizes="56px"
                   alt="John Webo"
                   width="56"
                   height="56"
@@ -109,7 +115,9 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="/images/clients/client3.webp"
+                  src="/images/clients/client3-80.webp"
+                  srcSet="/images/clients/client3-80.webp 80w, /images/clients/client3-160.webp 160w"
+                  sizes="56px"
                   alt="Kilimba Nekesa"
                   width="56"
                   height="56"
@@ -137,7 +145,9 @@ export function Testimonials() {
               <div className="testimonial-author">
                 <img
                   className="testimonial-avatar"
-                  src="/images/clients/client.webp"
+                  src="/images/clients/client-80.webp"
+                  srcSet="/images/clients/client-80.webp 80w, /images/clients/client-160.webp 160w"
+                  sizes="56px"
                   alt="Brian Kimani"
                   width="56"
                   height="56"

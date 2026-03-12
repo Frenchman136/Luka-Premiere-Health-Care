@@ -7,43 +7,57 @@ const DOCTORS = [
     name: "Dr. Aggrey Kadima",
     specialty: "Cardiologist",
     credentials: "MD, FACC - 15 years experience",
-    image: "/images/doctors/doctor5.webp",
+    image: "/images/doctors/doctor5-320.webp",
+    srcSet:
+      "/images/doctors/doctor5-320.webp 320w, /images/doctors/doctor5-480.webp 480w",
   },
   {
     name: "Dr. Bilha Anjili",
     specialty: "Pediatrician",
     credentials: "MD, FAAP - 12 years experience",
-    image: "/images/doctors/doctor4.webp",
+    image: "/images/doctors/doctor4-320.webp",
+    srcSet:
+      "/images/doctors/doctor4-320.webp 320w, /images/doctors/doctor4-480.webp 480w",
   },
   {
     name: "Dr. Zaccheus Junior",
     specialty: "Neurologist",
     credentials: "MD, PhD - 18 years experience",
-    image: "/images/doctors/doctor1.webp",
+    image: "/images/doctors/doctor1-320.webp",
+    srcSet:
+      "/images/doctors/doctor1-320.webp 320w, /images/doctors/doctor1-480.webp 480w",
   },
   {
     name: "Dr. James Kamau",
     specialty: "Orthopedic Surgeon",
     credentials: "MD, FAAOS - 14 years experience",
-    image: "/images/doctors/doctor6.webp",
+    image: "/images/doctors/doctor6-320.webp",
+    srcSet:
+      "/images/doctors/doctor6-320.webp 320w, /images/doctors/doctor6-480.webp 480w",
   },
   {
     name: "Dr. Mzee Isaac",
     specialty: "Dermatologist",
     credentials: "MD, FAAD - 10 years experience",
-    image: "/images/doctors/doctor.webp",
+    image: "/images/doctors/doctor-320.webp",
+    srcSet:
+      "/images/doctors/doctor-320.webp 320w, /images/doctors/doctor-480.webp 480w",
   },
   {
     name: "Dr. Samuel Otieno",
     specialty: "General Surgeon",
     credentials: "MD, FACS - 11 years experience",
-    image: "/images/doctors/doctor2.webp",
+    image: "/images/doctors/doctor2-320.webp",
+    srcSet:
+      "/images/doctors/doctor2-320.webp 320w, /images/doctors/doctor2-480.webp 480w",
   },
   {
     name: "Dr. Faith Achieng",
     specialty: "Obstetrician",
     credentials: "MD, FACOG - 9 years experience",
-    image: "/images/doctors/doctor3.webp",
+    image: "/images/doctors/doctor3-320.webp",
+    srcSet:
+      "/images/doctors/doctor3-320.webp 320w, /images/doctors/doctor3-480.webp 480w",
   },
 ];
 
@@ -64,6 +78,8 @@ function DoctorsGrid({ items }) {
           <div className="doctor-image">
             <img
               src={doctor.image}
+              srcSet={doctor.srcSet}
+              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
               alt={doctor.name}
               width="400"
               height="500"

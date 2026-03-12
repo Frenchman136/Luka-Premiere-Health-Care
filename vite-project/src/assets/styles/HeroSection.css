@@ -9,7 +9,17 @@
       rgba(8, 24, 43, 0.62) 45%,
       rgba(8, 24, 43, 0.2) 100%
     ),
-    url("/images/hero.webp");
+    url("/images/hero-960.webp");
+  background-image: linear-gradient(
+      120deg,
+      rgba(8, 24, 43, 0.78) 0%,
+      rgba(8, 24, 43, 0.62) 45%,
+      rgba(8, 24, 43, 0.2) 100%
+    ),
+    image-set(
+      url("/images/hero-960.webp") 1x,
+      url("/images/hero-1600.webp") 2x
+    );
   background-size: cover;
   background-position: center;
   color: var(--white);

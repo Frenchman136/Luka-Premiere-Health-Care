@@ -10,7 +10,9 @@ export function About() {
           </div>
           <div className="about-image">
             <img
-              src="/images/Luka%20hospital.webp"
+              src="/images/about-800.webp"
+              srcSet="/images/about-800.webp 800w, /images/about-1200.webp 1200w"
+              sizes="(max-width: 900px) 100vw, 50vw"
               alt="Luka Hospital"
               width="1200"
               height="800"

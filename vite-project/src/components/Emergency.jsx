@@ -46,7 +46,9 @@ export function Emergency() {
           </div>
           <div className="emergency-image">
             <img
-              src="/images/emergency/emergency.webp"
+              src="/images/emergency/emergency-800.webp"
+              srcSet="/images/emergency/emergency-800.webp 800w, /images/emergency/emergency-1200.webp 1200w"
+              sizes="(max-width: 900px) 100vw, 50vw"
               alt="Emergency Department"
               width="1200"
               height="800"

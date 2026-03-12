@@ -8,7 +8,8 @@ const BLOG_POSTS = [
     category: "Cardiology",
     summary:
       "Learn essential lifestyle changes to maintain cardiovascular health and prevent heart disease.",
-    image: "/images/Health/Hearthealth.webp",
+    image: "/images/Health/heart-480.webp",
+    srcSet: "/images/Health/heart-480.webp 480w, /images/Health/heart-800.webp 800w",
     alt: "Heart Health",
     featured: true,
   },
@@ -17,7 +18,8 @@ const BLOG_POSTS = [
     category: "Pediatrics",
     summary:
       "Essential nutrients and meal planning tips for your child's healthy development.",
-    image: "/images/Health/childnutrition.webp",
+    image: "/images/Health/child-480.webp",
+    srcSet: "/images/Health/child-480.webp 480w, /images/Health/child-800.webp 800w",
     alt: "Child Nutrition",
   },
   {
@@ -25,14 +27,17 @@ const BLOG_POSTS = [
     category: "Wellness",
     summary:
       "Practical strategies for maintaining mental health in today's fast-paced world.",
-    image: "/images/Health/mentalhealth.webp",
+    image: "/images/Health/mental-480.webp",
+    srcSet: "/images/Health/mental-480.webp 480w, /images/Health/mental-800.webp 800w",
     alt: "Mental Health",
   },
   {
     title: "Building Resilience Through Mindfulness",
     category: "Mental Health",
     summary: "Simple daily practices to improve focus, mood, and emotional balance.",
-    image: "/images/Health/mentalhealth1.webp",
+    image: "/images/Health/mental2-480.webp",
+    srcSet:
+      "/images/Health/mental2-480.webp 480w, /images/Health/mental2-800.webp 800w",
     alt: "Mindfulness and Resilience",
   },
 ];
@@ -57,6 +62,8 @@ function BlogGrid({ items }) {
           <div className="blog-image">
             <img
               src={post.image}
+              srcSet={post.srcSet}
+              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
               alt={post.alt}
               width="800"
               height="500"
