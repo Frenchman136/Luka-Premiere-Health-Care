@@ -11,10 +11,11 @@
     />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <!-- Navigation Bar -->
     <nav id="navbar">
       <div class="logo">
-        <h1>LUKA</h1>
+        <span class="logo-text">LUKA</span>
       </div>
       <div class="nav-actions">
         <button
@@ -42,7 +43,13 @@
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
           <span class="hamburger-label">Menu</span>
           <span class="hamburger-lines" aria-hidden="true">
             <span></span>
@@ -51,7 +58,7 @@
           </span>
         </button>
       </div>
-      <ul class="nav-links" id="navLinks">
+      <ul class="nav-links" id="navLinks" aria-hidden="true">
         <li><a href="#about">About</a></li>
         <li><a href="#services">Patient Care</a></li>
         <li><a href="#research">Research</a></li>
@@ -63,113 +70,115 @@
       </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-content">
-        <div class="hero-bottom-right">
-          <h2>An <span>Oasis</span> of life</h2>
-          <p>An oasis of life. We treat, God heals.</p>
+    <main id="main">
+      <!-- Hero Section -->
+      <section id="home" class="hero">
+        <div class="hero-content">
+          <div class="hero-bottom-right">
+            <h1 class="hero-title">Luka Premiere Health Care</h1>
+            <h2>An <span>Oasis</span> of life</h2>
+            <p>An oasis of life. We treat, God heals.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Quick Access Section -->
-    <section id="billing" class="quick-access">
-      <div class="container">
-        <div class="quick-card">
-          <i class="fas fa-calendar-check"></i>
-          <h3>Book Appointment</h3>
-          <p>Schedule your visit online</p>
-          <a href="#appointment" class="link-arrow"
-            >Book Now <i class="fas fa-arrow-right"></i
-          ></a>
+      <!-- Quick Access Section -->
+      <section id="billing" class="quick-access">
+        <div class="container">
+          <div class="quick-card">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Book Appointment</h3>
+            <p>Schedule your visit online</p>
+            <a href="#appointment" class="link-arrow"
+              >Book Now <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="quick-card">
+            <i class="fas fa-file-medical"></i>
+            <h3>Medical Records</h3>
+            <p>Access your health records</p>
+            <a href="#patient-portal" class="link-arrow"
+              >View Records <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="quick-card">
+            <i class="fas fa-credit-card"></i>
+            <h3>Pay Bills</h3>
+            <p>Secure online payment</p>
+            <a href="#billing" class="link-arrow"
+              >Pay Now <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="quick-card">
+            <i class="fas fa-ambulance"></i>
+            <h3>Emergency</h3>
+            <p>Immediate medical attention</p>
+            <a href="#emergency" class="link-arrow"
+              >Learn More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
         </div>
-        <div class="quick-card">
-          <i class="fas fa-file-medical"></i>
-          <h3>Medical Records</h3>
-          <p>Access your health records</p>
-          <a href="#patient-portal" class="link-arrow"
-            >View Records <i class="fas fa-arrow-right"></i
-          ></a>
-        </div>
-        <div class="quick-card">
-          <i class="fas fa-credit-card"></i>
-          <h3>Pay Bills</h3>
-          <p>Secure online payment</p>
-          <a href="#billing" class="link-arrow"
-            >Pay Now <i class="fas fa-arrow-right"></i
-          ></a>
-        </div>
-        <div class="quick-card">
-          <i class="fas fa-ambulance"></i>
-          <h3>Emergency</h3>
-          <p>Immediate medical attention</p>
-          <a href="#emergency" class="link-arrow"
-            >Learn More <i class="fas fa-arrow-right"></i
-          ></a>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-      <div class="container">
-        <div class="section-header">
-          <h2>Our Medical Services</h2>
-          <p>Comprehensive healthcare solutions for you and your family</p>
+      <!-- Services Section -->
+      <section id="services" class="services">
+        <div class="container">
+          <div class="section-header">
+            <h2>Our Medical Services</h2>
+            <p>Comprehensive healthcare solutions for you and your family</p>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <i class="fas fa-heartbeat"></i>
+              <h3>Cardiology</h3>
+              <p>Expert heart care and cardiovascular treatments</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+            <div class="service-card">
+              <i class="fas fa-baby"></i>
+              <h3>Pediatrics</h3>
+              <p>Specialized care for infants, children, and adolescents</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+            <div class="service-card">
+              <i class="fas fa-brain"></i>
+              <h3>Neurology</h3>
+              <p>Advanced neurological diagnosis and treatment</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+            <div class="service-card">
+              <i class="fas fa-bone"></i>
+              <h3>Orthopedics</h3>
+              <p>Bone, joint, and muscle care</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+            <div class="service-card">
+              <i class="fas fa-x-ray"></i>
+              <h3>Radiology</h3>
+              <p>Advanced imaging and diagnostic services</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+            <div class="service-card">
+              <i class="fas fa-procedures"></i>
+              <h3>Surgery</h3>
+              <p>Comprehensive surgical procedures</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+            <div class="service-card">
+              <i class="fas fa-vial"></i>
+              <h3>Laboratory</h3>
+              <p>Accurate diagnostic testing</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+            <div class="service-card">
+              <i class="fas fa-pills"></i>
+              <h3>Pharmacy</h3>
+              <p>24/7 pharmaceutical services</p>
+              <a href="#" class="service-link">Learn More</a>
+            </div>
+          </div>
         </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <i class="fas fa-heartbeat"></i>
-            <h3>Cardiology</h3>
-            <p>Expert heart care and cardiovascular treatments</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <i class="fas fa-baby"></i>
-            <h3>Pediatrics</h3>
-            <p>Specialized care for infants, children, and adolescents</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <i class="fas fa-brain"></i>
-            <h3>Neurology</h3>
-            <p>Advanced neurological diagnosis and treatment</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <i class="fas fa-bone"></i>
-            <h3>Orthopedics</h3>
-            <p>Bone, joint, and muscle care</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <i class="fas fa-x-ray"></i>
-            <h3>Radiology</h3>
-            <p>Advanced imaging and diagnostic services</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <i class="fas fa-procedures"></i>
-            <h3>Surgery</h3>
-            <p>Comprehensive surgical procedures</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <i class="fas fa-vial"></i>
-            <h3>Laboratory</h3>
-            <p>Accurate diagnostic testing</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <i class="fas fa-pills"></i>
-            <h3>Pharmacy</h3>
-            <p>24/7 pharmaceutical services</p>
-            <a href="#" class="service-link">Learn More</a>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
     <!-- Doctors Section -->
     <section id="doctors" class="doctors is-collapsed">
@@ -186,6 +195,10 @@
               <img
                 src="images/doctors/doctor5.webp"
                 alt="Dr. Aggrey Kadima"
+                width="400"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="doctor-info">
@@ -202,6 +215,10 @@
               <img
                 src="images/doctors/doctor4.webp"
                 alt="Dr. Bilha Anjili"
+                width="400"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="doctor-info">
@@ -218,6 +235,10 @@
               <img
                 src="images/doctors/doctor1.webp"
                 alt="Dr. Zaccheus Junior"
+                width="400"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="doctor-info">
@@ -234,6 +255,10 @@
               <img
                 src="images/doctors/doctor6.webp"
                 alt="Dr. James Kamau"
+                width="400"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="doctor-info">
@@ -250,6 +275,10 @@
               <img
                 src="images/doctors/doctor.webp"
                 alt="Dr. Leah Wanjiku"
+                width="400"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="doctor-info">
@@ -266,6 +295,10 @@
               <img
                 src="images/doctors/doctor2.webp"
                 alt="Dr. Samuel Otieno"
+                width="400"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="doctor-info">
@@ -282,6 +315,10 @@
               <img
                 src="images/doctors/doctor3.webp"
                 alt="Dr. Faith Achieng"
+                width="400"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="doctor-info">
@@ -318,27 +355,52 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="fullName">Full Name *</label>
-                <input type="text" id="fullName" required />
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  autocomplete="name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="email">Email *</label>
-                <input type="email" id="email" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  required
+                />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" required />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="date">Preferred Date *</label>
-                <input type="date" id="date" required />
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  autocomplete="off"
+                  required
+                />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="department">Department *</label>
-                <select id="department" required>
+                <select id="department" name="department" required>
                   <option value="">Select Department</option>
                   <option value="cardiology">Cardiology</option>
                   <option value="pediatrics">Pediatrics</option>
@@ -349,7 +411,7 @@
               </div>
               <div class="form-group">
                 <label for="doctor">Preferred Doctor</label>
-                <select id="doctor">
+                <select id="doctor" name="doctor">
                   <option value="">Any Available</option>
                   <option value="dr-johnson">Dr. Sarah Johnson</option>
                   <option value="dr-omondi">Dr. Michael Omondi</option>
@@ -360,12 +422,56 @@
             </div>
             <div class="form-group">
               <label for="message">Message / Reason for Visit</label>
-              <textarea id="message" rows="4"></textarea>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                autocomplete="off"
+              ></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-large">
               Book Appointment
             </button>
+            <div class="form-status" role="status" aria-live="polite"></div>
           </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Patient Portal Section -->
+    <section id="patient-portal" class="patient-portal">
+      <div class="container">
+        <div class="section-header">
+          <h2>Patient Portal Access</h2>
+          <p>View your medical records, test results, and upcoming visits</p>
+        </div>
+        <div class="portal-grid">
+          <div class="portal-card">
+            <div class="portal-icon">
+              <i class="fas fa-file-medical-alt"></i>
+            </div>
+            <h3>Medical Records</h3>
+            <p>Securely review lab results, visit summaries, and care plans.</p>
+            <a href="#" class="btn btn-primary btn-small">Sign In</a>
+          </div>
+          <div class="portal-card">
+            <div class="portal-icon">
+              <i class="fas fa-prescription-bottle-alt"></i>
+            </div>
+            <h3>Refill Requests</h3>
+            <p>Request refills and track prescription updates in one place.</p>
+            <a href="#" class="btn btn-outline btn-small">Request Refill</a>
+          </div>
+          <div class="portal-card">
+            <div class="portal-icon">
+              <i class="fas fa-notes-medical"></i>
+            </div>
+            <h3>Visit Planning</h3>
+            <p>Complete pre-visit forms and see your appointment checklist.</p>
+            <a href="#appointment" class="btn btn-outline btn-small"
+              >Prepare Visit</a
+            >
+          </div>
         </div>
       </div>
     </section>
@@ -413,6 +519,10 @@
             <img
               src="images/emergency/emergency.webp"
               alt="Emergency Department"
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -469,6 +579,10 @@
             <img
               src="images/Luka%20hospital.webp"
               alt="Luka Hospital"
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -501,6 +615,10 @@
                 class="testimonial-avatar"
                 src="images/clients/client.webp"
                 alt="Aggrey Dj"
+                width="56"
+                height="56"
+                loading="lazy"
+                decoding="async"
               />
               <div class="testimonial-author-info">
                 <strong>Aggrey Dj</strong>
@@ -525,6 +643,10 @@
                 class="testimonial-avatar"
                 src="images/clients/client1.webp"
                 alt="Fesel Chirumban"
+                width="56"
+                height="56"
+                loading="lazy"
+                decoding="async"
               />
               <div class="testimonial-author-info">
                 <strong>Elisha Singira</strong>
@@ -549,6 +671,10 @@
                 class="testimonial-avatar"
                 src="images/clients/client2.webp"
                 alt="John Webo"
+                width="56"
+                height="56"
+                loading="lazy"
+                decoding="async"
               />
               <div class="testimonial-author-info">
                 <strong>John Webo</strong>
@@ -573,6 +699,10 @@
                 class="testimonial-avatar"
                 src="images/clients/client3.webp"
                 alt="Kilimba Nekesa"
+                width="56"
+                height="56"
+                loading="lazy"
+                decoding="async"
               />
               <div class="testimonial-author-info">
                 <strong>Kilimba Nekesa</strong>
@@ -597,6 +727,10 @@
                 class="testimonial-avatar"
                 src="images/clients/client.webp"
                 alt="Brian Kimani"
+                width="56"
+                height="56"
+                loading="lazy"
+                decoding="async"
               />
               <div class="testimonial-author-info">
                 <strong>Brian Kimani</strong>
@@ -622,6 +756,10 @@
               <img
                 src="images/Health%20Tips%20%26%20news/Heart%20health.webp"
                 alt="Heart Health"
+                width="800"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="blog-content">
@@ -641,6 +779,10 @@
               <img
                 src="images/Health%20Tips%20%26%20news/child%20nutrition.webp"
                 alt="Child Nutrition"
+                width="800"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="blog-content">
@@ -660,6 +802,10 @@
               <img
                 src="images/Health%20Tips%20%26%20news/mental%20health.webp"
                 alt="Mental Health"
+                width="800"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="blog-content">
@@ -679,6 +825,10 @@
               <img
                 src="images/Health%20Tips%20%26%20news/mental%20health1.webp"
                 alt="Mindfulness and Resilience"
+                width="800"
+                height="500"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="blog-content">
@@ -760,27 +910,58 @@
             <form class="contact-form">
               <div class="form-group">
                 <label for="contactName">Name *</label>
-                <input type="text" id="contactName" required />
+                <input
+                  type="text"
+                  id="contactName"
+                  name="name"
+                  autocomplete="name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="contactEmail">Email *</label>
-                <input type="email" id="contactEmail" required />
+                <input
+                  type="email"
+                  id="contactEmail"
+                  name="email"
+                  autocomplete="email"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="contactPhone">Phone</label>
-                <input type="tel" id="contactPhone" />
+                <input
+                  type="tel"
+                  id="contactPhone"
+                  name="phone"
+                  inputmode="tel"
+                  autocomplete="tel"
+                />
               </div>
               <div class="form-group">
                 <label for="contactSubject">Subject *</label>
-                <input type="text" id="contactSubject" required />
+                <input
+                  type="text"
+                  id="contactSubject"
+                  name="subject"
+                  autocomplete="off"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="contactMessage">Message *</label>
-                <textarea id="contactMessage" rows="5" required></textarea>
+                <textarea
+                  id="contactMessage"
+                  name="message"
+                  rows="5"
+                  autocomplete="off"
+                  required
+                ></textarea>
               </div>
               <button type="submit" class="btn btn-primary btn-large">
                 Send Message
               </button>
+              <div class="form-status" role="status" aria-live="polite"></div>
             </form>
           </div>
         </div>
@@ -796,6 +977,8 @@
         </div>
       </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer id="careers" class="footer">

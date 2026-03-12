@@ -29,6 +29,24 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  padding: 10px 16px;
+  background: #0b2a4a;
+  color: #ffffff;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  z-index: 2000;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 14px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -37,7 +55,7 @@ body {
 
 /* Navigation Bar */
 nav {
-  position: relative;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -64,7 +82,7 @@ nav.scrolled {
   box-shadow: 0 12px 28px rgba(44, 62, 80, 0.14);
 }
 
-.logo h1{
+.logo .logo-text {
   font-size: 20px;
   font-weight: 800;
   letter-spacing: 3px;
@@ -214,6 +232,13 @@ nav.scrolled {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  margin-bottom: 10px;
 }
 
 .hero::before,
@@ -751,6 +776,72 @@ nav.scrolled {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-status {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(80, 200, 120, 0.12);
+  border: 1px solid rgba(80, 200, 120, 0.3);
+  color: #1b5d3a;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.form-status.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Patient Portal Section */
+.patient-portal {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #f7fbff 0%, #ffffff 60%, #f0f7ff 100%);
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.portal-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(74, 144, 226, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.portal-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(74, 144, 226, 0.12);
+  color: var(--primary-color);
+  font-size: 22px;
+}
+
+.portal-card h3 {
+  font-size: 20px;
+  color: var(--dark-color);
+}
+
+.portal-card p {
+  color: #4b5a67;
+}
+
+.portal-card .btn {
+  align-self: flex-start;
 }
 
 /* Emergency Section */
@@ -1654,7 +1745,7 @@ body.dark-mode nav.scrolled {
   background: rgba(16, 27, 42, 0.96);
 }
 
-body.dark-mode .logo h1 {
+body.dark-mode .logo .logo-text {
   color: #eaf2fb;
 }
 
@@ -1719,7 +1810,7 @@ body.dark-mode .blog-content p,
 body.dark-mode .contact-item p,
 body.dark-mode .about-text p,
 body.dark-mode .testimonial-card p {
-  color: #a9bdd1;
+  color: #c4d3e3;
 }
 
 body.dark-mode .quick-card,
@@ -1731,10 +1822,25 @@ body.dark-mode .appointment-form-container,
 body.dark-mode .contact-form-container,
 body.dark-mode .about-text,
 body.dark-mode .about-image,
-body.dark-mode .emergency-image {
+body.dark-mode .emergency-image,
+body.dark-mode .portal-card {
   background: #142235;
   border-color: rgba(126, 194, 255, 0.2);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
+}
+
+body.dark-mode .patient-portal {
+  background: linear-gradient(180deg, #0f1b2a 0%, #0b1725 100%);
+}
+
+body.dark-mode .portal-card p {
+  color: #c4d3e3;
+}
+
+body.dark-mode .form-status {
+  background: rgba(80, 200, 120, 0.15);
+  border-color: rgba(80, 200, 120, 0.35);
+  color: #b8f0d1;
 }
 
 body.dark-mode .emergency {

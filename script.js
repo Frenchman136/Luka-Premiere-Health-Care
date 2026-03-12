@@ -5,6 +5,9 @@ const themeToggle = document.getElementById("themeToggle");
 const themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
 const themeLabel = themeToggle ? themeToggle.querySelector("span") : null;
 const themeStorageKey = "luka-theme";
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 
 const setTheme = (theme) => {
   const darkMode = theme === "dark";
@@ -58,8 +61,10 @@ if (themeToggle) {
 }
 
 hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
-  navLinks.classList.toggle("active");
+  const isOpen = navLinks.classList.toggle("active");
+  hamburger.classList.toggle("active", isOpen);
+  hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  navLinks.setAttribute("aria-hidden", isOpen ? "false" : "true");
 });
 
 // Close mobile menu when clicking on a link
@@ -67,6 +72,8 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   link.addEventListener("click", () => {
     hamburger.classList.remove("active");
     navLinks.classList.remove("active");
+    hamburger.setAttribute("aria-expanded", "false");
+    navLinks.setAttribute("aria-hidden", "true");
   });
 });
 
@@ -98,6 +105,22 @@ scrollTopBtn.addEventListener("click", () => {
   });
 });
 
+const showFormStatus = (form, message) => {
+  const status = form.querySelector(".form-status");
+  if (!status) return;
+
+  status.textContent = message;
+  status.classList.add("is-visible");
+
+  if (status._timeoutId) {
+    clearTimeout(status._timeoutId);
+  }
+
+  status._timeoutId = setTimeout(() => {
+    status.classList.remove("is-visible");
+  }, 6000);
+};
+
 // Form Submission Handlers
 const appointmentForm = document.querySelector(".appointment-form");
 const contactForm = document.querySelector(".contact-form");
@@ -121,7 +144,8 @@ if (appointmentForm) {
     console.log("Appointment Data:", formData);
 
     // Show success message
-    alert(
+    showFormStatus(
+      appointmentForm,
       "Thank you! Your appointment request has been submitted. We will contact you shortly to confirm.",
     );
 
@@ -147,7 +171,8 @@ if (contactForm) {
     console.log("Contact Data:", formData);
 
     // Show success message
-    alert(
+    showFormStatus(
+      contactForm,
       "Thank you for contacting us! We will get back to you as soon as possible.",
     );
 
@@ -174,32 +199,41 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
       window.scrollTo({
         top: offsetTop,
-        behavior: "smooth",
+        behavior: prefersReducedMotion ? "auto" : "smooth",
       });
     }
   });
 });
 
 // Animate elements on scroll
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: "0px 0px -50px 0px",
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = "1";
-      entry.target.style.transform = "translateY(0)";
-    }
-  });
-}, observerOptions);
-
 // Observe all cards and sections
 document.addEventListener("DOMContentLoaded", () => {
   const animatedElements = document.querySelectorAll(
     ".service-card, .doctor-card, .quick-card, .blog-card, .feature-card",
   );
+
+  if (prefersReducedMotion) {
+    animatedElements.forEach((el) => {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+      el.style.transition = "none";
+    });
+    return;
+  }
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+      }
+    });
+  }, observerOptions);
 
   animatedElements.forEach((el) => {
     el.style.opacity = "0";
@@ -212,10 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // Testimonials auto-slide
 const testimonialsTrack = document.querySelector(".testimonials-grid");
 if (testimonialsTrack) {
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
   if (!prefersReducedMotion) {
     const cards = testimonialsTrack.querySelectorAll(".testimonial-card");
     let slideStep = 0;
@@ -362,6 +392,7 @@ if (departmentSelect && doctorSelect) {
 
 // Add loading animation
 window.addEventListener("load", () => {
+  if (prefersReducedMotion) return;
   document.body.style.opacity = "0";
   setTimeout(() => {
     document.body.style.transition = "opacity 0.5s ease";
