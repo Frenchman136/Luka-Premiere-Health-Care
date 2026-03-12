@@ -8,7 +8,7 @@ export function QuickAccess() {
           <i className="fas fa-calendar-check"></i>
           <h3>Book Appointment</h3>
           <p>Schedule your visit online</p>
-          <a href="#appointment" className="link-arrow">
+          <a href="#/appointment" target="_blank" rel="noreferrer" className="link-arrow">
             Book Now <i className="fas fa-arrow-right"></i>
           </a>
         </div>

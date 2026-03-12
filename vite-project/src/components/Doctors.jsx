@@ -1,168 +1,133 @@
-import '../assets/styles/Doctors.css';
+import { useMemo } from "react";
+import "../assets/styles/Doctors.css";
 
-export function Doctors() {
+const DOCTORS = [
+  {
+    name: "Dr. Aggrey Kadima",
+    specialty: "Cardiologist",
+    credentials: "MD, FACC - 15 years experience",
+    image: "/images/doctors/doctor5.webp",
+  },
+  {
+    name: "Dr. Bilha Anjili",
+    specialty: "Pediatrician",
+    credentials: "MD, FAAP - 12 years experience",
+    image: "/images/doctors/doctor4.webp",
+  },
+  {
+    name: "Dr. Zaccheus Junior",
+    specialty: "Neurologist",
+    credentials: "MD, PhD - 18 years experience",
+    image: "/images/doctors/doctor1.webp",
+  },
+  {
+    name: "Dr. James Kamau",
+    specialty: "Orthopedic Surgeon",
+    credentials: "MD, FAAOS - 14 years experience",
+    image: "/images/doctors/doctor6.webp",
+  },
+  {
+    name: "Dr. Mzee Isaac",
+    specialty: "Dermatologist",
+    credentials: "MD, FAAD - 10 years experience",
+    image: "/images/doctors/doctor.webp",
+  },
+  {
+    name: "Dr. Samuel Otieno",
+    specialty: "General Surgeon",
+    credentials: "MD, FACS - 11 years experience",
+    image: "/images/doctors/doctor2.webp",
+  },
+  {
+    name: "Dr. Faith Achieng",
+    specialty: "Obstetrician",
+    credentials: "MD, FACOG - 9 years experience",
+    image: "/images/doctors/doctor3.webp",
+  },
+];
+
+const getRandomSubset = (items, count) => {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, count);
+};
+
+function DoctorsGrid({ items }) {
   return (
-    <section id="doctors" className="doctors is-collapsed">
+    <div className="doctors-grid">
+      {items.map((doctor) => (
+        <div className="doctor-card" key={doctor.name}>
+          <div className="doctor-image">
+            <img
+              src={doctor.image}
+              alt={doctor.name}
+              width="400"
+              height="500"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="doctor-info">
+            <h3>{doctor.name}</h3>
+            <p className="specialty">{doctor.specialty}</p>
+            <p className="credentials">{doctor.credentials}</p>
+            <a
+              href="#/appointment"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-small btn-primary"
+            >
+              Book Appointment
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function Doctors({ showAll = false }) {
+  const previewCount = 3;
+  const previewDoctors = useMemo(
+    () => getRandomSubset(DOCTORS, previewCount),
+    []
+  );
+
+  const doctorsToShow = showAll ? DOCTORS : previewDoctors;
+
+  return (
+    <section id="doctors" className="doctors">
       <div className="container">
         <div className="section-header">
-          <h2>Meet Our Expert Doctors</h2>
+          <h2>{showAll ? "All Doctors" : "Meet Our Expert Doctors"}</h2>
           <p>
-            Experienced healthcare professionals dedicated to your wellbeing
+            {showAll
+              ? "Browse our full specialist team and find the right care."
+              : "Experienced healthcare professionals dedicated to your wellbeing"}
           </p>
         </div>
-        <div className="doctors-grid">
-          <div className="doctor-card">
-            <div className="doctor-image">
-              <img
-                src="/images/doctors/doctor5.webp"
-                alt="Dr. Aggrey Kadima"
-                width="400"
-                height="500"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="doctor-info">
-              <h3>Dr. Aggrey Kadima</h3>
-              <p className="specialty">Cardiologist</p>
-              <p className="credentials">MD, FACC - 15 years experience</p>
-              <a href="#appointment" className="btn btn-small btn-primary">
-                Book Appointment
-              </a>
-            </div>
+        <DoctorsGrid items={doctorsToShow} />
+        {!showAll && (
+          <div className="doctors-actions">
+            <a
+              href="#/doctors"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary"
+            >
+              View All Doctors
+            </a>
           </div>
-          <div className="doctor-card">
-            <div className="doctor-image">
-              <img
-                src="/images/doctors/doctor4.webp"
-                alt="Dr. Bilha Anjili"
-                width="400"
-                height="500"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="doctor-info">
-              <h3>Dr. Bilha Anjili</h3>
-              <p className="specialty">Pediatrician</p>
-              <p className="credentials">MD, FAAP - 12 years experience</p>
-              <a href="#appointment" className="btn btn-small btn-primary">
-                Book Appointment
-              </a>
-            </div>
-          </div>
-          <div className="doctor-card">
-            <div className="doctor-image">
-              <img
-                src="/images/doctors/doctor1.webp"
-                alt="Dr. Zaccheus Junior"
-                width="400"
-                height="500"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="doctor-info">
-              <h3>Dr. Zaccheus Junior</h3>
-              <p className="specialty">Neurologist</p>
-              <p className="credentials">MD, PhD - 18 years experience</p>
-              <a href="#appointment" className="btn btn-small btn-primary">
-                Book Appointment
-              </a>
-            </div>
-          </div>
-          <div className="doctor-card">
-            <div className="doctor-image">
-              <img
-                src="/images/doctors/doctor6.webp"
-                alt="Dr. James Kamau"
-                width="400"
-                height="500"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="doctor-info">
-              <h3>Dr. James Kamau</h3>
-              <p className="specialty">Orthopedic Surgeon</p>
-              <p className="credentials">MD, FAAOS - 14 years experience</p>
-              <a href="#appointment" className="btn btn-small btn-primary">
-                Book Appointment
-              </a>
-            </div>
-          </div>
-          <div className="doctor-card">
-            <div className="doctor-image">
-              <img
-                src="/images/doctors/doctor.webp"
-                alt="Dr. Leah Wanjiku"
-                width="400"
-                height="500"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="doctor-info">
-              <h3>Dr. Mzee Isaac</h3>
-              <p className="specialty">Dermatologist</p>
-              <p className="credentials">MD, FAAD - 10 years experience</p>
-              <a href="#appointment" className="btn btn-small btn-primary">
-                Book Appointment
-              </a>
-            </div>
-          </div>
-          <div className="doctor-card">
-            <div className="doctor-image">
-              <img
-                src="/images/doctors/doctor2.webp"
-                alt="Dr. Samuel Otieno"
-                width="400"
-                height="500"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="doctor-info">
-              <h3>Dr. Samuel Otieno</h3>
-              <p className="specialty">General Surgeon</p>
-              <p className="credentials">MD, FACS - 11 years experience</p>
-              <a href="#appointment" className="btn btn-small btn-primary">
-                Book Appointment
-              </a>
-            </div>
-          </div>
-          <div className="doctor-card">
-            <div className="doctor-image">
-              <img
-                src="/images/doctors/doctor3.webp"
-                alt="Dr. Faith Achieng"
-                width="400"
-                height="500"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="doctor-info">
-              <h3>Dr. Faith Achieng</h3>
-              <p className="specialty">Obstetrician</p>
-              <p className="credentials">MD, FACOG - 9 years experience</p>
-              <a href="#appointment" className="btn btn-small btn-primary">
-                Book Appointment
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="text-center">
-          <button
-            type="button"
-            className="btn btn-outline doctors-view-all"
-            aria-expanded="false"
-          >
-            View All Doctors
-          </button>
-        </div>
+        )}
       </div>
     </section>
   );
+}
+
+export function DoctorsPage() {
+  return <Doctors showAll />;
 }
 

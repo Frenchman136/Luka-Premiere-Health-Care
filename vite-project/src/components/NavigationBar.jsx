@@ -58,7 +58,9 @@ export function NavigationBar() {
           <a href="#research">Research</a>
         </li>
         <li>
-          <a href="#appointment">Schedule an Appointment</a>
+          <a href="#/appointment" target="_blank" rel="noreferrer">
+            Schedule an Appointment
+          </a>
         </li>
         <li>
           <a href="#doctors">Find a Doctor</a>
