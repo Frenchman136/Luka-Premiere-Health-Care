@@ -23,9 +23,9 @@ export function NavigationBar() {
             height="20"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             aria-hidden="true"
           >
             <circle cx="11" cy="11" r="7"></circle>

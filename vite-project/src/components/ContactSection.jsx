@@ -77,52 +77,52 @@ export function ContactSection() {
           <div className="contact-form-container">
             <form className="contact-form">
               <div className="form-group">
-                <label for="contactName">Name *</label>
+                <label htmlFor="contactName">Name *</label>
                 <input
                   type="text"
                   id="contactName"
                   name="name"
-                  autocomplete="name"
+                  autoComplete="name"
                   required
                 />
               </div>
               <div className="form-group">
-                <label for="contactEmail">Email *</label>
+                <label htmlFor="contactEmail">Email *</label>
                 <input
                   type="email"
                   id="contactEmail"
                   name="email"
-                  autocomplete="email"
+                  autoComplete="email"
                   required
                 />
               </div>
               <div className="form-group">
-                <label for="contactPhone">Phone</label>
+                <label htmlFor="contactPhone">Phone</label>
                 <input
                   type="tel"
                   id="contactPhone"
                   name="phone"
-                  inputmode="tel"
-                  autocomplete="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                 />
               </div>
               <div className="form-group">
-                <label for="contactSubject">Subject *</label>
+                <label htmlFor="contactSubject">Subject *</label>
                 <input
                   type="text"
                   id="contactSubject"
                   name="subject"
-                  autocomplete="off"
+                  autoComplete="off"
                   required
                 />
               </div>
               <div className="form-group">
-                <label for="contactMessage">Message *</label>
+                <label htmlFor="contactMessage">Message *</label>
                 <textarea
                   id="contactMessage"
                   name="message"
                   rows="5"
-                  autocomplete="off"
+                  autoComplete="off"
                   required
                 ></textarea>
               </div>
@@ -138,8 +138,8 @@ export function ContactSection() {
             src="https://www.google.com/maps?q=0.26142,34.50528&output=embed"
             width="100%"
             height="400"
-            style="border: 0"
-            allowfullscreen=""
+            style={{ border: 0 }}
+            allowFullScreen
             loading="lazy"
           ></iframe>
         </div>

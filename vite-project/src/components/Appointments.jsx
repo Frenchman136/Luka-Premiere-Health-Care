@@ -12,52 +12,52 @@ export function Appointments() {
           <form className="appointment-form">
             <div className="form-row">
               <div className="form-group">
-                <label for="fullName">Full Name *</label>
+                <label htmlFor="fullName">Full Name *</label>
                 <input
                   type="text"
                   id="fullName"
                   name="fullName"
-                  autocomplete="name"
+                  autoComplete="name"
                   required
                 />
               </div>
               <div className="form-group">
-                <label for="email">Email *</label>
+                <label htmlFor="email">Email *</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  autocomplete="email"
+                  autoComplete="email"
                   required
                 />
               </div>
             </div>
             <div className="form-row">
               <div className="form-group">
-                <label for="phone">Phone Number *</label>
+                <label htmlFor="phone">Phone Number *</label>
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
-                  inputmode="tel"
-                  autocomplete="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   required
                 />
               </div>
               <div className="form-group">
-                <label for="date">Preferred Date *</label>
+                <label htmlFor="date">Preferred Date *</label>
                 <input
                   type="date"
                   id="date"
                   name="date"
-                  autocomplete="off"
+                  autoComplete="off"
                   required
                 />
               </div>
             </div>
             <div className="form-row">
               <div className="form-group">
-                <label for="department">Department *</label>
+                <label htmlFor="department">Department *</label>
                 <select id="department" name="department" required>
                   <option value="">Select Department</option>
                   <option value="cardiology">Cardiology</option>
@@ -68,7 +68,7 @@ export function Appointments() {
                 </select>
               </div>
               <div className="form-group">
-                <label for="doctor">Preferred Doctor</label>
+                <label htmlFor="doctor">Preferred Doctor</label>
                 <select id="doctor" name="doctor">
                   <option value="">Any Available</option>
                   <option value="dr-johnson">Dr. Sarah Johnson</option>
@@ -79,12 +79,12 @@ export function Appointments() {
               </div>
             </div>
             <div className="form-group">
-              <label for="message">Message / Reason for Visit</label>
+              <label htmlFor="message">Message / Reason for Visit</label>
               <textarea
                 id="message"
                 name="message"
                 rows="4"
-                autocomplete="off"
+                autoComplete="off"
               ></textarea>
             </div>
             <button type="submit" className="btn btn-primary btn-large">
