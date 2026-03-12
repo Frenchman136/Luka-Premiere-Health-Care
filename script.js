@@ -399,13 +399,3 @@ window.addEventListener("load", () => {
     document.body.style.opacity = "1";
   }, 100);
 });
-
-// Console welcome message
-console.log(
-  "%c Welcome to Luka Premiere Health Care ",
-  "background: #4A90E2; color: white; font-size: 16px; padding: 10px;",
-);
-console.log(
-  "%c Your Health, Our Priority ",
-  "background: #50C878; color: white; font-size: 14px; padding: 5px;",
-);

@@ -12,7 +12,7 @@ export function HealthBlog() {
           <article className="blog-card blog-card--heart">
             <div className="blog-image">
               <img
-                src="/images/Health%20Tips%20%26%20news/Heart%20health.webp"
+                src="/images/Health/Hearthealth.webp"
                 alt="Heart Health"
                 width="800"
                 height="500"
@@ -35,7 +35,7 @@ export function HealthBlog() {
           <article className="blog-card">
             <div className="blog-image">
               <img
-                src="/images/Health%20Tips%20%26%20news/child%20nutrition.webp"
+                src="/images/Health/childnutrition.webp"
                 alt="Child Nutrition"
                 width="800"
                 height="500"
@@ -58,7 +58,7 @@ export function HealthBlog() {
           <article className="blog-card">
             <div className="blog-image">
               <img
-                src="/images/Health%20Tips%20%26%20news/mental%20health.webp"
+                src="/images/Health/mentalhealth.webp"
                 alt="Mental Health"
                 width="800"
                 height="500"
@@ -81,7 +81,7 @@ export function HealthBlog() {
           <article className="blog-card">
             <div className="blog-image">
               <img
-                src="/images/Health%20Tips%20%26%20news/mental%20health1.webp"
+                src="/images/Health/mentalhealth1.webp"
                 alt="Mindfulness and Resilience"
                 width="800"
                 height="500"
