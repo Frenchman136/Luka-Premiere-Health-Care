@@ -220,7 +220,7 @@ export function Appointments() {
                 <path d="M12 2L12 22M2 12H22" />
               </svg>
             </div>
-            <span className="brand-name">MediCare Hospital</span>
+            <span className="brand-name">Luka Health Care</span>
           </div>
 
           <h1 className="sidebar-heading">
