@@ -100,66 +100,6 @@ export function Testimonials() {
                 </div>
               </div>
             </div>
-            <div className="testimonial-card">
-              <div className="stars">
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-              </div>
-              <p>
-                "The maternity team was supportive and kind. Everything was
-                handled with care and professionalism."
-              </p>
-              <div className="testimonial-author">
-                <img
-                  className="testimonial-avatar"
-                  src="/images/clients/client3-80.webp"
-                  srcSet="/images/clients/client3-80.webp 80w, /images/clients/client3-160.webp 160w"
-                  sizes="56px"
-                  alt="Kilimba Nekesa"
-                  width="56"
-                  height="56"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="testimonial-author-info">
-                  <strong>Kilimba Nekesa</strong>
-                  <span>Maternity Patient</span>
-                </div>
-              </div>
-            </div>
-            <div className="testimonial-card">
-              <div className="stars">
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-              </div>
-              <p>
-                "Fast service at the outpatient clinic and the staff explained
-                the treatment plan clearly. Great experience."
-              </p>
-              <div className="testimonial-author">
-                <img
-                  className="testimonial-avatar"
-                  src="/images/clients/client-80.webp"
-                  srcSet="/images/clients/client-80.webp 80w, /images/clients/client-160.webp 160w"
-                  sizes="56px"
-                  alt="Brian Kimani"
-                  width="56"
-                  height="56"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="testimonial-author-info">
-                  <strong>Brian Kimani</strong>
-                  <span>Outpatient Patient</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

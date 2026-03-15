@@ -84,6 +84,25 @@
   color: var(--muted-text);
 }
 
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.about--compact .about-content {
+  grid-template-columns: 1fr;
+}
+
+.about--compact .about-image {
+  display: none;
+}
+
+.about--compact .about-text {
+  text-align: center;
+}
+
 .about-stats {
   display: flex;
   flex-wrap: wrap;
@@ -195,6 +214,10 @@
   .about-image {
     order: -1;
     min-height: 280px;
+  }
+
+  .about--compact .about-text {
+    text-align: left;
   }
 
   .stat h3 {

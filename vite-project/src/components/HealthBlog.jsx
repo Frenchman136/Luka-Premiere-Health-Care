@@ -86,7 +86,7 @@ function BlogGrid({ items }) {
 }
 
 export function HealthBlog({ showAll = false }) {
-  const previewCount = 3;
+  const previewCount = 2;
   const previewPosts = useMemo(
     () => getRandomSubset(BLOG_POSTS, previewCount),
     []

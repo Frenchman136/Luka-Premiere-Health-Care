@@ -46,12 +46,12 @@ function App() {
     <>
       <HeroSection />
       <QuickAccess />
-      <Services />
+      <Services previewCount={4} />
       <Doctors />
-      <Testimonials />
       <Emergency />
       <ContactTeaser />
-      <About />
+      <Testimonials />
+      <About variant="compact" />
       <HealthBlog />
     </>
   );

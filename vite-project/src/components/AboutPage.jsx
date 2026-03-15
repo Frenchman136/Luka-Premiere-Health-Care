@@ -30,7 +30,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      <About />
+      <About variant="full" />
     </main>
   );
 }
