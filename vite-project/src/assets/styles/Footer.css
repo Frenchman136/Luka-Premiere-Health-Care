@@ -129,12 +129,42 @@
     margin-bottom: 30px;
   }
 
+  .footer-section {
+    text-align: center;
+  }
+
   .footer-section h3 {
     font-size: 20px;
+  }
+
+  .footer-section p {
+    margin-bottom: 14px;
+  }
+
+  .footer-section ul li a {
+    display: inline-flex;
+  }
+
+  .footer-section ul li a:hover {
+    padding-left: 0;
+  }
+
+  .footer-contact li {
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
   }
 
   .footer-bottom {
     flex-direction: column;
     text-align: center;
+    gap: 12px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: 12px;
   }
 }
