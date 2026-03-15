@@ -1,5 +1,6 @@
 import "../assets/styles/ContactPage.css";
 import { ContactSection } from "./ContactSection";
+import { BackToTop } from "./BackToTop";
 
 const DEPARTMENTS = [
   {
@@ -92,6 +93,7 @@ export function ContactPage() {
       </section>
 
       <ContactSection />
+      <BackToTop />
     </main>
   );
 }

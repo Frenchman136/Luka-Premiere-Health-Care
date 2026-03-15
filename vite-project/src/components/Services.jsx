@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import "../assets/styles/Services.css";
 import { trackEvent } from "../utils/analytics";
+import { BackToTop } from "./BackToTop";
 
 const SERVICES = [
   {
@@ -169,12 +170,20 @@ const getCategories = () => ["All", ...new Set(SERVICES.map((item) => item.categ
 
 function ServiceCard({ service, variant = "compact" }) {
   const isExpanded = variant === "expanded";
+  const previewHighlights = service.highlights.slice(0, 2);
 
   return (
     <div className={`service-card ${isExpanded ? "service-card--expanded" : "service-card--compact"}`}>
       <i className={service.icon}></i>
       <h3>{service.name}</h3>
       <p>{service.description}</p>
+      {!isExpanded && (
+        <div className="service-tags">
+          {previewHighlights.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      )}
       {isExpanded && (
         <div className="service-meta">
           <span>{service.priceRange}</span>
@@ -310,6 +319,7 @@ export function ServicesPage() {
           )}
         </div>
       </section>
+      <BackToTop />
     </main>
   );
 }

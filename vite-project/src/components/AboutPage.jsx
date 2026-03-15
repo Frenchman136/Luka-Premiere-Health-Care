@@ -31,6 +31,25 @@ export function AboutPage() {
       </section>
 
       <About variant="full" />
+      <section className="about-callout">
+        <div className="container about-callout-card">
+          <div>
+            <h3>Meet the specialists behind our care.</h3>
+            <p>
+              Browse Luka Premiere Health Care’s expert doctors and book the
+              right clinician for your needs.
+            </p>
+          </div>
+          <div className="about-callout-actions">
+            <a href="#/doctors" className="btn btn-primary">
+              View doctors
+            </a>
+            <a href="#/appointment" className="btn btn-outline">
+              Book a visit
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

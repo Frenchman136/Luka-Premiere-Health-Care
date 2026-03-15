@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import "../assets/styles/HealthBlog.css";
 import { trackEvent } from "../utils/analytics";
+import { BackToTop } from "./BackToTop";
 
 const BLOG_POSTS = [
   {
@@ -180,6 +181,7 @@ export function HealthBlogPage() {
         </div>
       </section>
       <HealthBlog showAll />
+      <BackToTop />
     </main>
   );
 }

@@ -211,91 +211,111 @@ export function Appointments() {
     { label: "Notes", value: formData.notes || "None" },
   ];
 
+  const faqs = [
+    {
+      question: "How soon will my appointment be confirmed?",
+      answer:
+        "We confirm most requests within a few minutes during business hours. After-hours requests are confirmed first thing in the morning.",
+    },
+    {
+      question: "Can I reschedule after submitting?",
+      answer:
+        "Yes. Use the confirmation email or call our care team and we will update your slot.",
+    },
+    {
+      question: "What should I bring to my visit?",
+      answer:
+        "Bring identification, insurance details, and any recent medical records or prescriptions.",
+    },
+  ];
+
+  const [openFaq, setOpenFaq] = useState(0);
+
   return (
     <main className="page-shell">
       <div className="page">
         <aside className="sidebar">
-        <div>
-          <div className="sidebar-brand">
-            <div className="brand-icon">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-              >
-                <path d="M12 2L12 22M2 12H22" />
-              </svg>
+          <div>
+            <div className="sidebar-brand">
+              <div className="brand-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                >
+                  <path d="M12 2L12 22M2 12H22" />
+                </svg>
+              </div>
+              <span className="brand-name">Luka Health Care</span>
             </div>
-            <span className="brand-name">Luka Health Care</span>
+
+            <h1 className="sidebar-heading">
+              Book your <em>appointment</em> with us
+            </h1>
+            <p className="sidebar-sub">
+              Fill in the short form to reserve your slot. We&apos;ll confirm by
+              email within a few minutes.
+            </p>
+
+            <div className="steps" role="tablist" aria-label="Appointment steps">
+              {steps.map((step, index) => (
+                <button
+                  key={step.title}
+                  type="button"
+                  className="step"
+                  role="tab"
+                  id={`step-tab-${index}`}
+                  aria-selected={activeStep === index}
+                  aria-current={activeStep === index ? "step" : undefined}
+                  aria-controls={`step-panel-${index}`}
+                  onClick={() => goToStep(index)}
+                >
+                  <div className={`step-num ${activeStep === index ? "active" : ""}`}>
+                    {index + 1}
+                  </div>
+                  <div className="step-info">
+                    <strong>{step.label}</strong>
+                    <span>{step.subtitle}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
 
-          <h1 className="sidebar-heading">
-            Book your <em>appointment</em> with us
-          </h1>
-          <p className="sidebar-sub">
-            Fill in the short form to reserve your slot. We&apos;ll confirm by
-            email within a few minutes.
+          <p className="sidebar-footer">
+            By submitting this form you agree to our
+            <br />
+            Privacy Policy and Terms of Service.
           </p>
-
-          <div className="steps" role="tablist" aria-label="Appointment steps">
-            {steps.map((step, index) => (
-              <button
-                key={step.title}
-                type="button"
-                className="step"
-                role="tab"
-                id={`step-tab-${index}`}
-                aria-selected={activeStep === index}
-                aria-current={activeStep === index ? "step" : undefined}
-                aria-controls={`step-panel-${index}`}
-                onClick={() => goToStep(index)}
-              >
-                <div className={`step-num ${activeStep === index ? "active" : ""}`}>
-                  {index + 1}
-                </div>
-                <div className="step-info">
-                  <strong>{step.label}</strong>
-                  <span>{step.subtitle}</span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <p className="sidebar-footer">
-          By submitting this form you agree to our
-          <br />
-          Privacy Policy and Terms of Service.
-        </p>
-      </aside>
+        </aside>
 
         <main className="form-panel">
-        <div className="form-header">
-          <span className="form-tag">Step {activeStep + 1} of 4</span>
-          <h2 className="form-title">{steps[activeStep].title}</h2>
-        </div>
+          <div className="form-header">
+            <span className="form-tag">Step {activeStep + 1} of 4</span>
+            <h2 className="form-title">{steps[activeStep].title}</h2>
+          </div>
 
-        <form noValidate onSubmit={handleSubmit}>
-          {status.message && (
+          <form noValidate onSubmit={handleSubmit}>
+            {status.message && (
+              <div
+                className={`form-status ${status.type} is-visible`}
+                role="status"
+                aria-live="polite"
+              >
+                {status.message}
+              </div>
+            )}
+
             <div
-              className={`form-status ${status.type} is-visible`}
-              role="status"
-              aria-live="polite"
+              className="form-grid"
+              id={`step-panel-${activeStep}`}
+              role="tabpanel"
+              aria-labelledby={`step-tab-${activeStep}`}
             >
-              {status.message}
-            </div>
-          )}
-
-          <div
-            className="form-grid"
-            id={`step-panel-${activeStep}`}
-            role="tabpanel"
-            aria-labelledby={`step-tab-${activeStep}`}
-          >
             {activeStep === 0 && (
               <>
                 <div className={`field ${errors.firstName ? "has-error" : ""}`}>
@@ -638,6 +658,27 @@ export function Appointments() {
             Your information is encrypted and never shared with third parties.
           </p>
         </form>
+          <section className="faq-section" aria-label="Appointment FAQs">
+            <h3>Top appointment questions</h3>
+            <div className="faq-list">
+              {faqs.map((faq, index) => (
+                <div className="faq-item" key={faq.question}>
+                  <button
+                    type="button"
+                    className="faq-question"
+                    aria-expanded={openFaq === index}
+                    onClick={() =>
+                      setOpenFaq((current) => (current === index ? -1 : index))
+                    }
+                  >
+                    <span>{faq.question}</span>
+                    <i className={`fas ${openFaq === index ? "fa-minus" : "fa-plus"}`}></i>
+                  </button>
+                  {openFaq === index && <p className="faq-answer">{faq.answer}</p>}
+                </div>
+              ))}
+            </div>
+          </section>
         </main>
       </div>
     </main>
