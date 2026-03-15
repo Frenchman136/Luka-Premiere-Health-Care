@@ -16,6 +16,7 @@
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
   --muted-text: #666;
+  --nav-height: 62px;
   color-scheme: light;
 }
 

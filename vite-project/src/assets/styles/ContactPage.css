@@ -1,0 +1,64 @@
+/* Contact Page */
+.contact-directory {
+  padding: 50px 20px 20px;
+  background: var(--white);
+}
+
+.department-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.department-card {
+  background: var(--light-color);
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid rgba(74, 144, 226, 0.12);
+  box-shadow: 0 12px 24px rgba(44, 62, 80, 0.08);
+  display: grid;
+  gap: 8px;
+}
+
+.department-card h3 {
+  font-size: 18px;
+  color: var(--dark-color);
+}
+
+.department-card p {
+  color: var(--muted-text);
+  font-size: 13px;
+}
+
+.department-meta {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+[data-theme="dark"] .contact-directory {
+  background: #0b1220;
+}
+
+[data-theme="dark"] .department-card {
+  background: #0f172a;
+  border-color: rgba(121, 174, 241, 0.2);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .department-card h3,
+[data-theme="dark"] .department-meta {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .department-card p {
+  color: #cbd5f5;
+}
+
+@media (max-width: 640px) {
+  .contact-directory {
+    padding: 30px 16px 10px;
+  }
+}

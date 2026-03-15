@@ -41,6 +41,12 @@ nav.scrolled {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .logo .logo-text {
   font-size: 20px;
   font-weight: 800;
@@ -49,6 +55,40 @@ nav.scrolled {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
+.nav-primary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-primary a {
+  text-decoration: none;
+  color: var(--dark-color);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.nav-primary a:hover {
+  color: var(--primary-color);
+  background: rgba(74, 144, 226, 0.08);
+}
+
+.nav-primary a.is-active {
+  color: var(--primary-color);
+  background: rgba(74, 144, 226, 0.16);
+}
+
+[data-theme="dark"] .nav-primary a {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .nav-primary a.is-active {
+  background: rgba(121, 174, 241, 0.2);
+}
 
 .hamburger {
   display: flex;
@@ -99,6 +139,29 @@ nav.scrolled {
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #d93b2b;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 20px rgba(217, 59, 43, 0.24);
+  transition: var(--transition);
+}
+
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(217, 59, 43, 0.3);
 }
 
 .theme-toggle {
@@ -229,5 +292,41 @@ nav.scrolled {
     right: 16px;
     left: 16px;
     min-width: auto;
+  }
+
+  .theme-toggle span {
+    display: none;
+  }
+
+  .theme-toggle {
+    width: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .nav-cta {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 901px) {
+  .hamburger {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-primary {
+    display: none;
+  }
+
+  .search-btn {
+    display: none;
   }
 }

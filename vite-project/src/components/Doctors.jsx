@@ -93,8 +93,6 @@ function DoctorsGrid({ items }) {
             <p className="credentials">{doctor.credentials}</p>
             <a
               href="#/appointment"
-              target="_blank"
-              rel="noreferrer"
               className="btn btn-small btn-primary"
             >
               Book Appointment
@@ -159,8 +157,6 @@ export function Doctors({ showAll = false }) {
           <div className="doctors-actions">
             <a
               href="#/doctors"
-              target="_blank"
-              rel="noreferrer"
               className="btn btn-primary"
               onClick={() => trackEvent("doctors_view_all", { source: "home" })}
             >
@@ -174,6 +170,36 @@ export function Doctors({ showAll = false }) {
 }
 
 export function DoctorsPage() {
-  return <Doctors showAll />;
+  return (
+    <main className="page-shell">
+      <section className="page-hero">
+        <div className="container page-hero-grid">
+          <div>
+            <span className="page-eyebrow">Doctors</span>
+            <h1>Meet the specialists caring for you.</h1>
+            <p>
+              Search by specialty and book directly with the Luka Premiere
+              Health Care team.
+            </p>
+            <div className="page-actions">
+              <a href="#/appointment" className="btn btn-primary">
+                Book an appointment
+              </a>
+              <a href="#/services" className="btn btn-outline">
+                Explore services
+              </a>
+            </div>
+          </div>
+          <div className="page-hero-card">
+            <h3>Care coordination</h3>
+            <p>We will match you to the best specialist for your needs.</p>
+            <strong className="hero-highlight">+254 700 000 000</strong>
+            <span className="hero-subtext">Call for same-day routing.</span>
+          </div>
+        </div>
+      </section>
+      <Doctors showAll />
+    </main>
+  );
 }
 

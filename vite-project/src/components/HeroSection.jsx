@@ -13,10 +13,10 @@ export function HeroSection() {
           attention once reserved for royalty. Your health is our masterpiece.
         </p>
         <div className="hero-actions">
-          <a href="#/appointment" target="_blank" rel="noreferrer" className="hero-btn hero-btn-primary">
+          <a href="#/appointment" className="hero-btn hero-btn-primary">
             Book a Consultation <span aria-hidden="true">→</span>
           </a>
-          <a href="#research" className="hero-btn hero-btn-ghost">
+          <a href="#blog" className="hero-btn hero-btn-ghost">
             <span className="hero-play" aria-hidden="true">▶</span>
             Watch our story
           </a>

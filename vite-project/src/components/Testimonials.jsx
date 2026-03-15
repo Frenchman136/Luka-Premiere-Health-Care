@@ -2,7 +2,7 @@ import '../assets/styles/Testimonials.css';
 
 export function Testimonials() {
   return (
-    <section className="testimonials">
+    <section id="testimonials" className="testimonials">
       <div className="container">
         <div className="section-header">
           <h2>What Our Patients Say</h2>

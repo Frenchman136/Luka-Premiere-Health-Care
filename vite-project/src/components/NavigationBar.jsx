@@ -4,6 +4,9 @@ import { trackEvent } from "../utils/analytics";
 
 export function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState(() =>
+    typeof window === "undefined" ? "#/" : window.location.hash || "#/"
+  );
   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") return "light";
     return (
@@ -15,17 +18,20 @@ export function NavigationBar() {
   const [activeSection, setActiveSection] = useState("");
   const navRef = useRef(null);
   const sectionIds = [
+    "home",
     "about",
     "services",
-    "research",
     "doctors",
-    "billing",
-    "careers",
+    "emergency",
+    "blog",
     "contact",
   ];
 
   useEffect(() => {
-    const handleHashChange = () => setMenuOpen(false);
+    const handleHashChange = () => {
+      setMenuOpen(false);
+      setCurrentHash(window.location.hash || "#/");
+    };
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
@@ -110,12 +116,95 @@ export function NavigationBar() {
     trackEvent("theme_toggle", { theme: theme === "dark" ? "light" : "dark" });
   };
 
+  const isRoute = currentHash.startsWith("#/");
+  const routePath = isRoute ? currentHash.slice(2) : "";
+  const routeRoot = routePath.split("?")[0].split("/")[0] || "home";
+  const hashSection =
+    !isRoute && currentHash.startsWith("#") ? currentHash.slice(1) : "";
+  const resolvedHomeSection = activeSection || hashSection || "home";
+  const isHomeRoute = !isRoute || routeRoot === "home";
+  const activeLink = isHomeRoute ? resolvedHomeSection : routeRoot;
+
   return (
     <nav id="navbar" ref={navRef}>
-      <div className="logo">
+      <a className="logo" href="#/" onClick={() => handleNavClick("Home")}>
         <span className="logo-text">LUKA</span>
-      </div>
+      </a>
+      <ul className="nav-primary" aria-label="Primary">
+        <li>
+          <a
+            href="#/"
+            onClick={() => handleNavClick("Home")}
+            className={activeLink === "home" ? "is-active" : ""}
+            aria-current={activeLink === "home" ? "page" : undefined}
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/services"
+            onClick={() => handleNavClick("Services")}
+            className={activeLink === "services" ? "is-active" : ""}
+            aria-current={activeLink === "services" ? "page" : undefined}
+          >
+            Services
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/doctors"
+            onClick={() => handleNavClick("Doctors")}
+            className={activeLink === "doctors" ? "is-active" : ""}
+            aria-current={activeLink === "doctors" ? "page" : undefined}
+          >
+            Doctors
+          </a>
+        </li>
+        <li>
+          <a
+            href="#about"
+            onClick={() => handleNavClick("About")}
+            className={activeLink === "about" ? "is-active" : ""}
+          >
+            About
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/contact"
+            onClick={() => handleNavClick("Contact")}
+            className={activeLink === "contact" ? "is-active" : ""}
+            aria-current={activeLink === "contact" ? "page" : undefined}
+          >
+            Contact
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/blog"
+            onClick={() => handleNavClick("Blog")}
+            className={activeLink === "blog" ? "is-active" : ""}
+            aria-current={activeLink === "blog" ? "page" : undefined}
+          >
+            Blog
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/appointment"
+            onClick={() => handleNavClick("Appointments")}
+            className={activeLink === "appointment" ? "is-active" : ""}
+            aria-current={activeLink === "appointment" ? "page" : undefined}
+          >
+            Appointments
+          </a>
+        </li>
+      </ul>
       <div className="nav-actions">
+        <a href="#emergency" className="nav-cta" onClick={() => handleNavClick("Emergency")}>
+          Emergency
+        </a>
         <button
           className="theme-toggle"
           id="themeToggle"
@@ -168,75 +257,73 @@ export function NavigationBar() {
       >
         <li>
           <a
+            href="#/"
+            onClick={() => handleNavClick("Home")}
+            className={activeLink === "home" ? "is-active" : ""}
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/services"
+            onClick={() => handleNavClick("Services")}
+            className={activeLink === "services" ? "is-active" : ""}
+          >
+            Services
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/doctors"
+            onClick={() => handleNavClick("Doctors")}
+            className={activeLink === "doctors" ? "is-active" : ""}
+          >
+            Doctors
+          </a>
+        </li>
+        <li>
+          <a
             href="#about"
             onClick={() => handleNavClick("About")}
-            className={activeSection === "about" ? "is-active" : ""}
+            className={activeLink === "about" ? "is-active" : ""}
           >
             About
           </a>
         </li>
         <li>
           <a
-            href="#services"
-            onClick={() => handleNavClick("Patient Care")}
-            className={activeSection === "services" ? "is-active" : ""}
+            href="#/contact"
+            onClick={() => handleNavClick("Contact")}
+            className={activeLink === "contact" ? "is-active" : ""}
           >
-            Patient Care
+            Contact
           </a>
         </li>
         <li>
           <a
-            href="#research"
-            onClick={() => handleNavClick("Research")}
-            className={activeSection === "research" ? "is-active" : ""}
+            href="#/blog"
+            onClick={() => handleNavClick("Blog")}
+            className={activeLink === "blog" ? "is-active" : ""}
           >
-            Research
+            Blog
           </a>
         </li>
         <li>
           <a
             href="#/appointment"
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => handleNavClick("Appointment")}
+            onClick={() => handleNavClick("Appointments")}
+            className={activeLink === "appointment" ? "is-active" : ""}
           >
-            Schedule an Appointment
+            Appointments
           </a>
         </li>
         <li>
           <a
-            href="#doctors"
-            onClick={() => handleNavClick("Doctors")}
-            className={activeSection === "doctors" ? "is-active" : ""}
+            href="#emergency"
+            onClick={() => handleNavClick("Emergency")}
           >
-            Find a Doctor
-          </a>
-        </li>
-        <li>
-          <a
-            href="#billing"
-            onClick={() => handleNavClick("Billing")}
-            className={activeSection === "billing" ? "is-active" : ""}
-          >
-            Pay Your Bill
-          </a>
-        </li>
-        <li>
-          <a
-            href="#careers"
-            onClick={() => handleNavClick("Careers")}
-            className={activeSection === "careers" ? "is-active" : ""}
-          >
-            Employment
-          </a>
-        </li>
-        <li>
-          <a
-            href="#contact"
-            onClick={() => handleNavClick("Location")}
-            className={activeSection === "contact" ? "is-active" : ""}
-          >
-            Location
+            Emergency Hotline
           </a>
         </li>
       </ul>

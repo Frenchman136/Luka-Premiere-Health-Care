@@ -105,7 +105,7 @@ export function HealthBlog({ showAll = false }) {
   const postsToShow = showAll ? filteredPosts : previewPosts;
 
   return (
-    <section id="research" className="blog">
+    <section id="blog" className="blog">
       <div className="container">
         <div className="section-header">
           <h2>{showAll ? "Health Tips & News" : "Health Tips & News"}</h2>
@@ -138,8 +138,6 @@ export function HealthBlog({ showAll = false }) {
           <div className="blog-actions">
             <a
               href="#/blog"
-              target="_blank"
-              rel="noreferrer"
               className="btn btn-outline blog-view-all"
               onClick={() => trackEvent("blog_view_all", { source: "home" })}
             >
@@ -153,6 +151,36 @@ export function HealthBlog({ showAll = false }) {
 }
 
 export function HealthBlogPage() {
-  return <HealthBlog showAll />;
+  return (
+    <main className="page-shell">
+      <section className="page-hero">
+        <div className="container page-hero-grid">
+          <div>
+            <span className="page-eyebrow">Blog</span>
+            <h1>Practical health guidance, updated weekly.</h1>
+            <p>
+              Stay informed with tips, research highlights, and patient-focused
+              advice from our specialists.
+            </p>
+            <div className="page-actions">
+              <a href="#/services" className="btn btn-primary">
+                Explore services
+              </a>
+              <a href="#/appointment" className="btn btn-outline">
+                Book a visit
+              </a>
+            </div>
+          </div>
+          <div className="page-hero-card">
+            <h3>Need clinical advice?</h3>
+            <p>Our care team can answer questions or schedule follow ups.</p>
+            <strong className="hero-highlight">+254 700 000 000</strong>
+            <span className="hero-subtext">Mon - Sun, 8:00 AM - 8:00 PM</span>
+          </div>
+        </div>
+      </section>
+      <HealthBlog showAll />
+    </main>
+  );
 }
 

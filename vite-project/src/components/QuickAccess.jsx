@@ -2,30 +2,30 @@ import '../assets/styles/QuickAccess.css';
 
 export function QuickAccess() {
   return (
-    <section id="billing" className="quick-access">
+    <section id="quick-access" className="quick-access">
       <div className="container">
         <div className="quick-card">
           <i className="fas fa-calendar-check"></i>
           <h3>Book Appointment</h3>
           <p>Schedule your visit online</p>
-          <a href="#/appointment" target="_blank" rel="noreferrer" className="link-arrow">
+          <a href="#/appointment" className="link-arrow">
             Book Now <i className="fas fa-arrow-right"></i>
           </a>
         </div>
         <div className="quick-card">
-          <i className="fas fa-file-medical"></i>
-          <h3>Medical Records</h3>
-          <p>Access your health records</p>
-          <a href="#patient-portal" className="link-arrow">
-            View Records <i className="fas fa-arrow-right"></i>
+          <i className="fas fa-user-md"></i>
+          <h3>Find a Doctor</h3>
+          <p>Browse our specialist directory</p>
+          <a href="#/doctors" className="link-arrow">
+            View Doctors <i className="fas fa-arrow-right"></i>
           </a>
         </div>
         <div className="quick-card">
-          <i className="fas fa-credit-card"></i>
-          <h3>Pay Bills</h3>
-          <p>Secure online payment</p>
-          <a href="#billing" className="link-arrow">
-            Pay Now <i className="fas fa-arrow-right"></i>
+          <i className="fas fa-notes-medical"></i>
+          <h3>Explore Services</h3>
+          <p>Find the right care quickly</p>
+          <a href="#/services" className="link-arrow">
+            View Services <i className="fas fa-arrow-right"></i>
           </a>
         </div>
         <div className="quick-card">

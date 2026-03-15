@@ -2,7 +2,7 @@ import '../assets/styles/Footer.css'
 
 export function Footer() {
   return (
-    <footer id="careers" className="footer">
+    <footer className="footer">
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
@@ -30,19 +30,19 @@ export function Footer() {
             <h4>Quick Links</h4>
             <ul>
               <li>
-                <a href="#home">Home</a>
+                <a href="#/">Home</a>
               </li>
               <li>
-                <a href="#services">Services</a>
+                <a href="#/services">Services</a>
               </li>
               <li>
-                <a href="#doctors">Doctors</a>
+                <a href="#/doctors">Doctors</a>
               </li>
               <li>
                 <a href="#about">About Us</a>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <a href="#/contact">Contact</a>
               </li>
             </ul>
           </div>
@@ -70,19 +70,19 @@ export function Footer() {
             <h4>Departments</h4>
             <ul>
               <li>
-                <a href="#">Cardiology</a>
+                <a href="#/services/cardiology">Cardiology</a>
               </li>
               <li>
-                <a href="#">Pediatrics</a>
+                <a href="#/services/pediatrics">Pediatrics</a>
               </li>
               <li>
-                <a href="#">Neurology</a>
+                <a href="#/services/neurology">Neurology</a>
               </li>
               <li>
-                <a href="#">Orthopedics</a>
+                <a href="#/services/orthopedics">Orthopedics</a>
               </li>
               <li>
-                <a href="#">Emergency</a>
+                <a href="#emergency">Emergency</a>
               </li>
             </ul>
           </div>
