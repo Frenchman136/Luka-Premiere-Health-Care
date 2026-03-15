@@ -412,6 +412,13 @@ export function ServiceDetailPage({ slug }) {
                 Talk to a coordinator
               </a>
             </div>
+            <div className="service-detail-card service-team-card">
+              <h4>Meet the care team</h4>
+              <p>Find the specialists who lead {service.name} care.</p>
+              <a href="#/doctors" className="btn btn-outline btn-large">
+                View doctors
+              </a>
+            </div>
           </aside>
         </div>
       </section>

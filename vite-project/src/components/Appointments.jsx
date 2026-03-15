@@ -212,8 +212,9 @@ export function Appointments() {
   ];
 
   return (
-    <div className="page">
-      <aside className="sidebar">
+    <main className="page-shell">
+      <div className="page">
+        <aside className="sidebar">
         <div>
           <div className="sidebar-brand">
             <div className="brand-icon">
@@ -272,7 +273,7 @@ export function Appointments() {
         </p>
       </aside>
 
-      <main className="form-panel">
+        <main className="form-panel">
         <div className="form-header">
           <span className="form-tag">Step {activeStep + 1} of 4</span>
           <h2 className="form-title">{steps[activeStep].title}</h2>
@@ -637,7 +638,8 @@ export function Appointments() {
             Your information is encrypted and never shared with third parties.
           </p>
         </form>
-      </main>
-    </div>
+        </main>
+      </div>
+    </main>
   );
 }

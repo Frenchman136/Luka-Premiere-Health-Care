@@ -208,6 +208,10 @@
   text-align: center;
 }
 
+.service-team-card {
+  margin-top: 16px;
+}
+
 [data-theme="dark"] .services {
   background-color: #0b1220;
 }

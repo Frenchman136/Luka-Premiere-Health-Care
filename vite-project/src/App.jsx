@@ -14,6 +14,7 @@ import { AboutPage } from "./components/AboutPage";
 import { ContactPage } from "./components/ContactPage";
 import { ContactTeaser } from "./components/ContactTeaser";
 import { EmergencyPage } from "./components/EmergencyPage";
+import { NotFoundPage } from "./components/NotFoundPage";
 import { Footer } from "./components/Footer";
 
 function App() {
@@ -76,6 +77,8 @@ function App() {
     pageContent = <ContactPage />;
   } else if (routeRoot === "emergency") {
     pageContent = <EmergencyPage />;
+  } else if (routeRoot) {
+    pageContent = <NotFoundPage />;
   }
 
   return (
