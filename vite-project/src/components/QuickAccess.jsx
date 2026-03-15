@@ -32,7 +32,7 @@ export function QuickAccess() {
           <i className="fas fa-ambulance"></i>
           <h3>Emergency</h3>
           <p>Immediate medical attention</p>
-          <a href="#emergency" className="link-arrow">
+          <a href="#/emergency" className="link-arrow">
             Learn More <i className="fas fa-arrow-right"></i>
           </a>
         </div>

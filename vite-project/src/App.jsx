@@ -10,8 +10,10 @@ import { Emergency } from "./components/Emergency";
 import { About } from "./components/About";
 import { Testimonials } from "./components/Testimonials";
 import { HealthBlog, HealthBlogPage } from "./components/HealthBlog";
+import { AboutPage } from "./components/AboutPage";
 import { ContactPage } from "./components/ContactPage";
 import { ContactTeaser } from "./components/ContactTeaser";
+import { EmergencyPage } from "./components/EmergencyPage";
 import { Footer } from "./components/Footer";
 
 function App() {
@@ -68,8 +70,12 @@ function App() {
     pageContent = <DoctorsPage />;
   } else if (routeRoot === "blog") {
     pageContent = <HealthBlogPage />;
+  } else if (routeRoot === "about") {
+    pageContent = <AboutPage />;
   } else if (routeRoot === "contact") {
     pageContent = <ContactPage />;
+  } else if (routeRoot === "emergency") {
+    pageContent = <EmergencyPage />;
   }
 
   return (

@@ -255,7 +255,7 @@ export function ServicesPage() {
               <a href="#/appointment" className="btn btn-primary">
                 Book an appointment
               </a>
-              <a href="#emergency" className="btn btn-outline">
+              <a href="#/emergency" className="btn btn-outline">
                 Emergency help
               </a>
             </div>

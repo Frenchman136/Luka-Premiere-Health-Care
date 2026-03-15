@@ -39,7 +39,7 @@ export function Footer() {
                 <a href="#/doctors">Doctors</a>
               </li>
               <li>
-                <a href="#about">About Us</a>
+                <a href="#/about">About Us</a>
               </li>
               <li>
                 <a href="#/contact">Contact</a>
@@ -82,7 +82,7 @@ export function Footer() {
                 <a href="#/services/orthopedics">Orthopedics</a>
               </li>
               <li>
-                <a href="#emergency">Emergency</a>
+                <a href="#/emergency">Emergency</a>
               </li>
             </ul>
           </div>

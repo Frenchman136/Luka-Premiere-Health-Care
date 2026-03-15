@@ -48,7 +48,7 @@ export function ContactTeaser() {
                 <strong>Nairobi, Kenya</strong>
               </div>
             </div>
-            <a href="#emergency" className="contact-teaser-link">
+            <a href="#/emergency" className="contact-teaser-link">
               View emergency services
               <i className="fas fa-arrow-right" aria-hidden="true"></i>
             </a>

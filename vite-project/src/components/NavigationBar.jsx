@@ -163,7 +163,7 @@ export function NavigationBar() {
         </li>
         <li>
           <a
-            href="#about"
+            href="#/about"
             onClick={() => handleNavClick("About")}
             className={activeLink === "about" ? "is-active" : ""}
           >
@@ -202,7 +202,7 @@ export function NavigationBar() {
         </li>
       </ul>
       <div className="nav-actions">
-        <a href="#emergency" className="nav-cta" onClick={() => handleNavClick("Emergency")}>
+        <a href="#/emergency" className="nav-cta" onClick={() => handleNavClick("Emergency")}>
           Emergency
         </a>
         <button
@@ -284,7 +284,7 @@ export function NavigationBar() {
         </li>
         <li>
           <a
-            href="#about"
+            href="#/about"
             onClick={() => handleNavClick("About")}
             className={activeLink === "about" ? "is-active" : ""}
           >
@@ -320,7 +320,7 @@ export function NavigationBar() {
         </li>
         <li>
           <a
-            href="#emergency"
+            href="#/emergency"
             onClick={() => handleNavClick("Emergency")}
           >
             Emergency Hotline
