@@ -18,6 +18,7 @@ Header: `Authorization: Bearer <token>`
 `GET /appointments`
 Header: `Authorization: Bearer <token>`
 Query: `?all=true` (admin only)
+Query (optional pagination): `?page=1&pageSize=10`
 
 `POST /appointments`
 Header: `Authorization: Bearer <token>`
@@ -34,6 +35,7 @@ Body: `{ name, email, subject?, body }`
 
 `GET /messages`
 Header: `Authorization: Bearer <token>` (admin only)
+Query (optional pagination): `?page=1&pageSize=10`
 
 `PATCH /messages/:id`
 Header: `Authorization: Bearer <token>` (admin only)

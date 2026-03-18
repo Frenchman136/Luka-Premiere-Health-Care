@@ -30,11 +30,31 @@ router.use(requireAuth);
 router.use(requireAdmin);
 
 router.get("/", async (req, res) => {
-  const messages = await prisma.message.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  const page = Number(req.query.page);
+  const pageSize = Number(req.query.pageSize);
+  const usePagination =
+    Number.isInteger(page) && page > 0 && Number.isInteger(pageSize) && pageSize > 0;
 
-  return res.json({ messages });
+  const findOptions = {
+    orderBy: { createdAt: "desc" },
+  };
+
+  if (usePagination) {
+    findOptions.skip = (page - 1) * pageSize;
+    findOptions.take = pageSize;
+  }
+
+  const [messages, total] = await Promise.all([
+    prisma.message.findMany(findOptions),
+    usePagination ? prisma.message.count() : Promise.resolve(null),
+  ]);
+
+  return res.json({
+    messages,
+    page: usePagination ? page : 1,
+    pageSize: usePagination ? pageSize : messages.length,
+    total: usePagination ? total : messages.length,
+  });
 });
 
 router.patch("/:id", async (req, res) => {

@@ -10,13 +10,32 @@ router.use(requireAuth);
 router.get("/", async (req, res) => {
   const allowAll = req.user.role === "ADMIN" && req.query.all === "true";
   const where = allowAll ? {} : { userId: req.user.sub };
+  const page = Number(req.query.page);
+  const pageSize = Number(req.query.pageSize);
+  const usePagination =
+    Number.isInteger(page) && page > 0 && Number.isInteger(pageSize) && pageSize > 0;
 
-  const appointments = await prisma.appointment.findMany({
+  const findOptions = {
     where,
     orderBy: { scheduledAt: "desc" },
-  });
+  };
 
-  return res.json({ appointments });
+  if (usePagination) {
+    findOptions.skip = (page - 1) * pageSize;
+    findOptions.take = pageSize;
+  }
+
+  const [appointments, total] = await Promise.all([
+    prisma.appointment.findMany(findOptions),
+    usePagination ? prisma.appointment.count({ where }) : Promise.resolve(null),
+  ]);
+
+  return res.json({
+    appointments,
+    page: usePagination ? page : 1,
+    pageSize: usePagination ? pageSize : appointments.length,
+    total: usePagination ? total : appointments.length,
+  });
 });
 
 router.post("/", async (req, res) => {

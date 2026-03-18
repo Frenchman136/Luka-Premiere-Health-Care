@@ -16,6 +16,7 @@ import { ContactTeaser } from "./components/ContactTeaser";
 import { EmergencyPage } from "./components/EmergencyPage";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { Footer } from "./components/Footer";
+import { AdminDashboard } from "./components/AdminDashboard";
 
 function App() {
   const [hash, setHash] = useState(() => window.location.hash || "#/");
@@ -42,6 +43,7 @@ function App() {
 
   const routePath = hash.startsWith("#/") ? hash.slice(2) : "";
   const [routeRoot, routeSlug] = routePath.split("/");
+  const isAdminRoute = routeRoot === "admin";
 
   const renderHome = () => (
     <>
@@ -77,6 +79,8 @@ function App() {
     pageContent = <ContactPage />;
   } else if (routeRoot === "emergency") {
     pageContent = <EmergencyPage />;
+  } else if (routeRoot === "admin") {
+    pageContent = <AdminDashboard />;
   } else if (routeRoot) {
     pageContent = <NotFoundPage />;
   }
@@ -85,7 +89,7 @@ function App() {
     <div>
       <NavigationBar />
       {pageContent}
-      {routeRoot !== "appointment" && <Footer />}
+      {!isAdminRoute && routeRoot !== "appointment" && <Footer />}
     </div>
   );
 }

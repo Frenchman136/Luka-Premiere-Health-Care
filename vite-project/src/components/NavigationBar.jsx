@@ -200,6 +200,16 @@ export function NavigationBar() {
             Appointments
           </a>
         </li>
+        <li>
+          <a
+            href="#/admin"
+            onClick={() => handleNavClick("Admin")}
+            className={activeLink === "admin" ? "is-active" : ""}
+            aria-current={activeLink === "admin" ? "page" : undefined}
+          >
+            Admin
+          </a>
+        </li>
       </ul>
       <div className="nav-actions">
         <a href="#/emergency" className="nav-cta" onClick={() => handleNavClick("Emergency")}>
@@ -316,6 +326,15 @@ export function NavigationBar() {
             className={activeLink === "appointment" ? "is-active" : ""}
           >
             Appointments
+          </a>
+        </li>
+        <li>
+          <a
+            href="#/admin"
+            onClick={() => handleNavClick("Admin")}
+            className={activeLink === "admin" ? "is-active" : ""}
+          >
+            Admin
           </a>
         </li>
         <li>
