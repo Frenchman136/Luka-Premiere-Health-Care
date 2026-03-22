@@ -4,7 +4,7 @@ Node/Express backend with Firebase (Firestore + Firebase Auth) and Stripe paymen
 
 ## Setup
 
-1. Copy `.env.example` to `.env` and fill values (Firebase service account required).
+1. Copy `.env.example` to `.env` and fill values (service account required for local dev).
 2. Install deps.
 3. Start the API.
 
@@ -24,3 +24,5 @@ Auth note: clients must sign in with Firebase Auth and send a Firebase ID token 
 Rules note: sample Firestore rules live at `server/firestore.rules` (adjust and deploy with Firebase CLI if you access Firestore directly from the client).
 
 Admin note: promote an existing Firebase user to admin with `npm run admin:promote -- <email-or-uid>`.
+
+Functions note: when deploying with Firebase Functions, set `CORS_ORIGIN`, `FRONTEND_URL`, and Stripe keys as environment variables. Firebase-managed runtimes use default credentials, so you typically do not need a service account there.

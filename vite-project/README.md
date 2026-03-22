@@ -6,6 +6,8 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 Copy `.env.example` to `.env` and fill your Firebase client keys. The admin dashboard uses Firebase Auth (email/password) and sends Firebase ID tokens to the backend.
 
+When deploying with Firebase Hosting + Functions, set `VITE_API_URL=/api` so requests hit the hosting rewrite.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh

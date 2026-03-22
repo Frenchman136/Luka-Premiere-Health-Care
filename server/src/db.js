@@ -1,7 +1,7 @@
 const admin = require("firebase-admin");
 
 function loadServiceAccount() {
-  const json = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
+  const json = process.env.SERVICE_ACCOUNT_JSON || process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
   if (json) {
     try {
       return JSON.parse(json);
@@ -12,7 +12,8 @@ function loadServiceAccount() {
     }
   }
 
-  const base64 = process.env.FIREBASE_SERVICE_ACCOUNT_BASE64;
+  const base64 =
+    process.env.SERVICE_ACCOUNT_BASE64 || process.env.FIREBASE_SERVICE_ACCOUNT_BASE64;
   if (base64) {
     try {
       return JSON.parse(Buffer.from(base64, "base64").toString("utf8"));
@@ -23,7 +24,8 @@ function loadServiceAccount() {
     }
   }
 
-  const path = process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
+  const path =
+    process.env.SERVICE_ACCOUNT_PATH || process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
   if (path) {
     try {
       // eslint-disable-next-line global-require, import/no-dynamic-require
@@ -47,7 +49,10 @@ function initFirestore() {
 
     admin.initializeApp({
       credential,
-      projectId: process.env.FIREBASE_PROJECT_ID || serviceAccount?.project_id,
+      projectId:
+        process.env.PROJECT_ID ||
+        process.env.FIREBASE_PROJECT_ID ||
+        serviceAccount?.project_id,
     });
   }
 
