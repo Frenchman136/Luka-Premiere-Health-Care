@@ -1,11 +1,12 @@
-﻿import { useCallback, useEffect, useMemo, useState } from "react";
+﻿import { useCallback, useEffect, useState } from "react";
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import "../assets/styles/AdminDashboard.css";
+import { auth } from "../utils/firebase";
 
 const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:4000").replace(
   /\/$/,
   ""
 );
-const TOKEN_KEY = "admin_jwt";
 const APPOINTMENTS_PAGE_SIZE = 6;
 const MESSAGES_PAGE_SIZE = 5;
 
@@ -40,10 +41,7 @@ const shortenId = (value) => {
 };
 
 export function AdminDashboard() {
-  const [token, setToken] = useState(() => {
-    if (typeof window === "undefined") return "";
-    return window.localStorage.getItem(TOKEN_KEY) || "";
-  });
+  const [firebaseUser, setFirebaseUser] = useState(null);
   const [user, setUser] = useState(null);
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [authStatus, setAuthStatus] = useState({ type: "", message: "" });
@@ -60,47 +58,34 @@ export function AdminDashboard() {
   const [lastUpdated, setLastUpdated] = useState(null);
   const [updatingMessageId, setUpdatingMessageId] = useState(null);
 
-  const authHeaders = useMemo(() => {
-    if (!token) return {};
-    return { Authorization: `Bearer ${token}` };
-  }, [token]);
 
-  const fetchJson = useCallback(
-    async (path, options = {}) => {
-      const response = await fetch(`${API_BASE}${path}`, {
-        ...options,
-        headers: {
-          "Content-Type": "application/json",
-          ...authHeaders,
-          ...(options.headers || {}),
-        },
-      });
+  const fetchJson = useCallback(async (path, options = {}) => {
+    const headers = {
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    };
 
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        const message = payload?.error || `Request failed (${response.status})`;
-        throw new Error(message);
-      }
-      return payload;
-    },
-    [authHeaders]
-  );
-
-  const persistToken = (nextToken) => {
-    setToken(nextToken);
-    try {
-      if (nextToken) {
-        window.localStorage.setItem(TOKEN_KEY, nextToken);
-      } else {
-        window.localStorage.removeItem(TOKEN_KEY);
-      }
-    } catch {
-      // ignore storage failures
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      const idToken = await currentUser.getIdToken();
+      headers.Authorization = `Bearer ${idToken}`;
     }
-  };
+
+    const response = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers,
+    });
+
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const message = payload?.error || `Request failed (${response.status})`;
+      throw new Error(message);
+    }
+    return payload;
+  }, []);
 
   const loadSession = useCallback(async () => {
-    if (!token) return;
+    if (!auth.currentUser) return;
     try {
       const payload = await fetchJson("/auth/me");
       if (payload?.user?.role !== "ADMIN") {
@@ -108,17 +93,19 @@ export function AdminDashboard() {
           type: "error",
           message: "This account is not an admin. Use an admin login.",
         });
-        persistToken("");
+        await signOut(auth);
         setUser(null);
         return;
       }
       setUser(payload.user);
+      setAuthStatus({ type: "success", message: "Welcome back, admin." });
+      await loadAdminData();
     } catch (error) {
       setAuthStatus({ type: "error", message: error.message || "Auth failed." });
-      persistToken("");
+      await signOut(auth);
       setUser(null);
     }
-  }, [fetchJson, token]);
+  }, [fetchJson, loadAdminData]);
 
   const fetchOverview = useCallback(async () => {
     const overview = await fetchJson("/admin/overview");
@@ -150,7 +137,7 @@ export function AdminDashboard() {
   );
 
   const loadAdminData = useCallback(async () => {
-    if (!token) {
+    if (!firebaseUser) {
       setStatus({
         type: "warning",
         message: "Log in as an admin to load dashboard data.",
@@ -178,48 +165,57 @@ export function AdminDashboard() {
     } finally {
       setIsLoading(false);
     }
-  }, [fetchAppointments, fetchMessages, fetchOverview, messagesPage, appointmentsPage, token]);
+  }, [fetchAppointments, fetchMessages, fetchOverview, messagesPage, appointmentsPage, firebaseUser]);
 
   useEffect(() => {
-    if (!token) return;
+    const unsubscribe = onAuthStateChanged(auth, (nextUser) => {
+      setFirebaseUser(nextUser || null);
+      if (!nextUser) {
+        setUser(null);
+        setCounts(INITIAL_COUNTS);
+        setAppointments([]);
+        setMessages([]);
+        setAppointmentsPage(1);
+        setMessagesPage(1);
+        setAppointmentsTotal(0);
+        setMessagesTotal(0);
+        setStatus({ type: "", message: "" });
+        return;
+      }
+      setAuthStatus({ type: "loading", message: "Verifying access..." });
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!firebaseUser) return;
     loadSession();
-    loadAdminData();
-  }, [token, loadSession, loadAdminData]);
+  }, [firebaseUser, loadSession]);
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     setAuthStatus({ type: "loading", message: "Signing in..." });
 
     try {
-      const payload = await fetchJson("/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: loginForm.email.trim(),
-          password: loginForm.password,
-        }),
+      const credential = await signInWithEmailAndPassword(
+        auth,
+        loginForm.email.trim(),
+        loginForm.password
+      );
+      await credential.user.getIdToken(true);
+      setAuthStatus({
+        type: "success",
+        message: "Signed in. Verifying access...",
       });
-
-      if (payload?.user?.role !== "ADMIN") {
-        setAuthStatus({
-          type: "error",
-          message: "That account is not an admin.",
-        });
-        persistToken("");
-        setUser(null);
-        return;
-      }
-
-      persistToken(payload.token || "");
-      setUser(payload.user || null);
-      setAuthStatus({ type: "success", message: "Welcome back, admin." });
       setLoginForm({ email: "", password: "" });
     } catch (error) {
       setAuthStatus({ type: "error", message: error.message || "Login failed." });
     }
   };
 
-  const handleLogout = () => {
-    persistToken("");
+  const handleLogout = async () => {
+    await signOut(auth);
     setUser(null);
     setAuthStatus({ type: "warning", message: "Signed out." });
     setCounts(INITIAL_COUNTS);
@@ -284,7 +280,7 @@ export function AdminDashboard() {
               className="admin-refresh"
               type="button"
               onClick={loadAdminData}
-              disabled={isLoading || !token}
+              disabled={isLoading || !firebaseUser}
             >
               {isLoading ? "Refreshing..." : "Refresh"}
             </button>

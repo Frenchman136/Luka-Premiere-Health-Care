@@ -22,3 +22,5 @@ Firestore note: the appointments list uses `userId` + `scheduledAt` ordering, so
 Auth note: clients must sign in with Firebase Auth and send a Firebase ID token in the `Authorization: Bearer <token>` header. The `/auth/register` endpoint returns a Firebase custom token you can exchange client-side for an ID token.
 
 Rules note: sample Firestore rules live at `server/firestore.rules` (adjust and deploy with Firebase CLI if you access Firestore directly from the client).
+
+Admin note: promote an existing Firebase user to admin with `npm run admin:promote -- <email-or-uid>`.
