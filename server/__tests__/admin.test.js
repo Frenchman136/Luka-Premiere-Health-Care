@@ -1,10 +1,14 @@
 const request = require("supertest");
-const jwt = require("jsonwebtoken");
 const app = require("../src/app");
-const prisma = require("../src/db");
+const db = require("../src/db");
+
+const mockVerifyIdToken = jest.fn();
+const mockAuth = {
+  verifyIdToken: mockVerifyIdToken,
+};
 
 jest.mock("../src/db", () => ({
-  user: { count: jest.fn() },
+  user: { count: jest.fn(), findUnique: jest.fn(), create: jest.fn() },
   appointment: { count: jest.fn(), findMany: jest.fn() },
   message: {
     count: jest.fn(),
@@ -13,26 +17,33 @@ jest.mock("../src/db", () => ({
     update: jest.fn(),
   },
   payment: { count: jest.fn() },
+  _admin: {
+    auth: () => mockAuth,
+  },
 }));
 
-const makeToken = (role = "ADMIN", overrides = {}) =>
-  jwt.sign(
-    {
-      sub: "user_123",
-      email: "admin@example.com",
-      role,
-      ...overrides,
-    },
-    process.env.JWT_SECRET
-  );
+const makeToken = () => "test-token";
 
 describe("Admin access", () => {
   beforeAll(() => {
-    process.env.JWT_SECRET = "test-secret";
+    process.env.NODE_ENV = "test";
   });
 
   beforeEach(() => {
     jest.clearAllMocks();
+    mockVerifyIdToken.mockResolvedValue({
+      uid: "user_123",
+      email: "admin@example.com",
+      role: "ADMIN",
+      name: "Admin",
+    });
+    db.user.findUnique.mockResolvedValue({
+      id: "user_123",
+      email: "admin@example.com",
+      role: "ADMIN",
+      name: "Admin",
+      createdAt: new Date("2026-01-01T00:00:00.000Z"),
+    });
   });
 
   test("rejects missing token", async () => {
@@ -40,25 +51,28 @@ describe("Admin access", () => {
   });
 
   test("rejects non-admin tokens", async () => {
-    const token = makeToken("USER");
+    mockVerifyIdToken.mockResolvedValue({
+      uid: "user_123",
+      email: "user@example.com",
+      role: "USER",
+      name: "User",
+    });
 
     await request(app)
       .get("/admin/overview")
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${makeToken()}`)
       .expect(403);
   });
 
   test("returns counts for admin", async () => {
-    prisma.user.count.mockResolvedValue(12);
-    prisma.appointment.count.mockResolvedValue(7);
-    prisma.message.count.mockResolvedValue(5);
-    prisma.payment.count.mockResolvedValue(3);
-
-    const token = makeToken("ADMIN");
+    db.user.count.mockResolvedValue(12);
+    db.appointment.count.mockResolvedValue(7);
+    db.message.count.mockResolvedValue(5);
+    db.payment.count.mockResolvedValue(3);
 
     const response = await request(app)
       .get("/admin/overview")
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${makeToken()}`)
       .expect(200);
 
     expect(response.body).toEqual({
@@ -72,61 +86,80 @@ describe("Admin access", () => {
   });
 
   test("restricts message inbox to admins", async () => {
-    prisma.message.findMany.mockResolvedValue([]);
+    db.message.findMany.mockResolvedValue([]);
 
-    const userToken = makeToken("USER");
+    mockVerifyIdToken.mockResolvedValue({
+      uid: "user_123",
+      email: "user@example.com",
+      role: "USER",
+      name: "User",
+    });
     await request(app)
       .get("/messages")
-      .set("Authorization", `Bearer ${userToken}`)
+      .set("Authorization", `Bearer ${makeToken()}`)
       .expect(403);
 
-    const adminToken = makeToken("ADMIN");
+    mockVerifyIdToken.mockResolvedValue({
+      uid: "user_123",
+      email: "admin@example.com",
+      role: "ADMIN",
+      name: "Admin",
+    });
     await request(app)
       .get("/messages")
-      .set("Authorization", `Bearer ${adminToken}`)
+      .set("Authorization", `Bearer ${makeToken()}`)
       .expect(200);
   });
 
   test("appointments all query only opens for admins", async () => {
-    prisma.appointment.findMany.mockResolvedValue([]);
+    db.appointment.findMany.mockResolvedValue([]);
 
-    const userToken = makeToken("USER");
+    mockVerifyIdToken.mockResolvedValue({
+      uid: "user_123",
+      email: "user@example.com",
+      role: "USER",
+      name: "User",
+    });
     await request(app)
       .get("/appointments?all=true")
-      .set("Authorization", `Bearer ${userToken}`)
+      .set("Authorization", `Bearer ${makeToken()}`)
       .expect(200);
 
-    expect(prisma.appointment.findMany).toHaveBeenCalledWith(
+    expect(db.appointment.findMany).toHaveBeenCalledWith(
       expect.objectContaining({ where: { userId: "user_123" } })
     );
 
-    prisma.appointment.findMany.mockResolvedValue([]);
+    db.appointment.findMany.mockResolvedValue([]);
 
-    const adminToken = makeToken("ADMIN");
+    mockVerifyIdToken.mockResolvedValue({
+      uid: "user_123",
+      email: "admin@example.com",
+      role: "ADMIN",
+      name: "Admin",
+    });
     await request(app)
       .get("/appointments?all=true")
-      .set("Authorization", `Bearer ${adminToken}`)
+      .set("Authorization", `Bearer ${makeToken()}`)
       .expect(200);
 
-    expect(prisma.appointment.findMany).toHaveBeenCalledWith(
+    expect(db.appointment.findMany).toHaveBeenCalledWith(
       expect.objectContaining({ where: {} })
     );
   });
 
   test("admin can update message status", async () => {
-    prisma.message.findUnique.mockResolvedValue({
+    db.message.findUnique.mockResolvedValue({
       id: "msg_123",
       status: "NEW",
     });
-    prisma.message.update.mockResolvedValue({
+    db.message.update.mockResolvedValue({
       id: "msg_123",
       status: "RESOLVED",
     });
 
-    const adminToken = makeToken("ADMIN");
     const response = await request(app)
       .patch("/messages/msg_123")
-      .set("Authorization", `Bearer ${adminToken}`)
+      .set("Authorization", `Bearer ${makeToken()}`)
       .send({ status: "RESOLVED" })
       .expect(200);
 

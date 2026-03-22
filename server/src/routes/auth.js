@@ -1,24 +1,9 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
-const prisma = require("../db");
+const db = require("../db");
 const { requireAuth } = require("../middleware/auth");
 
 const router = express.Router();
-
-function signToken(user) {
-  return jwt.sign(
-    {
-      sub: user.id,
-      email: user.email,
-      role: user.role,
-      name: user.name || null,
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
-  );
-}
 
 function sanitizeUser(user) {
   return {
@@ -37,54 +22,75 @@ router.post("/register", async (req, res) => {
     return res.status(400).json({ error: "Email and password are required" });
   }
 
-  const existing = await prisma.user.findUnique({ where: { email } });
-  if (existing) {
-    return res.status(409).json({ error: "Email already in use" });
-  }
-
-  const passwordHash = await bcrypt.hash(password, 10);
-  const user = await prisma.user.create({
-    data: {
-      name: name || null,
+  try {
+    const userRecord = await db._admin.auth().createUser({
       email,
-      passwordHash,
-    },
-  });
+      password,
+      displayName: name || undefined,
+    });
 
-  const token = signToken(user);
+    await db._admin.auth().setCustomUserClaims(userRecord.uid, {
+      role: "USER",
+    });
 
-  return res.status(201).json({
-    user: sanitizeUser(user),
-    token,
-  });
+    const profile = await db.user.upsert({
+      where: { id: userRecord.uid },
+      update: {
+        email,
+        name: name || null,
+        role: "USER",
+      },
+      create: {
+        id: userRecord.uid,
+        email,
+        name: name || null,
+        role: "USER",
+      },
+    });
+
+    const customToken = await db._admin
+      .auth()
+      .createCustomToken(userRecord.uid, { role: "USER" });
+
+    return res.status(201).json({
+      user: sanitizeUser(profile),
+      customToken,
+      tokenType: "firebaseCustomToken",
+    });
+  } catch (error) {
+    if (error.code === "auth/email-already-exists") {
+      return res.status(409).json({ error: "Email already in use" });
+    }
+    return res.status(500).json({ error: "Failed to register user" });
+  }
 });
 
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body || {};
+  const { idToken } = req.body || {};
 
-  if (!email || !password) {
-    return res.status(400).json({ error: "Email and password are required" });
+  if (!idToken) {
+    return res.status(400).json({
+      error:
+        "idToken is required. Sign in with Firebase client SDK and send the ID token.",
+    });
   }
 
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) {
-    return res.status(401).json({ error: "Invalid credentials" });
-  }
+  try {
+    const decoded = await db._admin.auth().verifyIdToken(idToken);
+    const profile = await db.user.findUnique({ where: { id: decoded.uid } });
 
-  const ok = await bcrypt.compare(password, user.passwordHash);
-  if (!ok) {
-    return res.status(401).json({ error: "Invalid credentials" });
+    return res.json({
+      user: profile ? sanitizeUser(profile) : null,
+      token: idToken,
+      tokenType: "firebaseIdToken",
+    });
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid or expired token" });
   }
-
-  const token = signToken(user);
-  return res.json({
-    user: sanitizeUser(user),
-    token,
-  });
 });
 
 router.get("/me", requireAuth, async (req, res) => {
-  const user = await prisma.user.findUnique({ where: { id: req.user.sub } });
+  const user = await db.user.findUnique({ where: { id: req.user.sub } });
   if (!user) {
     return res.status(404).json({ error: "User not found" });
   }

@@ -1,40 +1,51 @@
 require("dotenv").config();
-const bcrypt = require("bcryptjs");
-const prisma = require("../src/db");
+const db = require("../src/db");
 
 const ADMIN_EMAIL = process.env.ADMIN_SEED_EMAIL || "feselchirumban@gmail.com";
 const ADMIN_PASSWORD = process.env.ADMIN_SEED_PASSWORD || "Fesel@12140";
 
-async function main() {
-  if (!process.env.JWT_SECRET) {
-    throw new Error("Missing JWT_SECRET in environment.");
+async function ensureAuthUser() {
+  try {
+    return await db._admin.auth().getUserByEmail(ADMIN_EMAIL);
+  } catch (error) {
+    if (error.code !== "auth/user-not-found") {
+      throw error;
+    }
+
+    return db._admin.auth().createUser({
+      email: ADMIN_EMAIL,
+      password: ADMIN_PASSWORD,
+      displayName: "Admin",
+    });
   }
+}
 
-  const passwordHash = await bcrypt.hash(ADMIN_PASSWORD, 10);
+async function main() {
+  const authUser = await ensureAuthUser();
 
-  const user = await prisma.user.upsert({
-    where: { email: ADMIN_EMAIL },
+  await db._admin.auth().setCustomUserClaims(authUser.uid, {
+    role: "ADMIN",
+  });
+
+  const user = await db.user.upsert({
+    where: { id: authUser.uid },
     update: {
-      role: "ADMIN",
-      passwordHash,
+      email: ADMIN_EMAIL,
       name: "Admin",
+      role: "ADMIN",
     },
     create: {
+      id: authUser.uid,
       email: ADMIN_EMAIL,
-      passwordHash,
-      role: "ADMIN",
       name: "Admin",
+      role: "ADMIN",
     },
   });
 
   console.log(`Seeded admin: ${user.email} (${user.id})`);
 }
 
-main()
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

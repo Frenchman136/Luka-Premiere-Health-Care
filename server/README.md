@@ -1,21 +1,24 @@
 # Premiere Health Backend
 
-Node/Express backend with Prisma + Postgres, JWT auth, and Stripe payments.
+Node/Express backend with Firebase (Firestore + Firebase Auth) and Stripe payments.
 
 ## Setup
 
-1. Copy `.env.example` to `.env` and fill values.
+1. Copy `.env.example` to `.env` and fill values (Firebase service account required).
 2. Install deps.
-3. Run Prisma migrations.
-4. Start the API.
+3. Start the API.
 
 ## Commands
 
 ```bash
 npm install
-npm run prisma:generate
-npm run prisma:migrate
 npm run dev
 ```
 
 API runs on `http://localhost:4000` by default.
+
+Firestore note: the appointments list uses `userId` + `scheduledAt` ordering, so create a composite index if Firestore prompts you at runtime.
+
+Auth note: clients must sign in with Firebase Auth and send a Firebase ID token in the `Authorization: Bearer <token>` header. The `/auth/register` endpoint returns a Firebase custom token you can exchange client-side for an ID token.
+
+Rules note: sample Firestore rules live at `server/firestore.rules` (adjust and deploy with Firebase CLI if you access Firestore directly from the client).

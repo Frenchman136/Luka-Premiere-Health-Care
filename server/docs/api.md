@@ -6,26 +6,28 @@ Base URL: `http://localhost:4000`
 
 `POST /auth/register`
 Body: `{ name?, email, password }`
+Response: `{ user, customToken, tokenType: "firebaseCustomToken" }`
 
 `POST /auth/login`
-Body: `{ email, password }`
+Body: `{ idToken }`
+Response: `{ user, token, tokenType: "firebaseIdToken" }`
 
 `GET /auth/me`
-Header: `Authorization: Bearer <token>`
+Header: `Authorization: Bearer <firebase id token>`
 
 ## Appointments
 
 `GET /appointments`
-Header: `Authorization: Bearer <token>`
+Header: `Authorization: Bearer <firebase id token>`
 Query: `?all=true` (admin only)
 Query (optional pagination): `?page=1&pageSize=10`
 
 `POST /appointments`
-Header: `Authorization: Bearer <token>`
+Header: `Authorization: Bearer <firebase id token>`
 Body: `{ service, scheduledAt, notes? }`
 
 `PATCH /appointments/:id`
-Header: `Authorization: Bearer <token>`
+Header: `Authorization: Bearer <firebase id token>`
 Body: `{ service?, scheduledAt?, status?, notes? }`
 
 ## Messages (Contact Form)
@@ -34,17 +36,17 @@ Body: `{ service?, scheduledAt?, status?, notes? }`
 Body: `{ name, email, subject?, body }`
 
 `GET /messages`
-Header: `Authorization: Bearer <token>` (admin only)
+Header: `Authorization: Bearer <firebase id token>` (admin only)
 Query (optional pagination): `?page=1&pageSize=10`
 
 `PATCH /messages/:id`
-Header: `Authorization: Bearer <token>` (admin only)
+Header: `Authorization: Bearer <firebase id token>` (admin only)
 Body: `{ status }`
 
 ## Payments
 
 `POST /payments/checkout`
-Header: `Authorization: Bearer <token>`
+Header: `Authorization: Bearer <firebase id token>`
 Body: `{ appointmentId, amount, currency? }`
 
 `POST /payments/webhook`
@@ -53,4 +55,4 @@ Stripe webhook endpoint
 ## Admin
 
 `GET /admin/overview`
-Header: `Authorization: Bearer <token>` (admin only)
+Header: `Authorization: Bearer <firebase id token>` (admin only)

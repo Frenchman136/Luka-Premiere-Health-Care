@@ -1,7 +1,7 @@
 const express = require("express");
 const Stripe = require("stripe");
 
-const prisma = require("../db");
+const db = require("../db");
 const { requireAuth } = require("../middleware/auth");
 
 const router = express.Router();
@@ -24,7 +24,7 @@ router.post("/checkout", async (req, res) => {
       .json({ error: "appointmentId and amount are required" });
   }
 
-  const appointment = await prisma.appointment.findUnique({
+  const appointment = await db.appointment.findUnique({
     where: { id: appointmentId },
   });
 
@@ -36,7 +36,7 @@ router.post("/checkout", async (req, res) => {
     return res.status(403).json({ error: "Forbidden" });
   }
 
-  const payment = await prisma.payment.create({
+  const payment = await db.payment.create({
     data: {
       userId: appointment.userId,
       appointmentId: appointment.id,
@@ -75,7 +75,7 @@ router.post("/checkout", async (req, res) => {
     },
   });
 
-  const updatedPayment = await prisma.payment.update({
+  const updatedPayment = await db.payment.update({
     where: { id: payment.id },
     data: { providerRef: session.id },
   });
@@ -105,7 +105,7 @@ async function handleStripeWebhook(req, res) {
     const session = event.data.object;
     const paymentId = session.metadata?.paymentId;
     if (paymentId) {
-      await prisma.payment.update({
+      await db.payment.update({
         where: { id: paymentId },
         data: { status: "PAID" },
       });
@@ -116,10 +116,10 @@ async function handleStripeWebhook(req, res) {
     const intent = event.data.object;
     const paymentId = intent.metadata?.paymentId;
     const payment = paymentId
-      ? await prisma.payment.findUnique({ where: { id: paymentId } })
+      ? await db.payment.findUnique({ where: { id: paymentId } })
       : null;
     if (payment) {
-      await prisma.payment.update({
+      await db.payment.update({
         where: { id: payment.id },
         data: { status: "FAILED" },
       });

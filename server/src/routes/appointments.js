@@ -1,6 +1,6 @@
 const express = require("express");
 
-const prisma = require("../db");
+const db = require("../db");
 const { requireAuth } = require("../middleware/auth");
 
 const router = express.Router();
@@ -26,8 +26,8 @@ router.get("/", async (req, res) => {
   }
 
   const [appointments, total] = await Promise.all([
-    prisma.appointment.findMany(findOptions),
-    usePagination ? prisma.appointment.count({ where }) : Promise.resolve(null),
+    db.appointment.findMany(findOptions),
+    usePagination ? db.appointment.count({ where }) : Promise.resolve(null),
   ]);
 
   return res.json({
@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
       .json({ error: "Service and scheduledAt are required" });
   }
 
-  const appointment = await prisma.appointment.create({
+  const appointment = await db.appointment.create({
     data: {
       userId: req.user.sub,
       service,
@@ -63,7 +63,7 @@ router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { service, scheduledAt, status, notes } = req.body || {};
 
-  const appointment = await prisma.appointment.findUnique({ where: { id } });
+  const appointment = await db.appointment.findUnique({ where: { id } });
   if (!appointment) {
     return res.status(404).json({ error: "Appointment not found" });
   }
@@ -72,7 +72,7 @@ router.patch("/:id", async (req, res) => {
     return res.status(403).json({ error: "Forbidden" });
   }
 
-  const updated = await prisma.appointment.update({
+  const updated = await db.appointment.update({
     where: { id },
     data: {
       service: service || appointment.service,

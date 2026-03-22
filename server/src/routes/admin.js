@@ -1,6 +1,6 @@
 const express = require("express");
 
-const prisma = require("../db");
+const db = require("../db");
 const { requireAuth, requireAdmin } = require("../middleware/auth");
 
 const router = express.Router();
@@ -10,10 +10,10 @@ router.use(requireAdmin);
 
 router.get("/overview", async (req, res) => {
   const [users, appointments, messages, payments] = await Promise.all([
-    prisma.user.count(),
-    prisma.appointment.count(),
-    prisma.message.count(),
-    prisma.payment.count(),
+    db.user.count(),
+    db.appointment.count(),
+    db.message.count(),
+    db.payment.count(),
   ]);
 
   return res.json({

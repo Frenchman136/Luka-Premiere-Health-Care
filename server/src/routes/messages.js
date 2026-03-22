@@ -1,6 +1,6 @@
 const express = require("express");
 
-const prisma = require("../db");
+const db = require("../db");
 const { requireAuth, requireAdmin } = require("../middleware/auth");
 
 const router = express.Router();
@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
       .json({ error: "Name, email, and message body are required" });
   }
 
-  const message = await prisma.message.create({
+  const message = await db.message.create({
     data: {
       name,
       email,
@@ -45,8 +45,8 @@ router.get("/", async (req, res) => {
   }
 
   const [messages, total] = await Promise.all([
-    prisma.message.findMany(findOptions),
-    usePagination ? prisma.message.count() : Promise.resolve(null),
+    db.message.findMany(findOptions),
+    usePagination ? db.message.count() : Promise.resolve(null),
   ]);
 
   return res.json({
@@ -61,12 +61,12 @@ router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { status } = req.body || {};
 
-  const message = await prisma.message.findUnique({ where: { id } });
+  const message = await db.message.findUnique({ where: { id } });
   if (!message) {
     return res.status(404).json({ error: "Message not found" });
   }
 
-  const updated = await prisma.message.update({
+  const updated = await db.message.update({
     where: { id },
     data: { status: status || message.status },
   });
