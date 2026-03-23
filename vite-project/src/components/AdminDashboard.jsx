@@ -84,29 +84,6 @@ export function AdminDashboard() {
     return payload;
   }, []);
 
-  const loadSession = useCallback(async () => {
-    if (!auth.currentUser) return;
-    try {
-      const payload = await fetchJson("/auth/me");
-      if (payload?.user?.role !== "ADMIN") {
-        setAuthStatus({
-          type: "error",
-          message: "This account is not an admin. Use an admin login.",
-        });
-        await signOut(auth);
-        setUser(null);
-        return;
-      }
-      setUser(payload.user);
-      setAuthStatus({ type: "success", message: "Welcome back, admin." });
-      await loadAdminData();
-    } catch (error) {
-      setAuthStatus({ type: "error", message: error.message || "Auth failed." });
-      await signOut(auth);
-      setUser(null);
-    }
-  }, [fetchJson, loadAdminData]);
-
   const fetchOverview = useCallback(async () => {
     const overview = await fetchJson("/admin/overview");
     setCounts({ ...INITIAL_COUNTS, ...(overview?.counts || {}) });
@@ -166,6 +143,29 @@ export function AdminDashboard() {
       setIsLoading(false);
     }
   }, [fetchAppointments, fetchMessages, fetchOverview, messagesPage, appointmentsPage, firebaseUser]);
+
+  const loadSession = useCallback(async () => {
+    if (!auth.currentUser) return;
+    try {
+      const payload = await fetchJson("/auth/me");
+      if (payload?.user?.role !== "ADMIN") {
+        setAuthStatus({
+          type: "error",
+          message: "This account is not an admin. Use an admin login.",
+        });
+        await signOut(auth);
+        setUser(null);
+        return;
+      }
+      setUser(payload.user);
+      setAuthStatus({ type: "success", message: "Welcome back, admin." });
+      await loadAdminData();
+    } catch (error) {
+      setAuthStatus({ type: "error", message: error.message || "Auth failed." });
+      await signOut(auth);
+      setUser(null);
+    }
+  }, [fetchJson, loadAdminData]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (nextUser) => {
