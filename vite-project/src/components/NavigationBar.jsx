@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "../assets/styles/NavigationBar.css";
 import { trackEvent } from "../utils/analytics";
 
-export function NavigationBar() {
+export function NavigationBar({ showAdminLink = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentHash, setCurrentHash] = useState(() =>
     typeof window === "undefined" ? "#/" : window.location.hash || "#/"
@@ -200,16 +200,18 @@ export function NavigationBar() {
             Appointments
           </a>
         </li>
-        <li>
-          <a
-            href="#/admin"
-            onClick={() => handleNavClick("Admin")}
-            className={activeLink === "admin" ? "is-active" : ""}
-            aria-current={activeLink === "admin" ? "page" : undefined}
-          >
-            Admin
-          </a>
-        </li>
+        {showAdminLink && (
+          <li>
+            <a
+              href="#/admin"
+              onClick={() => handleNavClick("Admin")}
+              className={activeLink === "admin" ? "is-active" : ""}
+              aria-current={activeLink === "admin" ? "page" : undefined}
+            >
+              Admin
+            </a>
+          </li>
+        )}
       </ul>
       <div className="nav-actions">
         <a href="#/emergency" className="nav-cta" onClick={() => handleNavClick("Emergency")}>
@@ -328,15 +330,17 @@ export function NavigationBar() {
             Appointments
           </a>
         </li>
-        <li>
-          <a
-            href="#/admin"
-            onClick={() => handleNavClick("Admin")}
-            className={activeLink === "admin" ? "is-active" : ""}
-          >
-            Admin
-          </a>
-        </li>
+        {showAdminLink && (
+          <li>
+            <a
+              href="#/admin"
+              onClick={() => handleNavClick("Admin")}
+              className={activeLink === "admin" ? "is-active" : ""}
+            >
+              Admin
+            </a>
+          </li>
+        )}
         <li>
           <a
             href="#/emergency"

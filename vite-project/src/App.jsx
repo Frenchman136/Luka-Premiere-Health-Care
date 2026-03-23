@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import "./App.css";
 import { NavigationBar } from "./components/NavigationBar";
 import { HeroSection } from "./components/HeroSection";
@@ -17,9 +18,16 @@ import { EmergencyPage } from "./components/EmergencyPage";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { Footer } from "./components/Footer";
 import { AdminDashboard } from "./components/AdminDashboard";
+import { auth } from "./utils/firebase";
+
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:4000").replace(
+  /\/$/,
+  ""
+);
 
 function App() {
   const [hash, setHash] = useState(() => window.location.hash || "#/");
+  const [adminStatus, setAdminStatus] = useState("unknown");
 
   useEffect(() => {
     const stored =
@@ -41,9 +49,37 @@ function App() {
     }
   }, [hash]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        setAdminStatus("guest");
+        return;
+      }
+
+      setAdminStatus("checking");
+      try {
+        const token = await user.getIdToken();
+        const response = await fetch(`${API_BASE}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!response.ok) {
+          throw new Error("Auth check failed");
+        }
+        const payload = await response.json();
+        setAdminStatus(payload?.user?.role === "ADMIN" ? "admin" : "user");
+      } catch {
+        setAdminStatus("user");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const routePath = hash.startsWith("#/") ? hash.slice(2) : "";
   const [routeRoot, routeSlug] = routePath.split("/");
   const isAdminRoute = routeRoot === "admin";
+  const isAdmin = adminStatus === "admin";
+  const isCheckingAdmin = adminStatus === "checking" || adminStatus === "unknown";
 
   const renderHome = () => (
     <>
@@ -80,14 +116,27 @@ function App() {
   } else if (routeRoot === "emergency") {
     pageContent = <EmergencyPage />;
   } else if (routeRoot === "admin") {
-    pageContent = <AdminDashboard />;
+    if (isCheckingAdmin) {
+      pageContent = (
+        <main className="page-shell">
+          <div className="page">
+            <h1>Checking access...</h1>
+            <p>Please wait while we verify your admin permissions.</p>
+          </div>
+        </main>
+      );
+    } else if (isAdmin) {
+      pageContent = <AdminDashboard />;
+    } else {
+      pageContent = <NotFoundPage />;
+    }
   } else if (routeRoot) {
     pageContent = <NotFoundPage />;
   }
 
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar showAdminLink={isAdmin} />
       {pageContent}
       {!isAdminRoute && routeRoot !== "appointment" && <Footer />}
     </div>
