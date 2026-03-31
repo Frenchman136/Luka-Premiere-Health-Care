@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { Analytics } from "@vercel/analytics/react";
 import "./App.css";
 import { NavigationBar } from "./components/NavigationBar";
 import { HeroSection } from "./components/HeroSection";
@@ -139,6 +140,7 @@ function App() {
       {pageContent}
       {!isAdminRoute && <NavigatorBot />}
       {!isAdminRoute && routeRoot !== "appointment" && <Footer />}
+      <Analytics />
     </div>
   );
 }

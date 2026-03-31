@@ -3,7 +3,6 @@
 Thumbs.db
 
 # Editor directories
-.vscode/
 .idea/
 
 # Dependencies
@@ -14,5 +13,4 @@ dist/
 build/
 
 # Environment variables
-.env
-.env.local
+config.bat

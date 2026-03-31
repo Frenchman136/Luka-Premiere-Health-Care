@@ -7,8 +7,8 @@
     "node": "18"
   },
   "scripts": {
-    "dev": "node --watch src/index.js",
-    "start": "node src/index.js",
+    "dev": "node init && node --watch src/index.js",
+    "start": "node init && node src/index.js",
     "test": "jest",
     "seed:admin": "node scripts/seed-admin.js",
     "admin:promote": "node scripts/promote-admin.js"
