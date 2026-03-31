@@ -102,6 +102,8 @@ function applyDefaults(collectionName, data) {
   if (collectionName === "appointments") {
     return {
       status: "REQUESTED",
+      priority: "NORMAL",
+      assigneeId: null,
       ...withTimestamps,
     };
   }
@@ -109,6 +111,9 @@ function applyDefaults(collectionName, data) {
   if (collectionName === "messages") {
     return {
       status: "NEW",
+      priority: "NORMAL",
+      tags: [],
+      assigneeId: null,
       ...withTimestamps,
     };
   }
@@ -118,6 +123,20 @@ function applyDefaults(collectionName, data) {
       provider: "STRIPE",
       status: "PENDING",
       currency: "usd",
+      ...withTimestamps,
+    };
+  }
+
+  if (collectionName === "notifications") {
+    return {
+      status: "QUEUED",
+      channel: "IN_APP",
+      ...withTimestamps,
+    };
+  }
+
+  if (collectionName === "auditLogs") {
+    return {
       ...withTimestamps,
     };
   }
@@ -138,9 +157,20 @@ function docToObject(doc) {
 function buildQuery(collectionRef, options = {}) {
   let query = collectionRef;
   if (options.where) {
-    Object.entries(options.where).forEach(([field, value]) => {
-      query = query.where(field, "==", value);
-    });
+    if (Array.isArray(options.where)) {
+      options.where.forEach(({ field, op, value }) => {
+        if (value === undefined) return;
+        query = query.where(field, op || "==", value);
+      });
+    } else {
+      Object.entries(options.where).forEach(([field, value]) => {
+        if (value && typeof value === "object" && "op" in value) {
+          query = query.where(field, value.op || "==", value.value);
+        } else {
+          query = query.where(field, "==", value);
+        }
+      });
+    }
   }
 
   if (options.orderBy) {
@@ -242,6 +272,8 @@ module.exports = {
   appointment: createCollectionClient("appointments"),
   message: createCollectionClient("messages"),
   payment: createCollectionClient("payments"),
+  notification: createCollectionClient("notifications"),
+  auditLog: createCollectionClient("auditLogs"),
   $disconnect: async () => {},
   _db: db,
   _admin: admin,

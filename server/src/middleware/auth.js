@@ -22,8 +22,36 @@ async function requireAuth(req, res, next) {
   const header = req.headers.authorization || "";
   const token = header.startsWith("Bearer ") ? header.slice(7) : null;
 
+  // if (!token) {
+  //   return res.status(401).json({ error: "Missing auth token" });
+  // }
+
+  try {
+    const decoded = await db._admin.auth().verifyIdToken(token);
+    const profile = await ensureUserProfile(decoded);
+    const role = decoded.role || profile.role || "USER";
+
+    req.user = {
+      ...decoded,
+      sub: decoded.uid,
+      uid: decoded.uid,
+      email: decoded.email || profile.email || null,
+      name: decoded.name || decoded.displayName || profile.name || null,
+      role,
+    };
+
+    return next();
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid or expired token" });
+  }
+}
+
+async function optionalAuth(req, res, next) {
+  const header = req.headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+
   if (!token) {
-    return res.status(401).json({ error: "Missing auth token" });
+    return next();
   }
 
   try {
@@ -59,6 +87,7 @@ const requireAdmin = requireRole("ADMIN");
 
 module.exports = {
   requireAuth,
+  optionalAuth,
   requireRole,
   requireAdmin,
 };

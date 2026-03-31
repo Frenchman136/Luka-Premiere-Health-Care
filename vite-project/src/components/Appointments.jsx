@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import "../assets/styles/Appointments.css";
 import { trackEvent } from "../utils/analytics";
+import { auth } from "../utils/firebase";
 
 const STORAGE_KEY = "appointment_form";
 const STEP_KEY = "appointment_step";
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:4000").replace(
+  /\/$/,
+  ""
+);
 
 const DEFAULT_FORM = {
   firstName: "",
@@ -141,7 +146,7 @@ export function Appointments() {
     trackEvent("appointment_step_change", { from: activeStep, to: nextStep });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (isSubmitting) return;
 
@@ -175,8 +180,25 @@ export function Appointments() {
     setStatus({ type: "", message: "" });
     trackEvent("appointment_submit_attempt", { channel: "web" });
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const headers = { "Content-Type": "application/json" };
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const idToken = await currentUser.getIdToken();
+        headers.Authorization = `Bearer ${idToken}`;
+      }
+
+      const response = await fetch(`${API_BASE}/appointments`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(formData),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.error || "Unable to submit appointment.");
+      }
+
       setStatus({
         type: "success",
         message: "Appointment request received! We will confirm shortly.",
@@ -188,7 +210,16 @@ export function Appointments() {
       } catch {
         // ignore
       }
-    }, 900);
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error?.message || "We could not submit your appointment. Please try again.",
+      });
+      trackEvent("appointment_submit_error", { message: error?.message });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const summaryRows = [

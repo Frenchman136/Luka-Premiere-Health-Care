@@ -18,6 +18,7 @@ import { EmergencyPage } from "./components/EmergencyPage";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { Footer } from "./components/Footer";
 import { AdminDashboard } from "./components/AdminDashboard";
+import { NavigatorBot } from "./components/NavigatorBot";
 import { auth } from "./utils/firebase";
 
 const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:4000").replace(
@@ -125,10 +126,8 @@ function App() {
           </div>
         </main>
       );
-    } else if (isAdmin) {
-      pageContent = <AdminDashboard />;
     } else {
-      pageContent = <NotFoundPage />;
+      pageContent = <AdminDashboard />;
     }
   } else if (routeRoot) {
     pageContent = <NotFoundPage />;
@@ -138,6 +137,7 @@ function App() {
     <div>
       <NavigationBar showAdminLink={isAdmin} />
       {pageContent}
+      {!isAdminRoute && <NavigatorBot />}
       {!isAdminRoute && routeRoot !== "appointment" && <Footer />}
     </div>
   );
