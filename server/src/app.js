@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
+const { env } = require("./utils/env");
 const authRoutes = require("./routes/auth");
 const appointmentsRoutes = require("./routes/appointments");
 const messagesRoutes = require("./routes/messages");
@@ -16,7 +17,7 @@ app.post(
   handleStripeWebhook
 );
 
-const allowedOrigins = (process.env.CORS_ORIGIN || "")
+const allowedOrigins = (env("CORS_ORIGIN", "cors.origin") || "")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean);

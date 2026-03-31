@@ -1,7 +1,10 @@
 const admin = require("firebase-admin");
+const { env } = require("./utils/env");
 
 function loadServiceAccount() {
-  const json = process.env.SERVICE_ACCOUNT_JSON || process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
+  const json =
+    env("SERVICE_ACCOUNT_JSON", "service_account.json") ||
+    env("FIREBASE_SERVICE_ACCOUNT_JSON", "firebase.service_account_json");
   if (json) {
     try {
       return JSON.parse(json);
@@ -13,7 +16,8 @@ function loadServiceAccount() {
   }
 
   const base64 =
-    process.env.SERVICE_ACCOUNT_BASE64 || process.env.FIREBASE_SERVICE_ACCOUNT_BASE64;
+    env("SERVICE_ACCOUNT_BASE64", "service_account.base64") ||
+    env("FIREBASE_SERVICE_ACCOUNT_BASE64", "firebase.service_account_base64");
   if (base64) {
     try {
       return JSON.parse(Buffer.from(base64, "base64").toString("utf8"));
@@ -25,7 +29,8 @@ function loadServiceAccount() {
   }
 
   const path =
-    process.env.SERVICE_ACCOUNT_PATH || process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
+    env("SERVICE_ACCOUNT_PATH", "service_account.path") ||
+    env("FIREBASE_SERVICE_ACCOUNT_PATH", "firebase.service_account_path");
   if (path) {
     try {
       // eslint-disable-next-line global-require, import/no-dynamic-require
@@ -50,8 +55,9 @@ function initFirestore() {
     admin.initializeApp({
       credential,
       projectId:
-        process.env.PROJECT_ID ||
-        process.env.FIREBASE_PROJECT_ID ||
+        env("PROJECT_ID", "project.id") ||
+        env("FIREBASE_PROJECT_ID", "firebase.project_id") ||
+        process.env.GCLOUD_PROJECT ||
         serviceAccount?.project_id,
     });
   }

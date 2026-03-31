@@ -1,9 +1,28 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithCustomToken,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import "../assets/styles/NavigationBar.css";
 import { trackEvent } from "../utils/analytics";
+import { auth } from "../utils/firebase";
+
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:4000").replace(
+  /\/$/,
+  ""
+);
 
 export function NavigationBar({ showAdminLink = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState("signin");
+  const [authForm, setAuthForm] = useState({ name: "", email: "", password: "" });
+  const [authStatus, setAuthStatus] = useState({ type: "", message: "" });
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentHash, setCurrentHash] = useState(() =>
     typeof window === "undefined" ? "#/" : window.location.hash || "#/"
   );
@@ -34,6 +53,13 @@ export function NavigationBar({ showAdminLink = false }) {
     };
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user || null);
+    });
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -71,6 +97,7 @@ export function NavigationBar({ showAdminLink = false }) {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
+        setAuthModalOpen(false);
       }
     };
 
@@ -116,6 +143,70 @@ export function NavigationBar({ showAdminLink = false }) {
     trackEvent("theme_toggle", { theme: theme === "dark" ? "light" : "dark" });
   };
 
+  const openAuthModal = (mode = "signin") => {
+    setAuthMode(mode);
+    setAuthModalOpen(true);
+    setAuthStatus({ type: "", message: "" });
+  };
+
+  const handleAuthSubmit = async (event) => {
+    event.preventDefault();
+    setAuthStatus({ type: "loading", message: "Working on it..." });
+
+    try {
+      if (authMode === "signup") {
+        const response = await fetch(`${API_BASE}/auth/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: authForm.name.trim(),
+            email: authForm.email.trim(),
+            password: authForm.password,
+          }),
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(payload.error || "Sign up failed.");
+        }
+        await signInWithCustomToken(auth, payload.customToken);
+      } else {
+        await signInWithEmailAndPassword(
+          auth,
+          authForm.email.trim(),
+          authForm.password
+        );
+      }
+      setAuthStatus({ type: "success", message: "Signed in successfully." });
+      setAuthForm({ name: "", email: "", password: "" });
+      setAuthModalOpen(false);
+    } catch (error) {
+      setAuthStatus({
+        type: "error",
+        message: error?.message || "Authentication failed.",
+      });
+    }
+  };
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setAuthStatus({ type: "warning", message: "Signed out." });
+  };
+
+  const handleGoogleSignIn = async () => {
+    setAuthStatus({ type: "loading", message: "Connecting to Google..." });
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      setAuthStatus({ type: "success", message: "Signed in with Google." });
+      setAuthModalOpen(false);
+    } catch (error) {
+      setAuthStatus({
+        type: "error",
+        message: error?.message || "Google sign-in failed.",
+      });
+    }
+  };
+
   const isRoute = currentHash.startsWith("#/");
   const routePath = isRoute ? currentHash.slice(2) : "";
   const routeRoot = routePath.split("?")[0].split("/")[0] || "home";
@@ -124,7 +215,6 @@ export function NavigationBar({ showAdminLink = false }) {
   const resolvedHomeSection = activeSection || hashSection || "home";
   const isHomeRoute = !isRoute || routeRoot === "home";
   const activeLink = isHomeRoute ? resolvedHomeSection : routeRoot;
-
   return (
     <nav id="navbar" ref={navRef}>
       <a className="logo" href="#/" onClick={() => handleNavClick("Home")}>
@@ -217,6 +307,15 @@ export function NavigationBar({ showAdminLink = false }) {
         <a href="#/emergency" className="nav-cta" onClick={() => handleNavClick("Emergency")}>
           Emergency
         </a>
+        {currentUser ? (
+          <button type="button" className="auth-btn ghost" onClick={handleSignOut}>
+            Sign out
+          </button>
+        ) : (
+          <button type="button" className="auth-btn" onClick={() => openAuthModal()}>
+            Sign in / up
+          </button>
+        )}
         <button
           className="theme-toggle"
           id="themeToggle"
@@ -229,22 +328,6 @@ export function NavigationBar({ showAdminLink = false }) {
             aria-hidden="true"
           ></i>
           <span>{theme === "dark" ? "Light" : "Dark"}</span>
-        </button>
-        <button className="search-btn" aria-label="Search">
-          <svg
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="7"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
         </button>
         <button
           className={`hamburger ${menuOpen ? "is-open" : ""}`}
@@ -342,6 +425,21 @@ export function NavigationBar({ showAdminLink = false }) {
           </li>
         )}
         <li>
+          {currentUser ? (
+            <button type="button" className="nav-link-btn" onClick={handleSignOut}>
+              Sign out
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="nav-link-btn"
+              onClick={() => openAuthModal()}
+            >
+              Account
+            </button>
+          )}
+        </li>
+        <li>
           <a
             href="#/emergency"
             onClick={() => handleNavClick("Emergency")}
@@ -350,6 +448,81 @@ export function NavigationBar({ showAdminLink = false }) {
           </a>
         </li>
       </ul>
+      {authModalOpen && (
+        <div className="nav-overlay" role="dialog" aria-label="Sign in">
+          <div className="nav-overlay-card auth-card">
+            <div className="nav-overlay-header">
+              <div>
+                <p className="nav-overlay-eyebrow">
+                  {authMode === "signup" ? "Create account" : "Welcome back"}
+                </p>
+                <h3>{authMode === "signup" ? "Sign up" : "Sign in"}</h3>
+              </div>
+              <button type="button" onClick={() => setAuthModalOpen(false)}>
+                Close
+              </button>
+            </div>
+            {authStatus.message && (
+              <div className={`auth-status ${authStatus.type}`}>
+                {authStatus.message}
+              </div>
+            )}
+            <div className="auth-toggle">
+              <button
+                type="button"
+                className={authMode === "signin" ? "is-active" : ""}
+                onClick={() => setAuthMode("signin")}
+              >
+                Sign in
+              </button>
+              <button
+                type="button"
+                className={authMode === "signup" ? "is-active" : ""}
+                onClick={() => setAuthMode("signup")}
+              >
+                Sign up
+              </button>
+            </div>
+            <button type="button" className="auth-google" onClick={handleGoogleSignIn}>
+              Continue with Google
+            </button>
+            <form className="auth-form" onSubmit={handleAuthSubmit}>
+              {authMode === "signup" && (
+                <input
+                  type="text"
+                  placeholder="Full name"
+                  value={authForm.name}
+                  onChange={(event) =>
+                    setAuthForm((prev) => ({ ...prev, name: event.target.value }))
+                  }
+                  required
+                />
+              )}
+              <input
+                type="email"
+                placeholder="Email address"
+                value={authForm.email}
+                onChange={(event) =>
+                  setAuthForm((prev) => ({ ...prev, email: event.target.value }))
+                }
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={authForm.password}
+                onChange={(event) =>
+                  setAuthForm((prev) => ({ ...prev, password: event.target.value }))
+                }
+                required
+              />
+              <button type="submit">
+                {authMode === "signup" ? "Create account" : "Sign in"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
