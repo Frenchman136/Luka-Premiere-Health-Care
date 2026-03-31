@@ -1,5 +1,6 @@
 const express = require("express");
 const Stripe = require("stripe");
+const { env } = require("../utils/env");
 
 const db = require("../db");
 const { requireAuth } = require("../middleware/auth");
@@ -7,10 +8,10 @@ const { requireAuth } = require("../middleware/auth");
 const router = express.Router();
 
 function getStripeClient() {
-  if (!process.env.STRIPE_SECRET_KEY) {
+  if (!env("STRIPE_SECRET_KEY", "stripe.secret_key")) {
     throw new Error("Missing STRIPE_SECRET_KEY");
   }
-  return new Stripe(process.env.STRIPE_SECRET_KEY);
+  return new Stripe(env("STRIPE_SECRET_KEY", "stripe.secret_key"));
 }
 
 router.use(requireAuth);
@@ -68,8 +69,8 @@ router.post("/checkout", async (req, res) => {
         },
       },
     ],
-    success_url: `${process.env.FRONTEND_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.FRONTEND_URL}/payment/cancel`,
+    success_url: `${env("FRONTEND_URL", "frontend.url")}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${env("FRONTEND_URL", "frontend.url")}/payment/cancel`,
     metadata: {
       paymentId: payment.id,
     },
@@ -95,7 +96,7 @@ async function handleStripeWebhook(req, res) {
     event = stripe.webhooks.constructEvent(
       req.body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET
+      env("STRIPE_WEBHOOK_SECRET", "stripe.webhook_secret")
     );
   } catch (error) {
     return res.status(400).send(`Webhook Error: ${error.message}`);

@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: luka-premiere-backend
+    env: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PROJECT_ID
+        value: luka-main-site
+      - key: CORS_ORIGIN
+        value: https://luka-premiere-health-care-cch8.vercel.app
+      - key: FRONTEND_URL
+        value: https://luka-premiere-health-care-cch8.vercel.app
+      # Recommended: store service account JSON as base64 in Render dashboard
+      # - key: SERVICE_ACCOUNT_BASE64
+      #   value: <paste-base64-json-here>
